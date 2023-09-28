@@ -1,6 +1,6 @@
 {
-    "name": "pocket_dad",
-    "short_name": "pocket_dad",
+    "name": "pocketdad",
+    "short_name": "pocketdad",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

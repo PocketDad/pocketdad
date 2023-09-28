@@ -1,4 +1,4 @@
-package com.example.pocket_dad
+package com.example.pocketdad
 
 import io.flutter.embedding.android.FlutterActivity
 
