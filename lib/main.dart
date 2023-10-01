@@ -129,47 +129,89 @@ class ChooseAvatar extends StatelessWidget {
       ),
       body: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Profile(),
-                  Profile(),
-                  Profile(),
-                ]
-              ),
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Profile(),
-                    Profile(),
-                    Profile(),
-                  ]
-              ),
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Profile(),
-                    Profile(),
-                    Profile(),
-                  ]
-              ),
-            ],
-          )
-      ),
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  "Choose my appearance!",
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  )
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Profile(),
+                      SizedBox(width: 20,),
+                      Profile(),
+                      SizedBox(width: 20,),
+                      Profile(),
+                    ]
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Profile(),
+                        SizedBox(width: 20,),
+                        Profile(),
+                        SizedBox(width: 20,),
+                        Profile(),
+                      ]
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Profile(),
+                        SizedBox(width: 20,),
+                        Profile(),
+                        SizedBox(width: 20,),
+                        Profile(),
+                      ]
+                  ),
+                ),
+                TextButton(
+                    onPressed: () {},
+                    child: const Text(
+                      "Random!",
+                      textAlign: TextAlign.right,
+                    )
+                )
+              ],
+            ),
+          ),
     );
   }
 }
 
 class Profile extends StatelessWidget{
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(20.0),
-      height: 80.0,
-      width: 80.0,
-      color: Theme.of(context).colorScheme.secondary,
-      child: Text("Test"),
+    return Expanded(
+      child: ElevatedButton(
+        style: ButtonStyle(
+          foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+          overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                (Set<MaterialState> states) {
+              if (states.contains(MaterialState.hovered)) {
+                return Colors.blue.withOpacity(0.04);
+              }
+              if (states.contains(MaterialState.focused) || states.contains(MaterialState.pressed)) {
+                return Colors.blue.withOpacity(0.12);
+              }
+              return null; // Defer to the widget's default.
+            },
+          ),
+        ),
+        onPressed: () {},
+        child: Text("Test"),
+      ),
     );
   }
 }
