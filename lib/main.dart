@@ -139,40 +139,40 @@ class ChooseAvatar extends StatelessWidget {
                   )
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Profile(),
-                      SizedBox(width: 20,),
+                      SizedBox(width: 10,),
                       Profile(),
-                      SizedBox(width: 20,),
+                      SizedBox(width: 10,),
                       Profile(),
                     ]
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Profile(),
-                        SizedBox(width: 20,),
+                        SizedBox(width: 10,),
                         Profile(),
-                        SizedBox(width: 20,),
+                        SizedBox(width: 10,),
                         Profile(),
                       ]
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Profile(),
-                        SizedBox(width: 20,),
+                        SizedBox(width: 10,),
                         Profile(),
-                        SizedBox(width: 20,),
+                        SizedBox(width: 10,),
                         Profile(),
                       ]
                   ),
@@ -200,17 +200,21 @@ class Profile extends StatelessWidget{
           overlayColor: MaterialStateProperty.resolveWith<Color?>(
                 (Set<MaterialState> states) {
               if (states.contains(MaterialState.hovered)) {
-                return Colors.blue.withOpacity(0.04);
+                return Colors.orangeAccent.withOpacity(0.04);
               }
               if (states.contains(MaterialState.focused) || states.contains(MaterialState.pressed)) {
-                return Colors.blue.withOpacity(0.12);
+                return Colors.orangeAccent.withOpacity(0.12);
               }
               return null; // Defer to the widget's default.
             },
           ),
         ),
         onPressed: () {},
-        child: Text("Test"),
+        child: Container(
+          color: Colors.orange,
+          height: 40,
+          width: 40,
+        ),
       ),
     );
   }
