@@ -139,7 +139,7 @@ class ChooseAvatar extends StatelessWidget {
                   )
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -152,7 +152,7 @@ class ChooseAvatar extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -165,7 +165,7 @@ class ChooseAvatar extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -193,9 +193,9 @@ class ChooseAvatar extends StatelessWidget {
 
 class Profile extends StatelessWidget{
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ElevatedButton(
+    return ElevatedButton(
         style: ButtonStyle(
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
           overlayColor: MaterialStateProperty.resolveWith<Color?>(
                 (Set<MaterialState> states) {
@@ -208,14 +208,21 @@ class Profile extends StatelessWidget{
               return null; // Defer to the widget's default.
             },
           ),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.zero,
+                    side: BorderSide(color: Colors.red)
+                )
+            )
         ),
         onPressed: () {},
-        child: Container(
+        child: SizedBox(width: 0, height: 10),
+
+      /*Container(
           color: Colors.orange,
-          height: 40,
-          width: 40,
-        ),
-      ),
-    );
+          height: 50,
+          width: 50,
+        ),*/
+      );
   }
 }
