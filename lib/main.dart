@@ -193,7 +193,17 @@ class ChooseAvatar extends StatelessWidget {
 
 class Profile extends StatelessWidget{
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return Container(
+      height: 80,
+      width: 80,
+      child: FloatingActionButton(
+      backgroundColor: Colors.orange,
+      onPressed: () {},
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+      tooltip: 'Increment',
+      child: const Icon(Icons.insert_emoticon),
+      ),
+    );/*ElevatedButton(
         style: ButtonStyle(
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
@@ -223,6 +233,6 @@ class Profile extends StatelessWidget{
           height: 50,
           width: 50,
         ),*/
-      );
+      );*/
   }
 }
