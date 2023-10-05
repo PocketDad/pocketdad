@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pocketdad/ChooseAvatar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'PocketDad',
+      title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -31,11 +32,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.orange),
         useMaterial3: true,
       ),
-      home: Scaffold(
-          body: Center(
-            child: ChooseAvatar(),
-          )
-      ),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
@@ -115,100 +112,6 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
-  }
-}
-
-class ChooseAvatar extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("PocketDad"),
-      ),
-      body: Center(
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  "Choose my appearance!",
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  )
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Profile(),
-                      SizedBox(width: 10,),
-                      Profile(),
-                      SizedBox(width: 10,),
-                      Profile(),
-                    ]
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Profile(),
-                        SizedBox(width: 10,),
-                        Profile(),
-                        SizedBox(width: 10,),
-                        Profile(),
-                      ]
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Profile(),
-                        SizedBox(width: 10,),
-                        Profile(),
-                        SizedBox(width: 10,),
-                        Profile(),
-                      ]
-                  ),
-                ),
-                TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      "Random!",
-                      textAlign: TextAlign.right,
-                    )
-                )
-              ],
-            ),
-          ),
-    );
-  }
-}
-
-class Profile extends StatelessWidget{
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 80,
-      width: 80,
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.deepOrange, width: 2),
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
-      ),
-      child: FloatingActionButton(
-      backgroundColor: Colors.orange,
-      onPressed: () {},
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(10),
-          child: Image.asset("assets/images/cat2.png")
-      ),
-      ),
     );
   }
 }
