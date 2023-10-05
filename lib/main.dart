@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pocketdad/ChooseAvatar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'PocketDad',
+      title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -31,11 +32,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.orange),
         useMaterial3: true,
       ),
-      home: Scaffold(
-          body: Center(
-            child: ChooseAvatar(),
-          )
-      ),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
@@ -116,123 +113,5 @@ class _MyHomePageState extends State<MyHomePage> {
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
-  }
-}
-
-class ChooseAvatar extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("PocketDad"),
-      ),
-      body: Center(
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  "Choose my appearance!",
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  )
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Profile(),
-                      SizedBox(width: 10,),
-                      Profile(),
-                      SizedBox(width: 10,),
-                      Profile(),
-                    ]
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Profile(),
-                        SizedBox(width: 10,),
-                        Profile(),
-                        SizedBox(width: 10,),
-                        Profile(),
-                      ]
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Profile(),
-                        SizedBox(width: 10,),
-                        Profile(),
-                        SizedBox(width: 10,),
-                        Profile(),
-                      ]
-                  ),
-                ),
-                TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      "Random!",
-                      textAlign: TextAlign.right,
-                    )
-                )
-              ],
-            ),
-          ),
-    );
-  }
-}
-
-class Profile extends StatelessWidget{
-  Widget build(BuildContext context) {
-    return Container(
-      height: 80,
-      width: 80,
-      child: FloatingActionButton(
-      backgroundColor: Colors.orange,
-      onPressed: () {},
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-      tooltip: 'Increment',
-      child: const Icon(Icons.insert_emoticon),
-      ),
-    );/*ElevatedButton(
-        style: ButtonStyle(
-          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-          overlayColor: MaterialStateProperty.resolveWith<Color?>(
-                (Set<MaterialState> states) {
-              if (states.contains(MaterialState.hovered)) {
-                return Colors.orangeAccent.withOpacity(0.04);
-              }
-              if (states.contains(MaterialState.focused) || states.contains(MaterialState.pressed)) {
-                return Colors.orangeAccent.withOpacity(0.12);
-              }
-              return null; // Defer to the widget's default.
-            },
-          ),
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.zero,
-                    side: BorderSide(color: Colors.red)
-                )
-            )
-        ),
-        onPressed: () {},
-        child: SizedBox(width: 0, height: 10),
-
-      /*Container(
-          color: Colors.orange,
-          height: 50,
-          width: 50,
-        ),*/
-      );*/
   }
 }
