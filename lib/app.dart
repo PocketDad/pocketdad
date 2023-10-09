@@ -6,6 +6,7 @@ import 'src/sample_feature/sample_item_details_view.dart';
 import 'src/sample_feature/sample_item_list_view.dart';
 import 'src/settings/settings_controller.dart';
 import 'src/settings/settings_view.dart';
+import 'src/pages/check_in.dart';
 
 /// The Widget that configures your application.
 class MyApp extends StatelessWidget {
@@ -69,6 +70,8 @@ class MyApp extends StatelessWidget {
                 switch (routeSettings.name) {
                   case SettingsView.routeName:
                     return SettingsView(controller: settingsController);
+                  case CheckIn.routeName:
+                    return const CheckIn();
                   case SampleItemDetailsView.routeName:
                     return const SampleItemDetailsView();
                   case SampleItemListView.routeName:

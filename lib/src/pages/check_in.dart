@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 class CheckIn extends StatelessWidget {
+
+  static const routeName = '/CheckIn';
+
   const CheckIn({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

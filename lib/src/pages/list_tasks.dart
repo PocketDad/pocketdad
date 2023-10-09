@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import '../components/listTaskItem.dart';
-import '../components/completedTaskItem.dart';
+import '../components/list_task_item.dart';
 
-class CompletedTasks extends StatelessWidget {
+class ListTasks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -10,35 +9,33 @@ class CompletedTasks extends StatelessWidget {
         length: 2,
         child: Scaffold(
           appBar: AppBar(
-              bottom: const TabBar(
-                tabs: [
-                  Tab(text: 'All'),
-                  Tab(text: 'Filter by'),
-                ],
-              ),
-              centerTitle: true,
-              backgroundColor: Theme.of(context).colorScheme.primary,
-              title: const Text(
-                  "Completed Tasks",
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  )
-              )
+            bottom: const TabBar(
+              tabs: [
+                Tab(text: 'All'),
+                Tab(text: 'Filter by'),
+              ],
+            ),
+            centerTitle: true,
+            backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+            title: const Text(
+                "Tasks",
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                )
+            )
           ),
           body: ListView(
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              children: [
-                CompletedTaskItem(),
-                CompletedTaskItem(),
-                CompletedTaskItem(),
-                CompletedTaskItem(),
-                CompletedTaskItem(),
-                CompletedTaskItem(),
-                CompletedTaskItem(),
-                CompletedTaskItem(),
-                CompletedTaskItem(),
-              ]
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            children: [
+              ListTaskItem(),
+              ListTaskItem(),
+              ListTaskItem(),
+              ListTaskItem(),
+              ListTaskItem(),
+              ListTaskItem(),
+              ListTaskItem()
+            ]
           ),
         ),
       ),
@@ -49,19 +46,19 @@ class CompletedTasks extends StatelessWidget {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text(
             "Tasks",
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            )
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          )
         ),
       ),
       body: ListView(
           padding: const EdgeInsets.symmetric(vertical: 8),
-          children: [
-            ListTaskItem(),
-            ListTaskItem(),
-            ListTaskItem()
-          ]
+        children: [
+          ListTaskItem(),
+          ListTaskItem(),
+          ListTaskItem()
+        ]
         // Center(
         // child: Column(
         //   mainAxisAlignment: MainAxisAlignment.center,
