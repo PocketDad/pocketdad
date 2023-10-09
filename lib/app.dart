@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:pocketdad/src/views/home/home_view.dart';
 
 import 'src/sample_feature/sample_item_details_view.dart';
 import 'src/sample_feature/sample_item_list_view.dart';
 import 'src/settings/settings_controller.dart';
 import 'src/settings/settings_view.dart';
-import 'src/pages/check_in.dart';
 
 /// The Widget that configures your application.
 class MyApp extends StatelessWidget {
@@ -68,10 +68,10 @@ class MyApp extends StatelessWidget {
               settings: routeSettings,
               builder: (BuildContext context) {
                 switch (routeSettings.name) {
+                  case HomeView.routeName:
+                    return HomeView();
                   case SettingsView.routeName:
                     return SettingsView(controller: settingsController);
-                  case CheckIn.routeName:
-                    return const CheckIn();
                   case SampleItemDetailsView.routeName:
                     return const SampleItemDetailsView();
                   case SampleItemListView.routeName:
