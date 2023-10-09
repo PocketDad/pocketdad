@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'listTaskItem.dart';
+import '../components/listTaskItem.dart';
 
 class ListTasks extends StatelessWidget {
   @override
