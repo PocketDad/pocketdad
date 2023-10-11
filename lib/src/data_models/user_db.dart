@@ -1,3 +1,6 @@
+import 'task_db.dart';
+import 'item_db.dart';
+
 class UserData {
   UserData(
     {
@@ -64,6 +67,14 @@ class UserDB {
 
   List<UserData> getAllusers(List<String> userIDs) {
     return _users.where((userData) => userIDs.contains(userData.id)).toList();
+  }
+
+  List<TaskData> getTasks(String userID, List<TaskData> tasks) {
+    return tasks.where((task) => task.userIDs.contains(userID)).toList();
+  }
+
+  List<ItemData> getItems(String userID, List<ItemData> items) {
+    return items.where((item) => item.userIDs.contains(userID)).toList();
   }
 
 }
