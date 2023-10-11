@@ -5,10 +5,12 @@ class ItemData {
     {required this.id,
     required this.name,
     required this.userIDs,
+    required this.icon,
     });
   String id;
   String name;
   List<String> userIDs;
+  String icon;
 }
 
 class ItemDB {
@@ -17,16 +19,19 @@ class ItemDB {
       id: 'item-001',
       name:  'Car',
       userIDs: ['user-001', 'user-002'],
+      icon: "assets/images/car.png",
     ),
     ItemData(
       id: 'item-002',
       name:  'House',
       userIDs: [],
+      icon: "",
     ),
     ItemData(
       id: 'item-003',
       name:  'Condo',
       userIDs: [],
+      icon: "",
     ),
   ];
 
