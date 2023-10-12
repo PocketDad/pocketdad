@@ -1,8 +1,11 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:pocketdad/src/data_models/user_db.dart';
 
 class ListTaskItem extends StatelessWidget {
+  const ListTaskItem(/*this.taskID, */ {super.key});
+  //final String taskID;
   @override
   Widget build(BuildContext context) {
     return const Center(
@@ -16,29 +19,37 @@ class ListTaskItem extends StatelessWidget {
               Spacer(),
               Text('MM/DD/YY'),
               Spacer(),
-              Row(
+              Column(
                 children: [
-                  Column(
-                    children: [
-                      Text(
-                        'Task Name: ',
-                        style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w400
-                      ))]
-                  ),
-                  Row(
-                    children: [
-                      Text('Task Description. task description',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w400
-                        )
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            textAlign: TextAlign.center,
+                            'Task Name: ',
+                            style:
+                              TextStyle(
+                                fontSize: 14,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w400
+                              )
+                          ),
+                        ]
                       ),
-                    ],
-                  )
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Task Description',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w400
+                            )
+                          ),
+                        ],
+                      ),
                 ]
               ),
               Spacer(),

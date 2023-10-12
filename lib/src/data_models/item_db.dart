@@ -24,14 +24,14 @@ class ItemDB {
     ItemData(
       id: 'item-002',
       name:  'House',
-      userIDs: [],
-      icon: "",
+      userIDs: ['user-003'],
+      icon: "assets/images/house.png",
     ),
     ItemData(
       id: 'item-003',
       name:  'Condo',
-      userIDs: [],
-      icon: "",
+      userIDs: ['user-004'],
+      icon: "assets/images/condo.png",
     ),
   ];
 
