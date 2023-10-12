@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import '../../../data_models/task_db.dart';
+import '../../../data_models/user_db.dart';
 import '../components/list_task_item.dart';
 import '../components/completed_task_item.dart';
 
 class CompletedTasks extends StatelessWidget {
+  CompletedTasks({super.key});
+
+  List<TaskData> tasks = taskDB.getTasks(currentUserID);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -28,80 +34,9 @@ class CompletedTasks extends StatelessWidget {
           ),
           body: ListView(
               padding: const EdgeInsets.symmetric(vertical: 8),
-              children: [
-                CompletedTaskItem(),
-                CompletedTaskItem(),
-                CompletedTaskItem(),
-                CompletedTaskItem(),
-                CompletedTaskItem(),
-                CompletedTaskItem(),
-                CompletedTaskItem(),
-                CompletedTaskItem(),
-                CompletedTaskItem(),
-              ]
+              children: tasks.map((task) => ListTaskItem(task: task)).toList()
           ),
         ),
-      ),
-    );
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text(
-            "Tasks",
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            )
-        ),
-      ),
-      body: ListView(
-          padding: const EdgeInsets.symmetric(vertical: 8),
-          children: [
-            ListTaskItem(),
-            ListTaskItem(),
-            ListTaskItem()
-          ]
-        // Center(
-        // child: Column(
-        //   mainAxisAlignment: MainAxisAlignment.center,
-        //   children: [
-        //     Padding(
-        //       padding: const EdgeInsets.symmetric(vertical: 10.0),
-        //       child: Row(
-        //           mainAxisAlignment: MainAxisAlignment.center,
-        //           children: [
-        //             IndividualTask(),
-        //           ]
-        //       ),
-        //     ),
-        //     Padding(
-        //       padding: const EdgeInsets.symmetric(vertical: 10.0),
-        //       child: Row(
-        //           mainAxisAlignment: MainAxisAlignment.center,
-        //           children: [
-        //             IndividualTask(),
-        //           ]
-        //       ),
-        //     ),
-        //     Padding(
-        //       padding: const EdgeInsets.symmetric(vertical: 10.0),
-        //       child: Row(
-        //           mainAxisAlignment: MainAxisAlignment.center,
-        //           children: [
-        //             IndividualTask(),
-        //           ]
-        //       ),
-        //     ),
-        //     TextButton(
-        //         onPressed: () {},
-        //         child: const Text(
-        //           "Random!",
-        //           textAlign: TextAlign.right,
-        //         )
-        //     )
-        //   ],
-        // ),
       ),
     );
   }

@@ -51,21 +51,21 @@ class TaskDB {
         dueDate: DateTime.parse('2023-07-24 04:00:00Z'),
         completionDate: null,
         location: '114 East-West Blvd',
-        itemID: 'item-001',
+        itemID: 'item-002',
         notes: ['Filters can be purchased on Amazon or at Home Depot'],
         completed: false
     ),
     TaskData(
         id: 'task-003',
-        name: 'Wash Car',
-        description: 'Nissan Versa should be cleaned',
+        name: 'Check Tire Tread',
+        description: 'Tire tread should be checked periodically.',
         userIDs: ['user-001'],
-        openDate: DateTime.parse('2023-07-20 20:18:04Z'),
-        dueDate: DateTime.parse('2023-07-23 05:00:00Z'),
+        openDate: DateTime.parse('2023-10-10 12:32:42Z'),
+        dueDate: DateTime.parse('2023-12-23 07:00:00Z'),
         completionDate: null,
         location: 'driveway',
         itemID: 'item-001',
-        notes: ['Your car should be cleaned every month'],
+        notes: ['The depth of the tread should 6/32 of an inch or deeper.'],
         completed: false
     ),
     TaskData(
@@ -73,8 +73,8 @@ class TaskDB {
         name: 'Wash Car',
         description: 'Nissan Versa should be cleaned',
         userIDs: ['user-001'],
-        openDate: DateTime.parse('2023-07-20 20:18:04Z'),
-        dueDate: DateTime.parse('2023-07-23 05:00:00Z'),
+        openDate: DateTime.parse('2023-04-11 22:22:22Z'),
+        dueDate: DateTime.parse('2023-07-12 05:00:00Z'),
         completionDate: null,
         location: 'driveway',
         itemID: 'item-001',
@@ -86,8 +86,8 @@ class TaskDB {
         name: 'Wash Car',
         description: 'Nissan Versa should be cleaned',
         userIDs: ['user-001'],
-        openDate: DateTime.parse('2023-07-20 20:18:04Z'),
-        dueDate: DateTime.parse('2023-07-23 05:00:00Z'),
+        openDate: DateTime.parse('2023-08-25 23:50:00Z'),
+        dueDate: DateTime.parse('2023-10-25 04:00:00Z'),
         completionDate: null,
         location: 'driveway',
         itemID: 'item-001',
@@ -100,13 +100,10 @@ class TaskDB {
     return _tasks.firstWhere((taskData) => taskData.id == taskID);
   }
 
-  List<TaskData> getTasks(List<String> taskIDs) {
-    return _tasks.where((taskData) => taskIDs.contains(taskData.id)).toList();
+  List<TaskData> getTasks(String userID) {
+    return _tasks.where((taskData) => taskData.userIDs.contains(userID)).toList();
   }
 }
 
 /// The singleton instance providing access to all user data for clients.
-TaskDB userDB = TaskDB();
-
-/// The currently logged in user.
-String currentUserID = 'user-005';
+TaskDB taskDB = TaskDB();

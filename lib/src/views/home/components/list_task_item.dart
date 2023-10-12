@@ -1,11 +1,14 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
+
+import '../../../data_models/task_db.dart';
 
 class ListTaskItem extends StatelessWidget {
+  const ListTaskItem({Key? key, required this.task}) : super(key: key);
+
+  final TaskData task;
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    return Center(
       child: Card(
         child: SizedBox(
           width: 300,
@@ -13,15 +16,15 @@ class ListTaskItem extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Spacer(),
-              Text('MM/DD/YY'),
+              const Spacer(),
+              Text(task.dueDate.toString()),
               Spacer(),
               Row(
                 children: [
                   Column(
                     children: [
                       Text(
-                        'Task Name: ',
+                        task.name,
                         style: TextStyle(
                         fontSize: 14,
                         color: Colors.black,
@@ -30,7 +33,7 @@ class ListTaskItem extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      Text('Task Description. task description',
+                      Text(task.description,
                         style: TextStyle(
                           fontSize: 14,
                           color: Colors.black,

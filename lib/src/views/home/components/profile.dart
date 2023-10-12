@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
 class Profile extends StatelessWidget{
+  const Profile({super.key});
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 80,
       width: 80,
       child: FloatingActionButton(

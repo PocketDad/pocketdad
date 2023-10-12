@@ -1,4 +1,3 @@
-import 'user_db.dart';
 
 class ItemData {
   ItemData(

@@ -65,7 +65,7 @@ class UserDB {
     return _users.firstWhere((userData) => userData.id == userID);
   }
 
-  List<UserData> getAllusers(List<String> userIDs) {
+  List<UserData> getAllUsers(List<String> userIDs) {
     return _users.where((userData) => userIDs.contains(userData.id)).toList();
   }
 
@@ -79,4 +79,8 @@ class UserDB {
 
 }
 
+/// The singleton instance providing access to all user data for clients.
 UserDB userDB = UserDB();
+
+/// The currently logged in user.
+String currentUserID = 'user-001';
