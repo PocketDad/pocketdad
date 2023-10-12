@@ -17,6 +17,10 @@ Widget bottomNavigationBar() {
           icon: Icon(Icons.chat),
           label: "Chat"
       ),
+      BottomNavigationBarItem(
+          icon: Icon(Icons.list),
+          label: "Individual task"
+      ),
     ],
   );
 }

@@ -3,6 +3,7 @@ import 'package:pocketdad/src/views/home/pages/add_task.dart';
 import 'package:pocketdad/src/views/home/pages/chat.dart';
 import 'package:pocketdad/src/views/home/pages/check_in.dart';
 import 'package:pocketdad/src/views/home/pages/list_tasks.dart';
+import 'package:pocketdad/src/views/home/pages/individual_task.dart';
 
 /// Top-level Layout for all of the "Home" related
 class HomeView extends StatefulWidget {
@@ -47,6 +48,14 @@ class HomeView extends StatefulWidget {
           label: "Chat"
       ),
     },
+    4: {
+      'title': const Text('Individual Task'),
+      'body': const IndividualTask(),
+      'navItem': const BottomNavigationBarItem(
+        icon: Icon(Icons.list),
+          label: "Individual Task"
+      ),
+    }
   };
 
   @override
@@ -76,6 +85,7 @@ class _HomeViewState extends State<HomeView> {
           widget.pages[1]['navItem'],
           widget.pages[2]['navItem'],
           widget.pages[3]['navItem'],
+          widget.pages[4]['navItem'],
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
