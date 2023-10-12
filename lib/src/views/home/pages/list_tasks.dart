@@ -21,7 +21,7 @@ class ListTasks extends StatelessWidget {
               ],
             ),
             centerTitle: true,
-            backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+            backgroundColor: Theme.of(context).colorScheme.primary,
             title: const Text(
                 "Tasks",
                 style: TextStyle(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../../data_models/task_db.dart';
 
 class ListTaskItem extends StatelessWidget {
@@ -19,34 +18,35 @@ class ListTaskItem extends StatelessWidget {
               const Spacer(),
               Text(task.dueDate.toString()),
               Spacer(),
-              Row(
+              Column(
                 children: [
                   Column(
-                    children: [
-                      Text(
-                        task.name,
-                        style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w400
-                      ))]
+                      children: [
+                        Text(
+                            task.name,
+                            style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w400
+                            ))]
                   ),
                   Row(
-                    children: [
-                      Text(task.description,
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w400
+                      children: [
+                        Text(task.description,
+                            style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w400
+                            )
                         )
-                      ),
-                    ],
+                      ]
                   )
                 ]
               ),
               Spacer(),
-          ])
-        ),
+            ]
+          )
+        )
       ),
     );
   }
