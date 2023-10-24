@@ -1,13 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../data_models/task_db.dart';
+import '../../../data_models/user_db.dart';
+import '../../../data_models/item_db.dart';
 
-class AddTask extends StatelessWidget {
-  const AddTask({super.key});
+
+class AddTask extends ConsumerWidget  {
+  AddTask({Key? key}) : super(key: key);
+
+  static const routeNae = '/addTask';
+  final _formKey = GlobalKey<FormBuilderState>();
+  final _nameFieldKey = GlobalKey<FormBuilderState>();
+  final _descriptionFieldKey = GlobalKey<FormBuilderState>();
+  final _usersFieldKey = GlobalKey<FormBuilderState>();
+  final _openDateFieldKey = GlobalKey<FormBuilderState>();
+  final _dueDateFieldKey = GlobalKey<FormBuilderState>();
+  final _locationFieldKey = GlobalKey<FormBuilderState>();
+  final _completitionDateFieldKey = GlobalKey<FormBuilderState>();
+  final _itemFieldKey = GlobalKey<FormBuilderState>();
+  final _notesFieldKey = GlobalKey<FormBuilderState>();
+  final _completedFieldKey = GlobalKey<FormBuilderState>();
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // work aroud riverpod stuff
+    /* uncomment when main is updated
+    final TaskDB taskDB = ref.watch(taskDBProvider);
+    final UserDB userDB = ref.watch(userDBProvider);
+    final ItemDB itemDB = ref.watch(itemDBProvider);
+    final String currentUserID = ref.watch(currentUserIDProvider);
+    List<String> itemNames = itemDB.getItemNames();
+    // ^ implement getItemNames in item_db.dart
+    */
+/*    
+    void onSubmit() {
+      String name = _nameFieldKey.currentState?.value;
+      String description = _descriptionFieldKey.currentState?.value;
+      List<String> users = _usersFieldKey.currentState?.value;
+      DateTime openDate = _openDateFieldKey.currentState?.value;
+      DateTime dueDate = _dueDateFieldKey.currentState?.value;
+      String location = _locationFieldKey.currentState?.value;
+      DateTime completionDate = _completitionDateFieldKey.currentState?.value;
+      String item = _itemFieldKey
+    }
+*/
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("PocketDad"),
+        title: const Text("Add Task"),
         centerTitle: true,
       ),
       body: SafeArea(
