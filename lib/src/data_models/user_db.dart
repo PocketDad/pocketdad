@@ -1,3 +1,5 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'task_db.dart';
 import 'item_db.dart';
 
@@ -21,8 +23,9 @@ class UserData {
 }
 
 class UserDB {
-  // change to var and use a loop(?)
-  // currently using hard coded instances
+  UserDB(this.ref);
+
+  final ProviderRef<UserDB> ref;
   final List<UserData> _users = [
     UserData(
       id: 'user-001',
@@ -65,22 +68,15 @@ class UserDB {
     return _users.firstWhere((userData) => userData.id == userID);
   }
 
-  List<UserData> getAllUsers(List<String> userIDs) {
-    return _users.where((userData) => userIDs.contains(userData.id)).toList();
+  List<UserData> getUsers(List<String> userIDs) {
+    return userIDs.map((userID) => getUser(userID)).toList();
   }
-
-  List<TaskData> getTasks(String userID, List<TaskData> tasks) {
-    return tasks.where((task) => task.userIDs.contains(userID)).toList();
-  }
-
-  List<ItemData> getItems(String userID, List<ItemData> items) {
-    return items.where((item) => item.userIDs.contains(userID)).toList();
-  }
-
 }
 
-/// The singleton instance providing access to all user data for clients.
-UserDB userDB = UserDB();
+final userDBProvider = Provider<UserDB>((ref) {
+  return UserDB(ref);
+});
 
-/// The currently logged in user.
-String currentUserID = 'user-001';
+final currentUserIDProvider = StateProvider<String>((ref) {
+  return 'user-001';
+});
