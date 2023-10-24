@@ -1,4 +1,8 @@
 /// The data associated with users.
+
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
 class TaskData {
   TaskData(
       {required this.id,
@@ -28,6 +32,9 @@ class TaskData {
 
 /// Provides access to and operations on all defined users.
 class TaskDB {
+  TaskDB(this.ref);
+
+  final ProviderRef<TaskDB> ref;
   final List<TaskData> _tasks = [
     TaskData(
         id: 'task-001',
@@ -105,5 +112,6 @@ class TaskDB {
   }
 }
 
-/// The singleton instance providing access to all user data for clients.
-TaskDB taskDB = TaskDB();
+final taskDBProvider = Provider<TaskDB>((ref) {
+  return TaskDB(ref);
+});

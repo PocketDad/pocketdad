@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../data_models/task_db.dart';
 import '../../../data_models/user_db.dart';
 import '../components/list_task_item.dart';
 
-class ListTasks extends StatelessWidget {
+class ListTasks extends ConsumerWidget {
   ListTasks({Key? key}) : super(key: key);
 
-  List<TaskData> tasks = taskDB.getTasks(currentUserID);
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+
+    final TaskDB taskDB = ref.watch(taskDBProvider);
     return MaterialApp(
       home: DefaultTabController(
         length: 2,
@@ -32,7 +34,7 @@ class ListTasks extends StatelessWidget {
           ),
           body: ListView(
             padding: const EdgeInsets.symmetric(vertical: 8),
-            children: tasks.map((task) => ListTaskItem(task: task)).toList()
+            children: taskDB.getTasks(currentUserID).map((task) => ListTaskItem(task: task)).toList()
           )
         ),
       ),
