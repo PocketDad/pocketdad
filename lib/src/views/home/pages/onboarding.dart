@@ -1,45 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:pocketdad/src/data_models/user_db.dart';
 
-void main() => runApp(const Onboarding());
+class OnboardingForm extends StatelessWidget {
 
-class Onboarding extends StatelessWidget {
-  const Onboarding({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Retrieve Text Input',
-      home: MyCustomForm(),
-    );
-  }
-}
-
-// Define a custom Form widget.
-class MyCustomForm extends StatefulWidget {
-  const MyCustomForm({super.key});
-
-  @override
-  State<MyCustomForm> createState() => _MyCustomFormState();
-}
-
-// Define a corresponding State class.
-// This class holds the data related to the Form.
-class _MyCustomFormState extends State<MyCustomForm> {
-  // Create a text controller and use it to retrieve the current value
-  // of the TextField.
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final usernameController = TextEditingController();
 
-  @override
-  void dispose() {
-    // Clean up the controller when the widget is disposed.
-    nameController.dispose();
-    emailController.dispose();
-    usernameController.dispose();
-    super.dispose();
-  }
+  OnboardingForm({super.key});
 
   @override
   Widget build(BuildContext context) {
