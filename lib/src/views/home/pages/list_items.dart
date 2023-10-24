@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pocketdad/src/data_models/user_db.dart';
 import 'package:pocketdad/src/views/home/components/list_item_item.dart';
 
-class ListItems extends StatelessWidget {
-  const ListItems({super.key});
+import '../../../data_models/item_db.dart';
+import '../../../data_models/relations/item_user_db.dart';
+
+class ListItems extends ConsumerWidget {
+  const ListItems({Key? key}) : super(key: key);
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+
+    final String currentUserID = ref.watch(currentUserIDProvider);
+    final ItemUserDB itemUserDB = ref.watch(itemUserDBProvider);
+    final List<ItemData> associatedItems = itemUserDB.getAssociatedItems(currentUserID);
     return MaterialApp(
       home: DefaultTabController(
         length: 2,
@@ -31,11 +41,7 @@ class ListItems extends StatelessWidget {
           ),
           body: ListView(
               padding: const EdgeInsets.symmetric(vertical: 8),
-              children: const [
-                ListItemItem('item-001'),
-                ListItemItem('item-002'),
-                ListItemItem('item-003'),
-              ]
+              children: associatedItems.map((item) => ListItemItem(item: item)).toList()
           ),
         ),
       ),
