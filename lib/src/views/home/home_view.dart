@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pocketdad/src/views/home/pages/add_task.dart';
 import 'package:pocketdad/src/views/home/pages/chat.dart';
 import 'package:pocketdad/src/views/home/pages/check_in.dart';
+import 'package:pocketdad/src/views/home/pages/choose_avatar.dart';
 import 'package:pocketdad/src/views/home/pages/list_tasks.dart';
 
 /// Top-level Layout for all of the "Home" related
