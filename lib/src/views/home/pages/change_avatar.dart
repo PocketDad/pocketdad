@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pocketdad/src/data_models/user_db.dart';
 
 class ChangeAvatar extends StatelessWidget {
@@ -11,14 +10,14 @@ class ChangeAvatar extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         centerTitle: true,
-        title: const Text("PocketDad"),
+        title: const Text("Change Avatar"),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
-                "Change my appearance!",
+                "Choose my appearance!",
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -64,13 +63,14 @@ class ChangeAvatar extends StatelessWidget {
               ),
             ),
             TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  userDB.getUser(currentUserID).dadPic = "assets/images/dad9.JPG";
+                },
                 child: const Text(
                   "Random!",
                   textAlign: TextAlign.right,
                 )
             ),
-            Image.asset(userDB.getUser(currentUserID).dadPic)
           ],
         ),
       ),
@@ -78,20 +78,17 @@ class ChangeAvatar extends StatelessWidget {
   }
 }
 
-class Profile extends ConsumerWidget{
+class Profile extends StatelessWidget{
 
-  final avatarStateProvider = StateProvider<String>((ref) {
-    String avatarString = "assets/images/dad1.JPG";
-    return avatarString;
-  });
-
-  final String avatarImage;
+  String avatarImage;
   Profile(this.avatarImage, {super.key});
 
+  void setAvatar (String avatarString) {
+    avatarImage = avatarString;
+  }
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final avatar = ref.watch(avatarStateProvider);
-    userDB.getUser(currentUserID).dadPic = avatar;
+  Widget build(BuildContext context) {
     return Container(
       height: 80,
       width: 80,
@@ -102,7 +99,7 @@ class Profile extends ConsumerWidget{
       child: FloatingActionButton(
         backgroundColor: Colors.orange,
         onPressed: () => {
-          ref.read(avatarStateProvider.notifier).state = avatarImage
+          userDB.getUser(currentUserID).dadPic = avatarImage
         },
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
