@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../data_models/task_db.dart';
+import '../../../data_models/relations/task_user_db.dart';
 import '../../../data_models/user_db.dart';
 import '../components/list_task_item.dart';
 
@@ -10,7 +11,9 @@ class ListTasks extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-    final TaskDB taskDB = ref.watch(taskDBProvider);
+    final String currentUserID = ref.watch(currentUserIDProvider);
+    final TaskUserDB taskUserDB = ref.watch(taskUserDBProvider);
+    final List<TaskData> associatedTasks = taskUserDB.getAssociatedTasks(currentUserID);
     return MaterialApp(
       home: DefaultTabController(
         length: 2,
@@ -34,7 +37,7 @@ class ListTasks extends ConsumerWidget {
           ),
           body: ListView(
             padding: const EdgeInsets.symmetric(vertical: 8),
-            children: taskDB.getTasks(currentUserID).map((task) => ListTaskItem(task: task)).toList()
+            children: associatedTasks.map((task) => ListTaskItem(task: task)).toList()
           )
         ),
       ),

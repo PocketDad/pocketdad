@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pocketdad/src/data_models/item_db.dart';
+
+import '../../../data_models/relations/item_user_db.dart';
 import '../../../data_models/user_db.dart';
 
-class ListItemItem extends StatelessWidget {
-  const ListItemItem(this.itemID, {super.key});
-  final String itemID;
+class ListItemItem extends ConsumerWidget {
+  ListItemItem({Key? key, required this.item}) : super(key: key);
+
+  final ItemData item;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final ItemUserDB itemUserDB = ref.watch(itemUserDBProvider);
+    final List<UserData> associatedUsers = itemUserDB.getAssociatedUsers(item.id);
     return Center(
       child: Card(
         child: SizedBox(
@@ -23,7 +29,7 @@ class ListItemItem extends StatelessWidget {
                             children: [
                               Text(
                                   textAlign: TextAlign.center,
-                                  ItemDB().getItem(itemID).name,
+                                  item.name,
                                   style:
                                   const TextStyle(
                                       fontSize: 24,
@@ -37,29 +43,28 @@ class ListItemItem extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            if (ItemDB().getItem(itemID).icon != "")
-                              SizedBox(height: 80, child: Image.asset(ItemDB().getItem(itemID).icon),),
+                            if (item.icon != "")
+                              SizedBox(height: 80, child: Image.asset(item.icon),),
                           ],
                         ),
                         const SizedBox(height: 20),
                         Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              if (ItemDB().getAssociatedUsers(itemID).isNotEmpty)
-                                const Text(
-                                    textAlign: TextAlign.center,
-                                    'Assigned users: ',
-                                    style:
-                                    TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w400
-                                    )
-                                ),
-                              for (var i = 0; i < ItemDB().getAssociatedUsers(itemID).length; i++)
+                               const Text(
+                                 textAlign: TextAlign.center,
+                                 'Assigned users: ',
+                                 style:
+                                 TextStyle(
+                                     fontSize: 14,
+                                     color: Colors.black,
+                                     fontWeight: FontWeight.w400
+                                 )
+                               ),
+                              for (var i = 0; i < associatedUsers.length; i++)
                                 Text(
                                     textAlign: TextAlign.center,
-                                    '${UserDB().getUser(ItemDB().getAssociatedUsers(itemID)[i]).name} ',
+                                    '${associatedUsers.map((user) => (user.name))} ',
                                     style:
                                     const TextStyle(
                                         fontSize: 14,
@@ -78,24 +83,3 @@ class ListItemItem extends StatelessWidget {
       );
   }
 }
-
-final List<ItemData> items = [
-  ItemData(
-    id: 'item-001',
-    name:  'Car',
-    userIDs: ['user-001', 'user-002'],
-    icon: "assets/images/car.png",
-  ),
-  ItemData(
-    id: 'item-002',
-    name:  'House',
-    userIDs: [],
-    icon: "",
-  ),
-  ItemData(
-    id: 'item-003',
-    name:  'Condo',
-    userIDs: [],
-    icon: "",
-  ),
-];
