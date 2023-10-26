@@ -25,6 +25,14 @@ class HomeView extends StatefulWidget {
       ),
     },
     1: {
+      'title': const Text('Add Task'),
+      'body': AddTask(),
+      'navItem': const BottomNavigationBarItem(
+        icon: Icon(Icons.add),
+        label: "Add Task",
+      ),
+    },
+    2: {
       'title': const Text('Check In'),
       'body': const CheckIn(),
       'navItem': const BottomNavigationBarItem(

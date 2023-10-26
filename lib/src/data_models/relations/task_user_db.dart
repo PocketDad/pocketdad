@@ -42,6 +42,17 @@ class TaskUserDB {
     ),
   ];
 
+  void addTaskUser({
+    required String taskID,
+    required String userID,}) {
+    TaskUserData data = TaskUserData(
+      taskID: taskID,
+      userID: userID
+    );
+    _taskUsers.add(data);
+  }
+
+
   List<UserData> getAssociatedUsers(String taskID) {
     UserDB userDB = ref.read(userDBProvider);
     List<String> userIDs = _taskUsers.where((data) => data.taskID == taskID).map((data) => data.userID).toList();
