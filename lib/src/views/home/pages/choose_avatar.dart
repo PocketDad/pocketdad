@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pocketdad/src/data_models/user_db.dart';
 
 class ChooseAvatar extends StatelessWidget {
   const ChooseAvatar({super.key});
@@ -11,74 +13,78 @@ class ChooseAvatar extends StatelessWidget {
         title: const Text("PocketDad"),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-                "Choose my appearance!",
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                )
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 10.0),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Profile("assets/images/dad1.JPG"),
-                    SizedBox(width: 10,),
-                    Profile("assets/images/dad2.JPG"),
-                    SizedBox(width: 10,),
-                    Profile("assets/images/dad3.JPG"),
-                  ]
+        child: ProviderScope(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                  "Choose my appearance!",
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  )
               ),
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 10.0),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Profile("assets/images/dad4.JPG"),
-                    SizedBox(width: 10,),
-                    Profile("assets/images/dad5.JPG"),
-                    SizedBox(width: 10,),
-                    Profile("assets/images/dad6.JPG"),
-                  ]
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 10.0),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Profile("assets/images/dad1.JPG"),
+                      SizedBox(width: 10,),
+                      Profile("assets/images/dad2.JPG"),
+                      SizedBox(width: 10,),
+                      Profile("assets/images/dad3.JPG"),
+                    ]
+                ),
               ),
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 10.0),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Profile("assets/images/dad7.JPG"),
-                    SizedBox(width: 10,),
-                    Profile("assets/images/dad8.JPG"),
-                    SizedBox(width: 10,),
-                    Profile("assets/images/dad9.JPG"),
-                  ]
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 10.0),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Profile("assets/images/dad4.JPG"),
+                      SizedBox(width: 10,),
+                      Profile("assets/images/dad5.JPG"),
+                      SizedBox(width: 10,),
+                      Profile("assets/images/dad6.JPG"),
+                    ]
+                ),
               ),
-            ),
-            TextButton(
-                onPressed: () {},
-                child: const Text(
-                  "Random!",
-                  textAlign: TextAlign.right,
-                )
-            )
-          ],
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 10.0),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Profile("assets/images/dad7.JPG"),
+                      SizedBox(width: 10,),
+                      Profile("assets/images/dad8.JPG"),
+                      SizedBox(width: 10,),
+                      Profile("assets/images/dad9.JPG"),
+                    ]
+                ),
+              ),
+              TextButton(
+                  onPressed: () {
+                  },
+                  child: const Text(
+                    "Random!",
+                    textAlign: TextAlign.right,
+                  )
+              )
+            ],
+          ),
         ),
       ),
     );
   }
 }
 
-class Profile extends StatelessWidget{
-  final String avatar;
-  const Profile(this.avatar, {super.key});
+class Profile extends ConsumerWidget{
+  String avatar;
+  Profile(this.avatar, {super.key});
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       height: 80,
       width: 80,
@@ -88,7 +94,9 @@ class Profile extends StatelessWidget{
       ),
       child: FloatingActionButton(
         backgroundColor: Colors.orange,
-        onPressed: () {},
+        onPressed: () {
+          ref.watch(userDBProvider).ref.watch(currentUserIDProvider.notifier).state = avatar;
+        },
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
           child: Image.asset(avatar),
