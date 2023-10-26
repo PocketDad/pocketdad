@@ -2,6 +2,8 @@
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'relations/task_user_db.dart';
+import 'relations/item_task_db.dart';
 
 class TaskData {
   TaskData(
@@ -29,6 +31,7 @@ class TaskData {
 /// Provides access to and operations on all defined users.
 class TaskDB {
   TaskDB(this.ref);
+  
 
   final ProviderRef<TaskDB> ref;
   final List<TaskData> _tasks = [
@@ -90,15 +93,16 @@ class TaskDB {
   ];
 
   void addTask({
-    // do i call addItemTask here?
     required String name,
     required String description,
     required DateTime dueDate,
-    required String location,}) {
-    String id = 'task-${(_tasks.length + 1).toString().padLeft(3, '0')}';
+    required String location,
+    required String userID,
+    required String itemID,}) {
+    String taskID = 'task-${(_tasks.length + 1).toString().padLeft(3, '0')}';
     DateTime openDate = DateTime.now();
     TaskData data = TaskData(
-      id: id,
+      id: taskID,
       name: name,
       description: description,
       openDate: openDate,
@@ -106,6 +110,10 @@ class TaskDB {
       location: location
     );
     _tasks.add(data);
+    final TaskUserDB taskUserDB = ref.read(taskUserDBProvider);
+    final ItemTaskDB itemTaskDB = ref.read(itemTaskDBProvider);
+    taskUserDB.addTaskUser(taskID: taskID, userID: userID);
+    itemTaskDB.addItemTask(taskID: taskID, itemID: itemID);
   }
 
   // todo: updateTask

@@ -42,6 +42,16 @@ class ItemTaskDB {
     ),
   ];
 
+  void addItemTask({
+    required String taskID,
+    required String itemID,}) {
+    ItemTaskData data = ItemTaskData(
+      taskID: taskID,
+      itemID: itemID
+    );
+    _itemTasks.add(data);
+  }
+
   List<ItemData> getAssociatedItems(String taskID) {
     ItemDB itemDB = ref.read(itemDBProvider);
     List<String> itemIDs = _itemTasks.where((data) => data.taskID == taskID).map((data) => data.itemID).toList();

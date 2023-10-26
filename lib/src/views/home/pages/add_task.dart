@@ -35,11 +35,14 @@ class AddTask extends ConsumerWidget  {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final TaskDB taskDB = ref.watch(taskDBProvider);
-    final UserDB userDB = ref.watch(userDBProvider);
     final ItemDB itemDB = ref.watch(itemDBProvider);
     final String currentUserID = ref.watch(currentUserIDProvider);
     List<String> itemNames = itemDB.getItemNames();
-    
+    /* todo: "friend system" so people can only assign specific users
+             create users_dropdown_field.dart 
+    final UserDB userDB = ref.watch(userDBProvider);
+    */
+
     void onSubmit() {
       bool isValid = _formKey.currentState?.saveAndValidate() ?? false;
       if (!isValid) return;
@@ -47,13 +50,15 @@ class AddTask extends ConsumerWidget  {
       String description = _descriptionFieldKey.currentState?.value;
       DateTime dueDate = _dueDateFieldKey.currentState?.value;
       String location = _locationFieldKey.currentState?.value;
-      // String item = itemDB.getItem(_itemFieldKey.currentState?.value);
+      String item = itemDB.getItemIDFromName(_itemFieldKey.currentState?.value);
 
       taskDB.addTask(
         name: name,
         description: description,
         dueDate: dueDate,
-        location: location
+        location: location,
+        itemID: item,
+        userID: currentUserID
       );
     }
 
@@ -94,147 +99,6 @@ class AddTask extends ConsumerWidget  {
           )
         ],
       )
-
-      /* initial mockup, delete later
-      body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-
-            // task name
-            const Padding(
-              padding: EdgeInsets.fromLTRB(20, 30, 20, 10),
-              child: TextField(
-                decoration: InputDecoration(
-                  filled: true,
-                  labelText: 'Task name',
-                    border: OutlineInputBorder(),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        width: 2.0,
-                        color: Colors.orangeAccent,
-                      ),
-                    ),
-                ),
-              ),
-            ),
-
-            // date
-            const Padding(
-              padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                child: TextField(
-                decoration: InputDecoration(
-                  filled: true,
-                  labelText: 'Date',
-                  border: OutlineInputBorder(),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      width: 2.0,
-                      color: Colors.orangeAccent,
-                    ),
-                  ),
-                  icon: Icon(Icons.calendar_month)
-                ),
-              ),
-            ),
-            // time
-            const Padding(
-              padding: EdgeInsets.fromLTRB(20, 0, 20, 10),
-                child: TextField(
-                decoration: InputDecoration(
-                  filled: true,
-                  labelText: 'Time',
-                  border: OutlineInputBorder(),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      width: 1.0,
-                      color: Colors.orangeAccent,
-                    ),
-                  ),
-                  icon: Icon(Icons.timelapse)
-                ),
-              ),
-            ),
-
-            // location
-            const Padding(
-              padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                child: TextField(
-                decoration: InputDecoration(
-                  filled: true,
-                  labelText: 'Location',
-                  border: OutlineInputBorder(),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      width: 2.0,
-                      color: Colors.orangeAccent,
-                    ),
-                  ),
-                  icon: Icon(Icons.map)
-                ),
-              ),
-            ),
-
-            // notes
-            const Padding(
-              padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                child: TextField(
-                decoration: InputDecoration(
-                  filled: true,
-                  labelText: 'Notes',
-                  border: OutlineInputBorder(),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      width: 2.0,
-                      color: Colors.orangeAccent,
-                    ),
-                  ),
-                  icon: Icon(Icons.map)
-                ),
-              ),
-            ),
-
-            // related items
-            const Padding(
-              padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                child: TextField(
-                decoration: InputDecoration(
-                  filled: true,
-                  labelText: 'Related item',
-                  border: OutlineInputBorder(),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      width: 2.0,
-                      color: Colors.orangeAccent,
-                    ),
-                  ),
-                  icon: Icon(Icons.arrow_drop_down)
-                ),
-              ),
-            ),
-            OverflowBar(
-              alignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: EdgeInsets.fromLTRB(50, 0, 0, 0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      int i = 0;
-                      i++;
-                      // change to add task
-                    },
-                    child: const Text("Add",
-                      style: TextStyle(
-                        fontSize: 20,
-                      )
-                    )
-                  ),
-                )
-              ],
-            )
-          ],
-        ),
-      ),*/
     );
   }
 }
