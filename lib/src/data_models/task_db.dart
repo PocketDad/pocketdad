@@ -9,7 +9,7 @@ class TaskData {
         required this.name,
         required this.description,
         required this.openDate,
-        this.dueDate,
+        required this.dueDate,
         this.location,
         this.completionDate,
         this.notes,
@@ -19,7 +19,7 @@ class TaskData {
   String name;
   String description;
   DateTime openDate;
-  DateTime? dueDate;
+  DateTime dueDate;
   DateTime? completionDate;
   String? location;
   List<String>? notes;
@@ -88,6 +88,27 @@ class TaskDB {
         completed: false
     ),
   ];
+
+  void addTask({
+    // do i call addItemTask here?
+    required String name,
+    required String description,
+    required DateTime dueDate,
+    required String location,}) {
+    String id = 'task-${(_tasks.length + 1).toString().padLeft(3, '0')}';
+    DateTime openDate = DateTime.now();
+    TaskData data = TaskData(
+      id: id,
+      name: name,
+      description: description,
+      openDate: openDate,
+      dueDate: dueDate,
+      location: location
+    );
+    _tasks.add(data);
+  }
+
+  // todo: updateTask
 
   TaskData getTask(String taskID) {
     return _tasks.firstWhere((taskData) => taskData.id == taskID);
