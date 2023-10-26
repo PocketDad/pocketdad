@@ -4,8 +4,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../data_models/task_db.dart';
 import '../../../data_models/user_db.dart';
 import '../../../data_models/item_db.dart';
+
+import 'list_tasks.dart';
+import '../form-fields/task_name_field.dart';
+import '../form-fields/description_field.dart';
+import '../form-fields/date_field.dart';
+import '../form-fields/location_field.dart';
+import '../form-fields/items_dropdown_field.dart';
+import '../form-fields/submit_button.dart';
+import '../form-fields/clear_button.dart';
 // import task user db
 // import item user db
+// todo: create notes db
 
 
 class AddTask extends ConsumerWidget  {
@@ -13,40 +23,43 @@ class AddTask extends ConsumerWidget  {
 
   static const routeNae = '/addTask';
   final _formKey = GlobalKey<FormBuilderState>();
-  final _nameFieldKey = GlobalKey<FormBuilderState>();
-  final _descriptionFieldKey = GlobalKey<FormBuilderState>();
-  final _usersFieldKey = GlobalKey<FormBuilderState>();
-  final _openDateFieldKey = GlobalKey<FormBuilderState>();
-  final _dueDateFieldKey = GlobalKey<FormBuilderState>();
-  final _locationFieldKey = GlobalKey<FormBuilderState>();
-  final _completitionDateFieldKey = GlobalKey<FormBuilderState>();
-  final _itemFieldKey = GlobalKey<FormBuilderState>();
+  final _nameFieldKey = GlobalKey<FormBuilderFieldState>();
+  final _descriptionFieldKey = GlobalKey<FormBuilderFieldState>();
+  final _dueDateFieldKey = GlobalKey<FormBuilderFieldState>();
+  final _locationFieldKey = GlobalKey<FormBuilderFieldState>();
+  final _itemFieldKey = GlobalKey<FormBuilderFieldState>();
+  /* to be implemented with Notes db and assigning users functionality
   final _notesFieldKey = GlobalKey<FormBuilderState>();
-  final _completedFieldKey = GlobalKey<FormBuilderState>();
+  final _usersFieldKey = GlobalKey<FormBuilderState>(); */
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // work aroud riverpod stuff
-    /* uncomment when main is updated
     final TaskDB taskDB = ref.watch(taskDBProvider);
     final UserDB userDB = ref.watch(userDBProvider);
     final ItemDB itemDB = ref.watch(itemDBProvider);
     final String currentUserID = ref.watch(currentUserIDProvider);
     List<String> itemNames = itemDB.getItemNames();
-    // ^ implement getItemNames in item_db.dart
-    */
-/*    
+    
     void onSubmit() {
+      bool isValid = _formKey.currentState?.saveAndValidate() ?? false;
+      if (!isValid) return;
       String name = _nameFieldKey.currentState?.value;
       String description = _descriptionFieldKey.currentState?.value;
-      List<String> users = _usersFieldKey.currentState?.value;
-      DateTime openDate = _openDateFieldKey.currentState?.value;
       DateTime dueDate = _dueDateFieldKey.currentState?.value;
       String location = _locationFieldKey.currentState?.value;
-      DateTime completionDate = _completitionDateFieldKey.currentState?.value;
-      String item = _itemFieldKey
+      // String item = itemDB.getItem(_itemFieldKey.currentState?.value);
+
+      taskDB.addTask(
+        name: name,
+        description: description,
+        dueDate: dueDate,
+        location: location
+      );
     }
-*/
+
+    void onClear() {
+      _formKey.currentState?.reset();
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -54,6 +67,35 @@ class AddTask extends ConsumerWidget  {
         title: const Text("Add Task"),
         centerTitle: true,
       ),
+      body: ListView(
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        children: [
+          Column(
+            children: [
+              FormBuilder(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    TaskNameField(fieldKey: _nameFieldKey),
+                    TaskDescriptionField(fieldKey: _descriptionFieldKey),
+                    TaskDateField(fieldKey: _dueDateFieldKey),
+                    TaskLocationField(fieldKey: _locationFieldKey),
+                    ItemDropdownField(fieldKey: _itemFieldKey, itemNames: itemNames),
+                  ],
+                )
+              ),
+              Row(
+                children: [
+                  SubmitButton(onSubmit: onSubmit),
+                  ClearButton(onClear: onClear)
+                ],
+              )
+            ],
+          )
+        ],
+      )
+
+      /* initial mockup, delete later
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -192,7 +234,7 @@ class AddTask extends ConsumerWidget  {
             )
           ],
         ),
-      ),
+      ),*/
     );
   }
 }
