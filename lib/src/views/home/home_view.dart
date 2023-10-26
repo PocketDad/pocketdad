@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pocketdad/src/views/home/pages/add_task.dart';
-import 'package:pocketdad/src/views/home/pages/change_avatar.dart';
 import 'package:pocketdad/src/views/home/pages/chat.dart';
 import 'package:pocketdad/src/views/home/pages/check_in.dart';
 import 'package:pocketdad/src/views/home/pages/list_tasks.dart';
@@ -42,7 +41,7 @@ class HomeView extends StatefulWidget {
     },
     3: {
       'title': const Text('Camera'),
-      'body': const ChangeAvatar(),
+      'body': const Chat(),
       'navItem': const BottomNavigationBarItem(
         icon: Icon(Icons.chat),
           label: "Chat"
