@@ -4,11 +4,12 @@ import 'package:pocketdad/src/data_models/user_db.dart';
 
 class OnboardingForm extends ConsumerWidget {
 
-  static const routeName = '/';
+  static const routeName = '/signup';
 
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final usernameController = TextEditingController();
+  // set password field
 
   OnboardingForm({super.key});
 
