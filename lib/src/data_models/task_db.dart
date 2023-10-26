@@ -12,7 +12,7 @@ class TaskData {
         this.dueDate,
         this.location,
         this.completionDate,
-        required this.notes,
+        this.notes,
         this.completed});
 
   String id;
@@ -22,7 +22,7 @@ class TaskData {
   DateTime? dueDate;
   DateTime? completionDate;
   String? location;
-  List<String> notes;
+  List<String>? notes;
   bool? completed;
 }
 
@@ -96,6 +96,11 @@ class TaskDB {
   List<TaskData> getTasks(List<String> taskIDs) {
     return taskIDs.map((taskID) => getTask(taskID)).toList();
   }
+
+  List<String> getTaskNames() {
+    return _tasks.map((task) => task.name).toList();
+  }
+
 }
 
 final taskDBProvider = Provider<TaskDB>((ref) {

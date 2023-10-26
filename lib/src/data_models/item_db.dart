@@ -42,6 +42,11 @@ class ItemDB {
   List<ItemData> getItems(List<String> itemIDs) {
     return itemIDs.map((itemID) => getItem(itemID)).toList();
   }
+
+  List<String> getItemNames() {
+    return _items.map((item) => item.name).toList();
+  }
+
 }
 
 final itemDBProvider = Provider<ItemDB>((ref) {
