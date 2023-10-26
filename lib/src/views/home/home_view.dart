@@ -25,14 +25,6 @@ class HomeView extends StatefulWidget {
       ),
     },
     1: {
-      'title': const Text('Add Task'),
-      'body': const AddTask(),
-      'navItem': const BottomNavigationBarItem(
-        icon: Icon(Icons.add),
-        label: "Add Task",
-      ),
-    },
-    2: {
       'title': const Text('Check In'),
       'body': const CheckIn(),
       'navItem': const BottomNavigationBarItem(
@@ -40,7 +32,7 @@ class HomeView extends StatefulWidget {
         label: "Check In",
       ),
     },
-    3: {
+    2: {
       'title': const Text('Camera'),
       'body': const Chat(),
       'navItem': const BottomNavigationBarItem(
@@ -55,7 +47,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  int _selectedIndex = 2;
+  int _selectedIndex = 1;
 
   void _onItemTapped(int index) {
     if (index != _selectedIndex) {
@@ -76,7 +68,6 @@ class _HomeViewState extends State<HomeView> {
           widget.pages[0]['navItem'],
           widget.pages[1]['navItem'],
           widget.pages[2]['navItem'],
-          widget.pages[3]['navItem'],
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
