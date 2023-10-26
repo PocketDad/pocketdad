@@ -7,6 +7,7 @@ import 'src/sample_feature/sample_item_details_view.dart';
 import 'src/sample_feature/sample_item_list_view.dart';
 import 'src/settings/settings_controller.dart';
 import 'src/settings/settings_view.dart';
+import 'src/views/home/pages/onboarding.dart';
 
 /// The Widget that configures your application.
 class MyApp extends StatelessWidget {
@@ -68,6 +69,8 @@ class MyApp extends StatelessWidget {
               settings: routeSettings,
               builder: (BuildContext context) {
                 switch (routeSettings.name) {
+                  case OnboardingForm.routeName:
+                    return OnboardingForm();
                   case HomeView.routeName:
                     return HomeView();
                   case SettingsView.routeName:

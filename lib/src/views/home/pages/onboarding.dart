@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pocketdad/src/data_models/user_db.dart';
 
-class OnboardingForm extends StatelessWidget {
+class OnboardingForm extends ConsumerWidget {
+
+  static const routeName = '/';
 
   final nameController = TextEditingController();
   final emailController = TextEditingController();
@@ -10,7 +13,7 @@ class OnboardingForm extends StatelessWidget {
   OnboardingForm({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -78,7 +81,7 @@ class OnboardingForm extends StatelessWidget {
         onPressed: () {
           UserData(
             email: emailController.text,
-            id: "user-001",
+            id: "user-${(ref.watch(userDBProvider).getNextUserNum())}",
             name: nameController.text,
             username: usernameController.text,
           );

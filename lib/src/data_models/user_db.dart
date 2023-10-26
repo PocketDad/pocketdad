@@ -71,6 +71,10 @@ class UserDB {
   List<UserData> getUsers(List<String> userIDs) {
     return userIDs.map((userID) => getUser(userID)).toList();
   }
+
+  int getNextUserNum() {
+    return (_users.length + 1);
+  }
 }
 
 final userDBProvider = Provider<UserDB>((ref) {
