@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:pocketdad/src/data_models/user_db.dart';
 
-class ChangeAvatar extends StatelessWidget {
-  const ChangeAvatar({super.key});
-
+class ChooseAvatar extends StatelessWidget {
+  const ChooseAvatar({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         centerTitle: true,
-        title: const Text("Change Avatar"),
+        title: const Text("PocketDad"),
       ),
       body: Center(
         child: Column(
@@ -23,7 +21,7 @@ class ChangeAvatar extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 )
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.symmetric(vertical: 10.0),
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -36,7 +34,7 @@ class ChangeAvatar extends StatelessWidget {
                   ]
               ),
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.symmetric(vertical: 10.0),
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -49,7 +47,7 @@ class ChangeAvatar extends StatelessWidget {
                   ]
               ),
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.symmetric(vertical: 10.0),
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -63,14 +61,12 @@ class ChangeAvatar extends StatelessWidget {
               ),
             ),
             TextButton(
-                onPressed: () {
-                  userDB.getUser(currentUserID).dadPic = "assets/images/dad9.JPG";
-                },
+                onPressed: () {},
                 child: const Text(
                   "Random!",
                   textAlign: TextAlign.right,
                 )
-            ),
+            )
           ],
         ),
       ),
@@ -79,14 +75,8 @@ class ChangeAvatar extends StatelessWidget {
 }
 
 class Profile extends StatelessWidget{
-
-  String avatarImage;
-  Profile(this.avatarImage, {super.key});
-
-  void setAvatar (String avatarString) {
-    avatarImage = avatarString;
-  }
-
+  final String avatar;
+  const Profile(this.avatar, {super.key});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -98,12 +88,10 @@ class Profile extends StatelessWidget{
       ),
       child: FloatingActionButton(
         backgroundColor: Colors.orange,
-        onPressed: () => {
-          userDB.getUser(currentUserID).dadPic = avatarImage
-        },
+        onPressed: () {},
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
-          child: Image.asset(avatarImage),
+          child: Image.asset(avatar),
         ),
       ),
     );
