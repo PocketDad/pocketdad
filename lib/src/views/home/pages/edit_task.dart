@@ -1,186 +1,118 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../data_models/task_db.dart';
+import '../../../data_models/user_db.dart';
+import '../../../data_models/item_db.dart';
+import '../../../data_models/relations/item_task_db.dart';
 
-class EditTask extends StatelessWidget {
-  const EditTask({super.key});
+import 'individual_task.dart';
+import '../form-fields/task_name_field.dart';
+import '../form-fields/description_field.dart';
+import '../form-fields/date_field.dart';
+import '../form-fields/location_field.dart';
+import '../form-fields/items_dropdown_field.dart';
+import '../form-fields/submit_button.dart';
+import '../form-fields/clear_button.dart';
+
+class EditTask extends ConsumerWidget  {
+  EditTask({Key? key}) : super(key: key);
+
+  static const routeName = '/edit_task';
+  final _formKey = GlobalKey<FormBuilderState>();
+  final _nameFieldKey = GlobalKey<FormBuilderFieldState>();
+  final _descriptionFieldKey = GlobalKey<FormBuilderFieldState>();
+  final _dueDateFieldKey = GlobalKey<FormBuilderFieldState>();
+  final _locationFieldKey = GlobalKey<FormBuilderFieldState>();
+  final _itemFieldKey = GlobalKey<FormBuilderFieldState>();
+  /* todo: implement notes and assigning users functionality
+  final _notesFieldKey = GlobalKey<FormBuilderState>();
+  final _usersFieldKey = GlobalKey<FormBuilderState>(); */
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final TaskDB taskDB = ref.watch(taskDBProvider);
+    final ItemDB itemDB = ref.watch(itemDBProvider);
+    final ItemTaskDB itemTaskDB = ref.watch(itemTaskDBProvider);
+    final String currentUserID = ref.watch(currentUserIDProvider);
+    List<String> itemNames = itemDB.getItemNames();
+    String taskID = ModalRoute.of(context)!.settings.arguments as String;
+    TaskData taskData = taskDB.getTask(taskID);
+    // fix so that it's a list of items
+    String currentItem = itemTaskDB.getAssociatedItems(taskID).first.id;
+
+    /* todo: "friend system" so people can only assign specific users
+    create users_dropdown_field.dart 
+    final UserDB userDB = ref.watch(userDBProvider);
+    */
+
+    void onSubmit() {
+      bool isValid = _formKey.currentState?.saveAndValidate() ?? false;
+      if (!isValid) return;
+      String name = _nameFieldKey.currentState?.value;
+      String description = _descriptionFieldKey.currentState?.value;
+      DateTime dueDate = _dueDateFieldKey.currentState?.value;
+      String location = _locationFieldKey.currentState?.value;
+      String item = itemDB.getItemIDFromName(_itemFieldKey.currentState?.value);
+
+      taskDB.updateTask(
+        taskID: taskID,
+        name: name,
+        description: description,
+        dueDate: dueDate,
+        location: location,
+        itemID: item,
+        userID: currentUserID
+      );
+      // todo: reroute to individual task screen
+    }
+
+    void onClear() {
+      _formKey.currentState?.reset();
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("PocketDad"),
+        title: const Text("Edit Task"),
         centerTitle: true,
       ),
-      body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-
-            // task name
-            const Padding(
-              padding: EdgeInsets.fromLTRB(20, 30, 20, 10),
-              child: TextField(
-                decoration: InputDecoration(
-                  filled: true,
-                  labelText: 'Task name',
-                    border: OutlineInputBorder(),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        width: 2.0,
-                        color: Colors.orangeAccent,
-                      ),
-                    ),
-                ),
-              ),
-            ),
-
-            // date
-            const Padding(
-              padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                child: TextField(
-                decoration: InputDecoration(
-                  filled: true,
-                  labelText: 'Date',
-                  border: OutlineInputBorder(),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      width: 2.0,
-                      color: Colors.orangeAccent,
-                    ),
-                  ),
-                  icon: Icon(Icons.calendar_month)
-                ),
-              ),
-            ),
-            // time
-            const Padding(
-              padding: EdgeInsets.fromLTRB(20, 0, 20, 10),
-                child: TextField(
-                decoration: InputDecoration(
-                  filled: true,
-                  labelText: 'Time',
-                  border: OutlineInputBorder(),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      width: 1.0,
-                      color: Colors.orangeAccent,
-                    ),
-                  ),
-                  icon: Icon(Icons.timelapse)
-                ),
-              ),
-            ),
-
-            // location
-            const Padding(
-              padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                child: TextField(
-                decoration: InputDecoration(
-                  filled: true,
-                  labelText: 'Location',
-                  border: OutlineInputBorder(),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      width: 2.0,
-                      color: Colors.orangeAccent,
-                    ),
-                  ),
-                  icon: Icon(Icons.map)
-                ),
-              ),
-            ),
-
-            // notes
-            const Padding(
-              padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                child: TextField(
-                decoration: InputDecoration(
-                  filled: true,
-                  labelText: 'Notes',
-                  border: OutlineInputBorder(),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      width: 2.0,
-                      color: Colors.orangeAccent,
-                    ),
-                  ),
-                  icon: Icon(Icons.map)
-                ),
-              ),
-            ),
-
-            // related items
-            const Padding(
-              padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                child: TextField(
-                decoration: InputDecoration(
-                  filled: true,
-                  labelText: 'Related item',
-                  border: OutlineInputBorder(),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      width: 2.0,
-                      color: Colors.orangeAccent,
-                    ),
-                  ),
-                  icon: Icon(Icons.arrow_drop_down)
-                ),
-              ),
-            ),
-            OverflowBar(
-              alignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: EdgeInsets.fromLTRB(50, 0, 0, 0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      int i = 0;
-                      i++;
-                      // change to add task
-                    },
-                    child: const Text("Edit",
-                      style: TextStyle(
-                        fontSize: 20,
-                      )
-                    )
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                  child: TextButton(
-                    onPressed: () {
-                      int i = 0;
-                      i++;
-                      // change to add task
-                    },
-                    child: const Text("Cancel",
-                      style: TextStyle(
-                        fontSize: 20,
-                      )
-                    )
-                  ),
+      body: ListView(
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        children: [
+          Column(
+            children: [
+              FormBuilder(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    TaskNameField(
+                      fieldKey: _nameFieldKey,
+                      currentName: taskData.name,),
+                    TaskDescriptionField(
+                      fieldKey: _descriptionFieldKey,
+                      currentDescription: taskData.description,),
+                    TaskDateField(
+                      fieldKey: _dueDateFieldKey,
+                      currentDate: taskData.dueDate,),
+                    TaskLocationField(
+                      fieldKey: _locationFieldKey,
+                      currentLocation: taskData.location,),
+                    ItemDropdownField(
+                      fieldKey: _itemFieldKey, 
+                      itemNames: itemNames,
+                      currentItem: currentItem,),
+                  ],
                 )
-              ],
-            )
-          ],
-        ),
-      ),
-
-      bottomNavigationBar: BottomNavigationBar(
-        // TODO: link icons to screens
-        // change style/colors?
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.checklist), 
-            label: "Tasks"
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add), 
-            label: "Add Task"
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.chat), 
-            label: "Chat"
-          ),
+              ),
+              Row(
+                children: [
+                  SubmitButton(onSubmit: onSubmit),
+                  ClearButton(onClear: onClear)
+                ],
+              )
+            ],
+          )
         ],
       )
     );

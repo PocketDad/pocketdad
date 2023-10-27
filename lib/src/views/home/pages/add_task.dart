@@ -13,22 +13,18 @@ import '../form-fields/location_field.dart';
 import '../form-fields/items_dropdown_field.dart';
 import '../form-fields/submit_button.dart';
 import '../form-fields/clear_button.dart';
-// import task user db
-// import item user db
-// todo: create notes db
-
 
 class AddTask extends ConsumerWidget  {
   AddTask({Key? key}) : super(key: key);
 
-  static const routeNae = '/addTask';
+  static const routeName = '/add_task';
   final _formKey = GlobalKey<FormBuilderState>();
   final _nameFieldKey = GlobalKey<FormBuilderFieldState>();
   final _descriptionFieldKey = GlobalKey<FormBuilderFieldState>();
   final _dueDateFieldKey = GlobalKey<FormBuilderFieldState>();
   final _locationFieldKey = GlobalKey<FormBuilderFieldState>();
   final _itemFieldKey = GlobalKey<FormBuilderFieldState>();
-  /* to be implemented with Notes db and assigning users functionality
+  /* todo: implement notes and assigning users functionality
   final _notesFieldKey = GlobalKey<FormBuilderState>();
   final _usersFieldKey = GlobalKey<FormBuilderState>(); */
 
@@ -39,7 +35,7 @@ class AddTask extends ConsumerWidget  {
     final String currentUserID = ref.watch(currentUserIDProvider);
     List<String> itemNames = itemDB.getItemNames();
     /* todo: "friend system" so people can only assign specific users
-             create users_dropdown_field.dart 
+    create users_dropdown_field.dart 
     final UserDB userDB = ref.watch(userDBProvider);
     */
 
@@ -60,6 +56,7 @@ class AddTask extends ConsumerWidget  {
         itemID: item,
         userID: currentUserID
       );
+      // todo: reroute to list tasks screen
     }
 
     void onClear() {
