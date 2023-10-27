@@ -4,6 +4,7 @@ import '../../../data_models/task_db.dart';
 import '../../../data_models/relations/task_user_db.dart';
 import '../../../data_models/user_db.dart';
 import '../components/list_task_item.dart';
+import 'add_task.dart';
 
 class ListTasks extends ConsumerWidget {
   ListTasks({Key? key}) : super(key: key);
@@ -38,7 +39,14 @@ class ListTasks extends ConsumerWidget {
           body: ListView(
             padding: const EdgeInsets.symmetric(vertical: 8),
             children: associatedTasks.map((task) => ListTaskItem(task: task)).toList()
-          )
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              Navigator.restorablePushNamed(context, AddTask.routeName);
+            },
+            tooltip: 'Add Task',
+            child: const Icon(Icons.add),
+        )
         ),
       ),
     );
