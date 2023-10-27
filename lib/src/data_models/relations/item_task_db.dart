@@ -52,6 +52,11 @@ class ItemTaskDB {
     _itemTasks.add(data);
   }
 
+  void removeFromTaskID({
+    required String taskID}) {
+    _itemTasks.removeWhere((data) => data.taskID == taskID);
+  }
+
   List<ItemData> getAssociatedItems(String taskID) {
     ItemDB itemDB = ref.read(itemDBProvider);
     List<String> itemIDs = _itemTasks.where((data) => data.taskID == taskID).map((data) => data.itemID).toList();

@@ -117,6 +117,32 @@ class TaskDB {
   }
 
   // todo: updateTask
+  void updateTask({
+    required String taskID,
+    required String name,
+    required String description,
+    required DateTime dueDate,
+    required String location,
+    required String userID,
+    required String itemID,
+  }) {
+    // remakes task instance
+    _tasks.removeWhere((data) => data.id == taskID);
+    // remakes itemTask instance
+    final ItemTaskDB itemTaskDB = ref.read(itemTaskDBProvider);
+    itemTaskDB.removeFromTaskID(taskID: taskID);
+    DateTime openDate = DateTime.now();
+    TaskData data = TaskData(
+      id: taskID,
+      name: name,
+      description: description,
+      openDate: openDate,
+      dueDate: dueDate,
+      location: location
+    );
+    _tasks.add(data);
+    itemTaskDB.addItemTask(taskID: taskID, itemID: itemID);
+  }
 
   TaskData getTask(String taskID) {
     return _tasks.firstWhere((taskData) => taskData.id == taskID);
