@@ -14,9 +14,13 @@ ColorScheme lightScheme = ColorScheme(
     onSurface: Color(0xff263238)
 );
 
-TextTheme textTheme = ThemeData.light().textTheme;
+TextTheme textTheme = ThemeData(fontFamily: "Mulish").textTheme.copyWith(
+  displaySmall: TextStyle(
+    fontFamily: "Chakra Petch"
+  ),
+);
 
 ThemeData lightTheme = ThemeData(
-  // fontFamily: 'Mulish',
+  textTheme: textTheme,
   colorScheme: lightScheme,
 );
