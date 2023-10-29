@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pocketdad/src/data_models/user_db.dart';
 
+import '../home_view.dart';
+
 class OnboardingForm extends ConsumerWidget {
 
   static const routeName = '/signup';
@@ -76,19 +78,24 @@ class OnboardingForm extends ConsumerWidget {
             ),
           ),
         ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: ElevatedButton(
         // When the user presses the button, show an alert dialog containing
         // the text that the user has entered into the text field.
         onPressed: () {
+          int thisID = (ref.watch(userDBProvider).getNextUserNum());
           UserData(
             email: emailController.text,
-            id: "user-${(ref.watch(userDBProvider).getNextUserNum())}",
+            id: "user-$thisID",
             name: nameController.text,
             username: usernameController.text,
           );
+          ref.read(currentUserIDProvider.notifier).state = "user-$thisID";
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomeView())
+          );
         },
-        tooltip: "I'm ready!",
-        child: const Icon(Icons.add),
+        child: const Text("Sign up"),
       ),
     );
   }
