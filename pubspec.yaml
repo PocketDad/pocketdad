@@ -38,3 +38,14 @@ flutter:
   assets:
     # Add assets from the images directory to the application.
     - assets/images/
+
+  fonts:
+    - family: Chakra Petch
+      fonts:
+        - asset: assets/google_fonts/Chakra_Petch/ChakraPetch-Light.ttf
+        - asset: assets/google_fonts/Chakra_Petch/ChakraPetch-Medium.ttf
+        - asset: assets/google_fonts/Chakra_Petch/ChakraPetch-Regular.ttf
+    - family: Mulish
+      fonts:
+        - asset: assets/google_fonts/Mulish/Mulish-VariableFont_wght.ttf
+        - asset: assets/google_fonts/Mulish/Mulish-Italic-VariableFont_wght.ttf
