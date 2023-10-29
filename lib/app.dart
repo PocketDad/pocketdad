@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:pocketdad/src/views/home/home_view.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pocketdad/src/theme.dart';
 import 'package:pocketdad/src/views/home/pages/add_task.dart';
 import 'src/sample_feature/sample_item_details_view.dart';
 import 'src/sample_feature/sample_item_list_view.dart';
 import 'src/settings/settings_controller.dart';
 import 'src/settings/settings_view.dart';
+import 'package:pocketdad/src/views/home/pages/onboarding.dart';
 
 /// The Widget that configures your application.
 class MyApp extends StatelessWidget {
@@ -58,8 +59,8 @@ class MyApp extends StatelessWidget {
           // Define a light and dark color theme. Then, read the user's
           // preferred ThemeMode (light, dark, or system default) from the
           // SettingsController to display the correct theme.
-          theme: ThemeData(),
-          darkTheme: ThemeData.dark(),
+          theme: lightTheme,
+          // darkTheme: ThemeData.dark(),
           themeMode: settingsController.themeMode,
 
           // Define a function to handle named routes in order to support
@@ -69,6 +70,8 @@ class MyApp extends StatelessWidget {
               settings: routeSettings,
               builder: (BuildContext context) {
                 switch (routeSettings.name) {
+                  case OnboardingForm.routeName:
+                    return OnboardingForm();
                   case HomeView.routeName:
                     return HomeView();
                   case AddTask.routeName:

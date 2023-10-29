@@ -3,6 +3,8 @@ import 'package:pocketdad/src/data_models/user_db.dart';
 
 class OnboardingForm extends StatelessWidget {
 
+  static const routeName = '/';
+
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final usernameController = TextEditingController();
@@ -18,22 +20,24 @@ class OnboardingForm extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
+                Text(
                   "Welcome to PocketDad!",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50),
+                  style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                    color: Theme.of(context).colorScheme.primary
+                  ),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 50),
                 TextField(
                   controller: nameController,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     filled: true,
                     labelText: 'Your name',
                     border: OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         width: 2.0,
-                        color: Colors.orangeAccent,
+                        color: Theme.of(context).colorScheme.secondary,
                       ),
                     ),
                   ),
@@ -41,14 +45,14 @@ class OnboardingForm extends StatelessWidget {
                 const SizedBox(height: 20,),
                 TextField(
                   controller: usernameController,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     filled: true,
                     labelText: 'Username',
                     border: OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         width: 2.0,
-                        color: Colors.orangeAccent,
+                        color: Theme.of(context).colorScheme.secondary,
                       ),
                     ),
                   ),
@@ -56,14 +60,14 @@ class OnboardingForm extends StatelessWidget {
                 const SizedBox(height: 20,),
                 TextField(
                   controller: emailController,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     filled: true,
                     labelText: 'Your email',
                     border: OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         width: 2.0,
-                        color: Colors.orangeAccent,
+                        color: Theme.of(context).colorScheme.secondary,
                       ),
                     ),
                   ),
@@ -72,7 +76,7 @@ class OnboardingForm extends StatelessWidget {
             ),
           ),
         ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: ElevatedButton(
         // When the user presses the button, show an alert dialog containing
         // the text that the user has entered into the text field.
         onPressed: () {
@@ -83,8 +87,9 @@ class OnboardingForm extends StatelessWidget {
             username: usernameController.text,
           );
         },
-        tooltip: "I'm ready!",
-        child: const Icon(Icons.add),
+        child: const Text(
+          "Register"
+        ),
       ),
     );
   }
