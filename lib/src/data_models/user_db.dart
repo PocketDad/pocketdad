@@ -68,14 +68,29 @@ class UserDB {
     return _users.firstWhere((userData) => userData.id == userID);
   }
 
+  UserData? getUsername(String username) {
+    try {
+      return _users.firstWhere((userData) => userData.username == username);
+    }
+    catch (e) {
+      if (e is StateError) {
+      }
+    }
+    return null;
+  }
+
   List<UserData> getUsers(List<String> userIDs) {
     return userIDs.map((userID) => getUser(userID)).toList();
+  }
+
+  int getNextUserNum() {
+    return (_users.length + 1);
   }
 
   List<String> getUserNames() {
     return _users.map((user) => user.name).toList();
   }
-  
+ 
 }
 
 final userDBProvider = Provider<UserDB>((ref) {

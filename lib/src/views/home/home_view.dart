@@ -11,7 +11,7 @@ class HomeView extends StatefulWidget {
     super.key,
   });
 
-  static const routeName = '/';
+  static const routeName = '/home';
 
   // This data structure will eventually become stateful and thus will
   // need to be moved into the state widget.

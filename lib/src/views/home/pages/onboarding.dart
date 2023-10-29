@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pocketdad/src/data_models/user_db.dart';
 
-class OnboardingForm extends StatelessWidget {
+import '../home_view.dart';
+
+class OnboardingForm extends ConsumerWidget {
+
+  static const routeName = '/signup';
 
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final usernameController = TextEditingController();
+  // set password field
 
   OnboardingForm({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -72,19 +78,24 @@ class OnboardingForm extends StatelessWidget {
             ),
           ),
         ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: ElevatedButton(
         // When the user presses the button, show an alert dialog containing
         // the text that the user has entered into the text field.
         onPressed: () {
+          int thisID = (ref.watch(userDBProvider).getNextUserNum());
           UserData(
             email: emailController.text,
-            id: "user-001",
+            id: "user-$thisID",
             name: nameController.text,
             username: usernameController.text,
           );
+          ref.read(currentUserIDProvider.notifier).state = "user-$thisID";
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomeView())
+          );
         },
-        tooltip: "I'm ready!",
-        child: const Icon(Icons.add),
+        child: const Text("Sign up"),
       ),
     );
   }
