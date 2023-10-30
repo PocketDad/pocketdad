@@ -1,5 +1,4 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pocketdad/src/data_models/task_db.dart';
 import 'package:pocketdad/src/data_models/user_db.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -54,7 +53,3 @@ class ItemUserDB {
     return itemDB.getItems(itemIDs);
   }
 }
-
-final itemUserDBProvider = Provider<ItemUserDB>((ref) {
-  return ItemUserDB(ref);
-});

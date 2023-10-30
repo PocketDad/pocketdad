@@ -4,6 +4,7 @@ import 'package:pocketdad/src/data_models/item_db.dart';
 
 import '../../../data_models/relations/item_user_db.dart';
 import '../../../data_models/user_db.dart';
+import 'package:pocketdad/features/relations/item_user_provider';
 
 class ListItemItem extends ConsumerWidget {
   ListItemItem({Key? key, required this.item}) : super(key: key);

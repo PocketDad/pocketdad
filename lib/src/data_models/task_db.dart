@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'relations/task_user_db.dart';
 import 'relations/item_task_db.dart';
+import 'package:pocketdad/features/relations/data/item_task_provider';
 
 class TaskData {
   TaskData(

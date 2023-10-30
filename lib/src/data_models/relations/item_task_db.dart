@@ -69,7 +69,3 @@ class ItemTaskDB {
     return taskDB.getTasks(taskIDs);
   }
 }
-
-final itemTaskDBProvider = Provider<ItemTaskDB>((ref) {
-  return ItemTaskDB(ref);
-});
