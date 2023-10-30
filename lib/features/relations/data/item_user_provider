@@ -1,6 +1,0 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pocketdad/src/data_models/relations/item_task_db.dart';
-
-final itemUserDBProvider = Provider<ItemUserDB>((ref) {
-  return ItemUserDB(ref);
-});

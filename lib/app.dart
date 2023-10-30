@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:pocketdad/src/views/home/home_view.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pocketdad/src/views/home/pages/add_task.dart';
-import 'src/sample_feature/sample_item_details_view.dart';
-import 'src/sample_feature/sample_item_list_view.dart';
-import 'src/settings/settings_controller.dart';
-import 'src/settings/settings_view.dart';
-import 'src/views/home/pages/onboarding.dart';
-import 'src/views/home/pages/sign_in.dart';
+import 'package:pocketdad/features/common/home_view.dart';
+import 'package:pocketdad/features/task/presentation/add_task.dart';
+import 'features/settings/settings_controller.dart';
+import 'features/settings/settings_view.dart';
+import 'features/authentication/onboarding.dart';
+import 'features/authentication/sign_in.dart';
 
 /// The Widget that configures your application.
 class MyApp extends StatelessWidget {
@@ -81,11 +78,8 @@ class MyApp extends StatelessWidget {
                     return AddTask();
                   case SettingsView.routeName:
                     return SettingsView(controller: settingsController);
-                  case SampleItemDetailsView.routeName:
-                    return const SampleItemDetailsView();
-                  case SampleItemListView.routeName:
                   default:
-                    return const SampleItemListView();
+                    return SignIn();
                 }
               },
             );
