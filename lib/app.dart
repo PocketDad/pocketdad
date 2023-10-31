@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:pocketdad/src/theme.dart';
+import 'package:pocketdad/features/common/theme.dart';
 import 'package:pocketdad/features/common/home_view.dart';
 import 'package:pocketdad/features/task/presentation/add_task.dart';
 import 'features/settings/settings_controller.dart';

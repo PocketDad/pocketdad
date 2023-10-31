@@ -10,8 +10,11 @@ class CheckIn extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("PocketDad"),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        titleTextStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
+          color: Theme.of(context).colorScheme.onPrimary,
+        ),
+        title: const Text("Check In"),
         centerTitle: true,
       ),
       body: Center(

@@ -10,7 +10,7 @@ ColorScheme lightScheme = ColorScheme(
     onError: Color(0xffc62828),
     background: Color(0xfffff8e1),
     onBackground: Color(0xff263238),
-    surface: Color(0xffb0bec5),
+    surface: Color(0xfffff8e1),
     onSurface: Color(0xff263238)
 );
 
@@ -18,6 +18,13 @@ TextTheme textTheme = ThemeData(fontFamily: "Mulish").textTheme.copyWith(
   displaySmall: TextStyle(
     fontFamily: "Chakra Petch"
   ),
+  titleLarge: TextStyle(
+    fontFamily: "Chakra Petch",
+    fontWeight: FontWeight.bold,
+  ),
+  headlineSmall: TextStyle(
+    fontWeight: FontWeight.bold
+  )
 );
 
 ThemeData lightTheme = ThemeData(
