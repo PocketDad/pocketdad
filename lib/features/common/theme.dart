@@ -5,7 +5,7 @@ ColorScheme lightScheme = ColorScheme(
     primary: Color(0xffef6c00),
     onPrimary: Color(0xfffff8e1),
     secondary: Color(0xffffab40),
-    onSecondary: Color(0xfffff8e1),
+    onSecondary: Color(0xffffd740),
     error: Color(0xfffff8e1),
     onError: Color(0xffc62828),
     background: Color(0xfffff8e1),
@@ -16,14 +16,22 @@ ColorScheme lightScheme = ColorScheme(
 
 TextTheme textTheme = ThemeData(fontFamily: "Mulish").textTheme.copyWith(
   displaySmall: TextStyle(
-    fontFamily: "Chakra Petch"
+    fontFamily: "Chakra Petch",
+    fontWeight: FontWeight.bold,
   ),
-  titleLarge: TextStyle(
+  displayMedium: TextStyle(
     fontFamily: "Chakra Petch",
     fontWeight: FontWeight.bold,
   ),
   headlineSmall: TextStyle(
     fontWeight: FontWeight.bold
+  ),
+  titleSmall: TextStyle(
+    fontStyle: FontStyle.italic
+  ),
+  titleLarge: TextStyle(
+    fontWeight: FontWeight.bold,
+    fontFamily: "Chakra Petch",
   )
 );
 

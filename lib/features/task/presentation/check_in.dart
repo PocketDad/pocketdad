@@ -22,45 +22,55 @@ class CheckIn extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             // greeting
-            const Padding(
-              padding: EdgeInsets.fromLTRB(0, 20, 0, 10),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 25),
               child: Text(
                 "Good morning, kiddo!",
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
+                style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
             ),
 
             // dad joke of the day
             Container(
-              margin: const EdgeInsets.fromLTRB(35, 0, 35, 10),
-              padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 60),
+              margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: Color.fromARGB(255, 251, 208, 19),
-                  width: 7.5,
+                  color: Theme.of(context).colorScheme.onSecondary,
+                  width: 5,
                 )
               ),
-              child: const Text(
-                'Why did the drum go to bed? It was beat.',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontStyle: FontStyle.italic
-                )
-              ),
+              child: Column(
+                children: [
+                  Text(
+                    'Dad Joke of the Day!',
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      color: Theme.of(context).colorScheme.onSecondary,
+                    )
+                    ,
+                  ),
+                  Text(
+                      'Why did the drum go to bed? It was beat.',
+                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                        color: Theme.of(context).colorScheme.onSurface,
+                      )
+                  ),
+                ],
+              )
             ),
 
 
             // today tasks
-            const Padding(
+            Container(
               padding: EdgeInsets.fromLTRB(0, 5, 0, 15),
               child: Text(
                 "Today you have 2 tasks",
-                style: TextStyle(
-                  fontSize: 24,
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
+                textAlign: TextAlign.left,
               ),
             ),
             ElevatedButton(
