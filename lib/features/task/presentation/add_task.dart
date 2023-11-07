@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pocketdad/features/user/data/user_provider.dart';
 import '../../item/data/item_provider.dart';
 import '../data/task_provider.dart';
 import '../domain/task_db.dart';
@@ -14,6 +15,7 @@ import 'form_fields/location_field.dart';
 import 'form_fields/items_dropdown_field.dart';
 import 'form_fields/submit_button.dart';
 import 'form_fields/clear_button.dart';
+import 'form_fields/users_dropdown_field.dart';
 
 class AddTask extends ConsumerWidget  {
   AddTask({Key? key}) : super(key: key);
@@ -25,14 +27,13 @@ class AddTask extends ConsumerWidget  {
   final _dueDateFieldKey = GlobalKey<FormBuilderFieldState>();
   final _locationFieldKey = GlobalKey<FormBuilderFieldState>();
   final _itemFieldKey = GlobalKey<FormBuilderFieldState>();
-  /* todo: implement notes and assigning users functionality
-  final _notesFieldKey = GlobalKey<FormBuilderState>();
-  final _usersFieldKey = GlobalKey<FormBuilderState>(); */
+  final _usersFieldKey = GlobalKey<FormBuilderState>();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final TaskDB taskDB = ref.watch(taskDBProvider);
     final ItemDB itemDB = ref.watch(itemDBProvider);
+    final UserDB userDB = ref.watch(userDBProvider);
     final String currentUserID = ref.watch(currentUserIDProvider);
     List<String> itemNames = itemDB.getItemNames();
     /* todo: "friend system" so people can only assign specific users
@@ -49,6 +50,7 @@ class AddTask extends ConsumerWidget  {
       DateTime dueDate = _dueDateFieldKey.currentState?.value;
       String location = _locationFieldKey.currentState?.value;
       String item = itemDB.getItemIDFromName(_itemFieldKey.currentState?.value);
+      
 
       taskDB.addTask(
         name: name,
