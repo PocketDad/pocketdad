@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pocketdad/features/user/domain/user_db.dart';
 import 'package:pocketdad/features/item/presentation/list_item_item.dart';
 
-import '../../relations/data/item_user_provider';
+import '../../relations/data/item_user_provider.dart';
 import '../domain/item_db.dart';
 import '../../relations/domain/item_user_db.dart';
 

@@ -11,8 +11,8 @@ class TaskData {
       {required this.id,
         required this.name,
         required this.description,
-        required this.openDate,
-        required this.dueDate,
+        this.openDate,
+        this.dueDate,
         this.location,
         this.completionDate,
         this.notes,
@@ -21,8 +21,8 @@ class TaskData {
   String id;
   String name;
   String description;
-  DateTime openDate;
-  DateTime dueDate;
+  DateTime? openDate;
+  DateTime? dueDate;
   DateTime? completionDate;
   String? location;
   List<String>? notes;
@@ -33,7 +33,6 @@ class TaskData {
 class TaskDB {
   TaskDB(this.ref);
   
-
   final ProviderRef<TaskDB> ref;
   final List<TaskData> _tasks = [
     TaskData(
@@ -95,26 +94,33 @@ class TaskDB {
 
   void addTask({
     required String name,
-    required String description,
-    required DateTime dueDate,
-    required String location,
-    required String userID,
-    required String itemID,}) {
-    String taskID = 'task-${(_tasks.length + 1).toString().padLeft(3, '0')}';
+    String? description,
+    DateTime? dueDate,
+    String? location,
+    List<String>? notes,
+    String? userID,
+    String? itemID,}) {
     DateTime openDate = DateTime.now();
+    description = "$name was created on $openDate.\n$description";
+    String taskID = 'task-${(_tasks.length + 1).toString().padLeft(3, '0')}';
     TaskData data = TaskData(
       id: taskID,
       name: name,
       description: description,
       openDate: openDate,
       dueDate: dueDate,
-      location: location
+      location: location,
+      notes: notes
     );
     _tasks.add(data);
     final TaskUserDB taskUserDB = ref.read(taskUserDBProvider);
     final ItemTaskDB itemTaskDB = ref.read(itemTaskDBProvider);
-    taskUserDB.addTaskUser(taskID: taskID, userID: userID);
-    itemTaskDB.addItemTask(taskID: taskID, itemID: itemID);
+    if (userID != null) {
+      taskUserDB.addTaskUser(taskID: taskID, userID: userID);
+    }
+    if (itemID != null) {
+      itemTaskDB.addItemTask(taskID: taskID, itemID: itemID);
+    }
   }
 
   // todo: updateTask

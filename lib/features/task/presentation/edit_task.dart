@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../item/data/item_provider.dart';
-import '../../relations/data/item_task_provider';
+import '../../relations/data/item_task_provider.dart';
 import '../data/task_provider.dart';
 import '../domain/task_db.dart';
 import '../../user/domain/user_db.dart';
