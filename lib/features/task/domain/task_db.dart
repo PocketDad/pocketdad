@@ -98,7 +98,7 @@ class TaskDB {
     DateTime? dueDate,
     String? location,
     List<String>? notes,
-    String? userID,
+    List<String>? userIDs,
     String? itemID,}) {
     DateTime openDate = DateTime.now();
     description = "$name was created on $openDate.\n$description";
@@ -115,8 +115,8 @@ class TaskDB {
     _tasks.add(data);
     final TaskUserDB taskUserDB = ref.read(taskUserDBProvider);
     final ItemTaskDB itemTaskDB = ref.read(itemTaskDBProvider);
-    if (userID != null) {
-      taskUserDB.addTaskUser(taskID: taskID, userID: userID);
+    if (userIDs != null) {
+      userIDs.map((userID) => taskUserDB.addTaskUser(taskID: taskID, userID: userID));
     }
     if (itemID != null) {
       itemTaskDB.addItemTask(taskID: taskID, itemID: itemID);
@@ -127,18 +127,23 @@ class TaskDB {
   void updateTask({
     required String taskID,
     required String name,
-    required String description,
-    required DateTime dueDate,
-    required String location,
-    required String userID,
-    required String itemID,
+    String? description,
+    DateTime? dueDate,
+    String? location,
+    String? itemID,
+    List<String>? userIDs
   }) {
     // remakes task instance
     _tasks.removeWhere((data) => data.id == taskID);
     // remakes itemTask instance
     final ItemTaskDB itemTaskDB = ref.read(itemTaskDBProvider);
     itemTaskDB.removeFromTaskID(taskID: taskID);
+    final TaskUserDB taskUserDB = ref.read(taskUserDBProvider);
+    if (userIDs != null) {
+      userIDs.map((e) => taskUserDB.removeFromUserID(taskID: taskID));
+    }
     DateTime openDate = DateTime.now();
+    description = "$name was updated on $openDate.\n$description";
     TaskData data = TaskData(
       id: taskID,
       name: name,
@@ -148,7 +153,9 @@ class TaskDB {
       location: location
     );
     _tasks.add(data);
-    itemTaskDB.addItemTask(taskID: taskID, itemID: itemID);
+    if (itemID != null) {
+      itemTaskDB.addItemTask(taskID: taskID, itemID: itemID);
+    }
   }
 
   TaskData getTask(String taskID) {

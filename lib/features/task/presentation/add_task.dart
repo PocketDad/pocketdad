@@ -27,7 +27,7 @@ class AddTask extends ConsumerWidget  {
   final _dueDateFieldKey = GlobalKey<FormBuilderFieldState>();
   final _locationFieldKey = GlobalKey<FormBuilderFieldState>();
   final _itemFieldKey = GlobalKey<FormBuilderFieldState>();
-  final _usersFieldKey = GlobalKey<FormBuilderState>();
+  final _usersFieldKey = GlobalKey<FormBuilderFieldState>();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -36,11 +36,11 @@ class AddTask extends ConsumerWidget  {
     final UserDB userDB = ref.watch(userDBProvider);
     final String currentUserID = ref.watch(currentUserIDProvider);
     List<String> itemNames = itemDB.getItemNames();
+    List<String> userNames = userDB.getUserNames();
     /* todo: "friend system" so people can only assign specific users
     create users_dropdown_field.dart 
     final UserDB userDB = ref.watch(userDBProvider);
     */
-
 
     void onSubmit() {
       bool isValid = _formKey.currentState?.saveAndValidate() ?? false;
@@ -50,7 +50,11 @@ class AddTask extends ConsumerWidget  {
       DateTime dueDate = _dueDateFieldKey.currentState?.value;
       String location = _locationFieldKey.currentState?.value;
       String item = itemDB.getItemIDFromName(_itemFieldKey.currentState?.value);
-      
+      List<String> users = _usersFieldKey.currentState?.value as List<String>;
+      // current user will always be associated with task
+      if (!users.contains(currentUserID)) {
+        users.add(currentUserID);
+      }
 
       taskDB.addTask(
         name: name,
@@ -58,7 +62,7 @@ class AddTask extends ConsumerWidget  {
         dueDate: dueDate,
         location: location,
         itemID: item,
-        userID: currentUserID
+        userIDs: users
       );
       // todo: reroute to list tasks screen
     }
@@ -87,6 +91,7 @@ class AddTask extends ConsumerWidget  {
                     TaskDateField(fieldKey: _dueDateFieldKey),
                     TaskLocationField(fieldKey: _locationFieldKey),
                     ItemDropdownField(fieldKey: _itemFieldKey, itemNames: itemNames),
+                    UsersDropdownField(fieldKey: _usersFieldKey, userNames: userNames)
                   ],
                 )
               ),

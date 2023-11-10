@@ -90,6 +90,10 @@ class UserDB {
   List<String> getUserNames() {
     return _users.map((user) => user.name).toList();
   }
+
+  List<String> getUserIDs(List<UserData> users) {
+    return _users.map((user) => user.id).toList();
+  }
 }
 
 final currentUserIDProvider = StateProvider<String>((ref) {
