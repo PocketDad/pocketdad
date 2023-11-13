@@ -5,7 +5,7 @@ ColorScheme lightScheme = ColorScheme(
     primary: Color(0xffef6c00),
     onPrimary: Color(0xfffff8e1),
     secondary: Color(0xffffab40),
-    onSecondary: Color(0xffffd740),
+    onSecondary: Color(0xffffd180),
     error: Color(0xfffff8e1),
     onError: Color(0xffc62828),
     background: Color(0xfffff8e1),

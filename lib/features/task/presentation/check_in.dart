@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pocketdad/features/task/presentation/single_task_card.dart';
 
 class CheckIn extends StatelessWidget {
 
@@ -23,7 +24,7 @@ class CheckIn extends StatelessWidget {
           children: [
             // greeting
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 25),
+              padding: EdgeInsets.fromLTRB(0, 25, 0, 15),
               child: Text(
                 "Good morning, kiddo!",
                 style: Theme.of(context).textTheme.displaySmall?.copyWith(
@@ -37,6 +38,8 @@ class CheckIn extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 8, horizontal: 60),
               margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
               decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.onSecondary,
+                borderRadius: BorderRadius.all(Radius.circular(20)),
                 border: Border.all(
                   color: Theme.of(context).colorScheme.onSecondary,
                   width: 5,
@@ -47,7 +50,7 @@ class CheckIn extends StatelessWidget {
                   Text(
                     'Dad Joke of the Day!',
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      color: Theme.of(context).colorScheme.onSecondary,
+                      color: Theme.of(context).colorScheme.onSurface,
                     )
                     ,
                   ),
@@ -61,10 +64,16 @@ class CheckIn extends StatelessWidget {
               )
             ),
 
+            const Divider(
+              color: Color(0xffbdbdbd),
+              indent: 30,
+              endIndent: 30,
+            ),
 
             // today tasks
             Container(
-              padding: EdgeInsets.fromLTRB(0, 5, 0, 15),
+              alignment: Alignment.centerLeft,
+              padding: EdgeInsets.fromLTRB(15, 5, 0, 15),
               child: Text(
                 "Today you have 2 tasks",
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -73,17 +82,10 @@ class CheckIn extends StatelessWidget {
                 textAlign: TextAlign.left,
               ),
             ),
-            ElevatedButton(
-              onPressed: () {
-                int i = 0;
-                i++;
-                // change to point towards individual task
-              },
-              child: const Text("Clean the gutters",
-                style: TextStyle(
-                  fontSize: 24,
-                )
-              )
+            ButtonTheme(
+              minWidth: 200,
+              height: 100,
+              child: SingleTaskCard(task: "Sample Task 1", date: "4/4/23", item: "house"),
             ),
             ElevatedButton(
               onPressed: () {
@@ -98,14 +100,22 @@ class CheckIn extends StatelessWidget {
               )
             ),
 
+            const Divider(
+              color: Color(0xffbdbdbd),
+              indent: 30,
+              endIndent: 30,
+            ),
+
             // week tasks
-            const Padding(
-              padding: EdgeInsets.fromLTRB(0, 20, 0, 15),
+            Container(
+              alignment: Alignment.centerLeft,
+              padding: EdgeInsets.fromLTRB(15, 5, 0, 15),
               child: Text(
                 "This week you have 3 tasks",
-                style: TextStyle(
-                  fontSize: 24,
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
+                textAlign: TextAlign.left,
               ),
             ),
             ElevatedButton(
