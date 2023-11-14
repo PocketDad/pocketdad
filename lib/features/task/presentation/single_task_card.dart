@@ -5,6 +5,8 @@ class SingleTaskCard extends StatelessWidget {
   final String date;
   final String item;
 
+  // TODO: add individual task page field as part of constructor
+
   const SingleTaskCard({Key? key, required this.task, required this.date, required this.item}) : super(key: key);
 
   @override
@@ -25,6 +27,7 @@ class SingleTaskCard extends StatelessWidget {
                   backgroundColor: Theme.of(context).colorScheme.primary,
                   padding: const EdgeInsets.all(15),
                   textStyle: Theme.of(context).textTheme.titleLarge,
+                  minimumSize: const Size.fromHeight(50),
                 ),
                 onPressed: () {  },
                 child: Text(
@@ -35,12 +38,16 @@ class SingleTaskCard extends StatelessWidget {
                 ),
               ),
             ),
+            SizedBox(height: 10,),
             Text(item),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text(date),
-              ],
+            Padding(
+              padding: EdgeInsets.fromLTRB(0, 0, 10, 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(date),
+                ],
+              ),
             )
           ]
         ),
