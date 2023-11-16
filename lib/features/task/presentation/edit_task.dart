@@ -47,7 +47,8 @@ class EditTask extends ConsumerWidget  {
     String taskID = ModalRoute.of(context)!.settings.arguments as String;
     TaskData taskData = taskDB.getTask(taskID);
     String currentItem = itemTaskDB.getAssociatedItem(taskID).itemID;
-    List<String> currentUsers = userDB.getUserIDs(taskUserDB.getAssociatedUsers(taskID));
+    List<String> currentUserIDs = userDB.getUserIDs(taskUserDB.getAssociatedUsers(taskID));
+    String currentUsers = userDB.userIDsToString(currentUserIDs);
     /* todo: "friend system" so people can only assign specific users
     create users_dropdown_field.dart 
     final UserDB userDB = ref.watch(userDBProvider);

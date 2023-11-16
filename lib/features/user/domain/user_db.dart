@@ -31,7 +31,7 @@ class UserDB {
       id: 'user-001',
       name: 'John Doe',
       email: 'johndoe@gmail.com',
-      username: 'johnnydoe',
+      username: 'johndoe',
       dadName: "John's dad",
       dadPic: "assets/images/dad2.JPG"),
     UserData(
@@ -94,6 +94,33 @@ class UserDB {
   List<String> getUserIDs(List<UserData> users) {
     return _users.map((user) => user.id).toList();
   }
+
+  List<String> getUserIDsFromString(String userNamesStr) {
+    List<String> validUsers = getUserNames();
+    List<String> ret = userNamesStr.split(',').map((e) => e.trim()).toList();
+    for (final i in ret) {
+      // only valid usernames
+      if(!validUsers.contains(i)) {
+        ret.remove(i);
+      }
+    }
+    for (int i = 0; i < ret.length; i ++) {
+      ret[i] = getUsername(ret[i])!.id;
+    }
+    return ret;
+  }
+
+  String userIDsToString(List<String> userIDs) {
+    String ret = '';
+    for (int i = 0; i < userIDs.length; i++) {
+      ret += userIDs[i];
+      if((i + 1) != userIDs.length) {
+        ret += ',';
+      }
+    }
+    return ret;
+  }
+
 }
 
 final currentUserIDProvider = StateProvider<String>((ref) {

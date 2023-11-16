@@ -9,6 +9,8 @@ import 'add_task.dart';
 class ListTasks extends ConsumerWidget {
   ListTasks({Key? key}) : super(key: key);
 
+  static const routeName = '/list_tasks';
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 

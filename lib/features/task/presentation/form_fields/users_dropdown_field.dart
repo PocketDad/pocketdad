@@ -5,6 +5,37 @@ import 'field_padding.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 
 class UsersDropdownField extends StatelessWidget {
+  const UsersDropdownField(
+    {super.key,
+    required this.fieldKey,
+    required this.userNames,
+    this.currentUsers});
+
+  final String? currentUsers;
+  final List<String> userNames;
+  final GlobalKey<FormBuilderFieldState<FormBuilderField<dynamic>, dynamic>> fieldKey;
+
+  @override
+  Widget build(BuildContext context) {
+    String fieldName = 'Description';
+    return FieldPadding(
+      child: FormBuilderTextField(
+        name: fieldName,
+        key: fieldKey,
+        initialValue: currentUsers,
+        decoration: InputDecoration(
+          labelText: fieldName,
+        ),
+        validator: FormBuilderValidators.compose([
+          FormBuilderValidators.required()
+        ]),
+      )
+    );
+  }
+}
+
+/*
+class UsersDropdownField extends StatelessWidget {
   UsersDropdownField(
     {super.key, 
     required this.fieldKey,
@@ -28,12 +59,17 @@ class UsersDropdownField extends StatelessWidget {
         items: userNames.map((name) => MultiSelectItem(name, name)).toList(),
         listType: MultiSelectListType.CHIP,
         onConfirm: (values) {
-          selectedUsers = values.cast<String>();
+          if(values.isNotEmpty) {
+            selectedUsers = values.cast<String>();
+          } else {
+            selectedUsers = [];
+          }
         },
       ),
     );
   }
 }
+*/
 
 /*
 class UsersDropdownField extends StatelessWidget {

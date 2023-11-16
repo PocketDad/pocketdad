@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pocketdad/features/task/presentation/list_tasks.dart';
 import 'package:pocketdad/features/user/data/user_provider.dart';
 import '../../item/data/item_provider.dart';
 import '../data/task_provider.dart';
 import '../domain/task_db.dart';
 import '../../user/domain/user_db.dart';
 import '../../item/domain/item_db.dart';
+import 'list_tasks.dart';
 
 import 'form_fields/task_name_field.dart';
 import 'form_fields/description_field.dart';
@@ -37,23 +39,18 @@ class AddTask extends ConsumerWidget  {
     final String currentUserID = ref.watch(currentUserIDProvider);
     List<String> itemNames = itemDB.getItemNames();
     List<String> userNames = userDB.getUserNames();
-    /* todo: "friend system" so people can only assign specific users
-    create users_dropdown_field.dart 
-    final UserDB userDB = ref.watch(userDBProvider);
-    */
 
     void onSubmit() {
       bool isValid = _formKey.currentState?.saveAndValidate() ?? false;
       if (!isValid) return;
       String name = _nameFieldKey.currentState?.value;
       String description = _descriptionFieldKey.currentState?.value;
-      DateTime dueDate = _dueDateFieldKey.currentState?.value;
-      String location = _locationFieldKey.currentState?.value;
-      String item = itemDB.getItemIDFromName(_itemFieldKey.currentState?.value);
-      List<String> users = _usersFieldKey.currentState?.value as List<String>;
-      // current user will always be associated with task
-      if (!users.contains(currentUserID)) {
-        users.add(currentUserID);
+      DateTime? dueDate = _dueDateFieldKey.currentState?.value;
+      String? location = _locationFieldKey.currentState?.value;
+      String? item = itemDB.getItemIDFromName(_itemFieldKey.currentState?.value);
+      List<String>? userIDs = userDB.getUserIDsFromString(_usersFieldKey.currentState?.value);
+      if(!userIDs.contains(currentUserID)) {
+        userIDs.add(currentUserID);
       }
 
       taskDB.addTask(
@@ -62,9 +59,10 @@ class AddTask extends ConsumerWidget  {
         dueDate: dueDate,
         location: location,
         itemID: item,
-        userIDs: users
+        userIDs: userIDs
       );
       // todo: reroute to list tasks screen
+      // Navigator.pushReplacementNamed(context, ListTasks.routeName);
     }
 
     void onClear() {
@@ -73,7 +71,7 @@ class AddTask extends ConsumerWidget  {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         title: const Text("Add Task"),
         centerTitle: true,
       ),
