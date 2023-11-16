@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:pocketdad/features/settings/settings_controller.dart';
+import 'package:pocketdad/features/settings/settings_service.dart';
+import 'package:pocketdad/features/settings/settings_view.dart';
 import 'package:pocketdad/features/task/presentation/single_task_card.dart';
+import 'package:pocketdad/features/settings/settings_view.dart';
 
 class CheckIn extends StatelessWidget {
 
@@ -17,6 +21,9 @@ class CheckIn extends StatelessWidget {
         ),
         title: const Text("Check In"),
         centerTitle: true,
+        actions: [
+          SettingsView(controller: SettingsController(SettingsService())),
+        ],
       ),
       body: ListView(
         children: [
