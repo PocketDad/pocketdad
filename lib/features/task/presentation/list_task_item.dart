@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../domain/task_db.dart';
+import 'package:pocketdad/features/common/theme.dart';
 
 class ListTaskItem extends StatelessWidget {
   const ListTaskItem({Key? key, required this.task}) : super(key: key);
@@ -19,11 +20,10 @@ class ListTaskItem extends StatelessWidget {
                     children: [
                       Text(
                         task.name,
-                        style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w400
-                        )),
+                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                          color: Theme.of(context).colorScheme.onBackground,
+                        ),
+                      ),
                       SizedBox(height: 10),
                       if (task.description != null)
                         Text(task.description,

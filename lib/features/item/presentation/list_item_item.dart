@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pocketdad/features/item/domain/item_db.dart';
 
+import '../../relations/data/item_user_provider.dart';
 import '../../relations/domain/item_user_db.dart';
 import '../../user/domain/user_db.dart';
 import '../../relations/data/item_user_provider.dart';

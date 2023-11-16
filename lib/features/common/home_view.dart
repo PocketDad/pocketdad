@@ -64,6 +64,7 @@ class _HomeViewState extends State<HomeView> {
           child: widget.pages[_selectedIndex]['body']
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Theme.of(context).colorScheme.background,
         items: [
           widget.pages[0]['navItem'],
           widget.pages[1]['navItem'],
