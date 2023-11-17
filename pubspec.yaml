@@ -10,6 +10,10 @@ environment:
   sdk: '>=3.1.0 <4.0.0'
 
 dependencies:
+  cloud_firestore: ^4.13.0
+  firebase_auth: ^4.13.0
+  firebase_core: ^2.22.0
+  firebase_ui_auth: ^1.10.0
   flutter:
     sdk: flutter
   flutter_form_builder: ^9.1.1
@@ -17,6 +21,8 @@ dependencies:
     sdk: flutter
   flutter_riverpod: ^2.4.4
   form_builder_validators: ^9.1.0
+  freezed_annotation: ^2.4.1
+  json_annotation: ^4.8.1
   riverpod_annotation: ^2.2.1
 
 dev_dependencies:
@@ -24,10 +30,12 @@ dev_dependencies:
     sdk: flutter
 
   flutter_lints: ^2.0.0
-  build_runner:
+  build_runner: ^2.4.6
   custom_lint:
   riverpod_generator: ^3.0.0-dev.4
   riverpod_lint: ^2.3.1
+  json_serializable: ^6.7.1
+  freezed: ^2.4.5
 
 flutter:
   uses-material-design: true

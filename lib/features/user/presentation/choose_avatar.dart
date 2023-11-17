@@ -3,6 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pocketdad/features/user/domain/user_db.dart';
 
 import '../data/user_provider.dart';
+import '../domain/user.dart';
+import '../domain/user_collection.dart';
+
 
 class ChooseAvatar extends StatelessWidget {
   const ChooseAvatar({super.key});
@@ -97,7 +100,7 @@ class Profile extends ConsumerWidget{
       child: FloatingActionButton(
         backgroundColor: Colors.orange,
         onPressed: () {
-          ref.watch(userDBProvider).ref.watch(currentUserIDProvider.notifier).state = avatar;
+          // ref.watch(userDBProvider).ref.watch(currentUserIDProvider.notifier).state = avatar;
         },
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10),

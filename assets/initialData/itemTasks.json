@@ -1,0 +1,22 @@
+[
+  {
+    "itemID": "item-001",
+    "taskID": "task-001"
+  },
+  {
+    "itemID": "item-002",
+    "taskID": "task-002"
+  },
+  {
+    "itemID": "item-003",
+    "taskID": "task-001"
+  },
+  {
+    "itemID": "item-001",
+    "taskID": "task-004"
+  },
+  {
+    "itemID": "item-001",
+    "taskID": "task-005"
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "itemID": "item-001",
+    "userID": "user-001"
+  },
+  {
+    "itemID": "item-001",
+    "userID": "user-002"
+  },
+  {
+    "itemID": "item-002",
+    "userID": "user-003"
+  },
+  {
+    "itemID": "item-003",
+    "userID": "user-004"
+  },
+  {
+    "itemID": "item-003",
+    "userID": "user-001"
+  }
+]
