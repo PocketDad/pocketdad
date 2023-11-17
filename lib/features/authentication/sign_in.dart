@@ -51,16 +51,16 @@ class SignIn extends ConsumerWidget {
               const SizedBox(height: 20,),
               ElevatedButton(
                   onPressed: () {
-                    if (ref.watch(userDBProvider).getUsername(usernameController.text) != null) {
-                      ref.read(currentUserIDProvider.notifier).state = ref.watch(userDBProvider).getUsername(usernameController.text)!.id;
+                    // if (ref.watch(userDBProvider).getUsername(usernameController.text) != null) {
+                    //   ref.read(currentUserIDProvider.notifier).state = ref.watch(userDBProvider).getUsername(usernameController.text)!.id;
                       Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => HomeView())
                       );
-                    }
-                    else {
-                      ref.read(attemptedLogIn.notifier).state = true;
-                    }
+                    // }
+                    // else {
+                    //   ref.read(attemptedLogIn.notifier).state = true;
+                    // }
                   },
                   child: const Text("Log in"),
               ),
