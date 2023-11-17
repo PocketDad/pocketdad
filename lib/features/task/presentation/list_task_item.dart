@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import '../domain/task.dart';
 import '../domain/task_db.dart';
 
 class ListTaskItem extends StatelessWidget {
   const ListTaskItem({Key? key, required this.task}) : super(key: key);
 
-  final TaskData task;
+  final Task task;
   @override
   Widget build(BuildContext context) {
     return Center(

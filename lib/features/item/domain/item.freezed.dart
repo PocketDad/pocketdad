@@ -22,13 +22,7 @@ Item _$ItemFromJson(Map<String, dynamic> json) {
 mixin _$Item {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  String get description => throw _privateConstructorUsedError;
-  DateTime get openDate => throw _privateConstructorUsedError;
-  DateTime? get dueDate => throw _privateConstructorUsedError;
-  String? get location => throw _privateConstructorUsedError;
-  String? get completionDate => throw _privateConstructorUsedError;
-  List<String> get notes => throw _privateConstructorUsedError;
-  bool? get completed => throw _privateConstructorUsedError;
+  String get icon => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -40,16 +34,7 @@ abstract class $ItemCopyWith<$Res> {
   factory $ItemCopyWith(Item value, $Res Function(Item) then) =
       _$ItemCopyWithImpl<$Res, Item>;
   @useResult
-  $Res call(
-      {String id,
-      String name,
-      String description,
-      DateTime openDate,
-      DateTime? dueDate,
-      String? location,
-      String? completionDate,
-      List<String> notes,
-      bool? completed});
+  $Res call({String id, String name, String icon});
 }
 
 /// @nodoc
@@ -67,13 +52,7 @@ class _$ItemCopyWithImpl<$Res, $Val extends Item>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? description = null,
-    Object? openDate = null,
-    Object? dueDate = freezed,
-    Object? location = freezed,
-    Object? completionDate = freezed,
-    Object? notes = null,
-    Object? completed = freezed,
+    Object? icon = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -84,34 +63,10 @@ class _$ItemCopyWithImpl<$Res, $Val extends Item>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
+      icon: null == icon
+          ? _value.icon
+          : icon // ignore: cast_nullable_to_non_nullable
               as String,
-      openDate: null == openDate
-          ? _value.openDate
-          : openDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      dueDate: freezed == dueDate
-          ? _value.dueDate
-          : dueDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      location: freezed == location
-          ? _value.location
-          : location // ignore: cast_nullable_to_non_nullable
-              as String?,
-      completionDate: freezed == completionDate
-          ? _value.completionDate
-          : completionDate // ignore: cast_nullable_to_non_nullable
-              as String?,
-      notes: null == notes
-          ? _value.notes
-          : notes // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      completed: freezed == completed
-          ? _value.completed
-          : completed // ignore: cast_nullable_to_non_nullable
-              as bool?,
     ) as $Val);
   }
 }
@@ -123,16 +78,7 @@ abstract class _$$ItemImplCopyWith<$Res> implements $ItemCopyWith<$Res> {
       __$$ItemImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String id,
-      String name,
-      String description,
-      DateTime openDate,
-      DateTime? dueDate,
-      String? location,
-      String? completionDate,
-      List<String> notes,
-      bool? completed});
+  $Res call({String id, String name, String icon});
 }
 
 /// @nodoc
@@ -147,13 +93,7 @@ class __$$ItemImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? description = null,
-    Object? openDate = null,
-    Object? dueDate = freezed,
-    Object? location = freezed,
-    Object? completionDate = freezed,
-    Object? notes = null,
-    Object? completed = freezed,
+    Object? icon = null,
   }) {
     return _then(_$ItemImpl(
       id: null == id
@@ -164,34 +104,10 @@ class __$$ItemImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
+      icon: null == icon
+          ? _value.icon
+          : icon // ignore: cast_nullable_to_non_nullable
               as String,
-      openDate: null == openDate
-          ? _value.openDate
-          : openDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      dueDate: freezed == dueDate
-          ? _value.dueDate
-          : dueDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      location: freezed == location
-          ? _value.location
-          : location // ignore: cast_nullable_to_non_nullable
-              as String?,
-      completionDate: freezed == completionDate
-          ? _value.completionDate
-          : completionDate // ignore: cast_nullable_to_non_nullable
-              as String?,
-      notes: null == notes
-          ? _value._notes
-          : notes // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      completed: freezed == completed
-          ? _value.completed
-          : completed // ignore: cast_nullable_to_non_nullable
-              as bool?,
     ));
   }
 }
@@ -199,17 +115,7 @@ class __$$ItemImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$ItemImpl implements _Item {
-  const _$ItemImpl(
-      {required this.id,
-      required this.name,
-      required this.description,
-      required this.openDate,
-      this.dueDate,
-      this.location,
-      this.completionDate,
-      final List<String> notes = const [],
-      this.completed})
-      : _notes = notes;
+  const _$ItemImpl({required this.id, required this.name, required this.icon});
 
   factory _$ItemImpl.fromJson(Map<String, dynamic> json) =>
       _$$ItemImplFromJson(json);
@@ -219,30 +125,11 @@ class _$ItemImpl implements _Item {
   @override
   final String name;
   @override
-  final String description;
-  @override
-  final DateTime openDate;
-  @override
-  final DateTime? dueDate;
-  @override
-  final String? location;
-  @override
-  final String? completionDate;
-  final List<String> _notes;
-  @override
-  @JsonKey()
-  List<String> get notes {
-    if (_notes is EqualUnmodifiableListView) return _notes;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_notes);
-  }
-
-  @override
-  final bool? completed;
+  final String icon;
 
   @override
   String toString() {
-    return 'Item(id: $id, name: $name, description: $description, openDate: $openDate, dueDate: $dueDate, location: $location, completionDate: $completionDate, notes: $notes, completed: $completed)';
+    return 'Item(id: $id, name: $name, icon: $icon)';
   }
 
   @override
@@ -252,33 +139,12 @@ class _$ItemImpl implements _Item {
             other is _$ItemImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.description, description) ||
-                other.description == description) &&
-            (identical(other.openDate, openDate) ||
-                other.openDate == openDate) &&
-            (identical(other.dueDate, dueDate) || other.dueDate == dueDate) &&
-            (identical(other.location, location) ||
-                other.location == location) &&
-            (identical(other.completionDate, completionDate) ||
-                other.completionDate == completionDate) &&
-            const DeepCollectionEquality().equals(other._notes, _notes) &&
-            (identical(other.completed, completed) ||
-                other.completed == completed));
+            (identical(other.icon, icon) || other.icon == icon));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      name,
-      description,
-      openDate,
-      dueDate,
-      location,
-      completionDate,
-      const DeepCollectionEquality().hash(_notes),
-      completed);
+  int get hashCode => Object.hash(runtimeType, id, name, icon);
 
   @JsonKey(ignore: true)
   @override
@@ -298,13 +164,7 @@ abstract class _Item implements Item {
   const factory _Item(
       {required final String id,
       required final String name,
-      required final String description,
-      required final DateTime openDate,
-      final DateTime? dueDate,
-      final String? location,
-      final String? completionDate,
-      final List<String> notes,
-      final bool? completed}) = _$ItemImpl;
+      required final String icon}) = _$ItemImpl;
 
   factory _Item.fromJson(Map<String, dynamic> json) = _$ItemImpl.fromJson;
 
@@ -313,19 +173,7 @@ abstract class _Item implements Item {
   @override
   String get name;
   @override
-  String get description;
-  @override
-  DateTime get openDate;
-  @override
-  DateTime? get dueDate;
-  @override
-  String? get location;
-  @override
-  String? get completionDate;
-  @override
-  List<String> get notes;
-  @override
-  bool? get completed;
+  String get icon;
   @override
   @JsonKey(ignore: true)
   _$$ItemImplCopyWith<_$ItemImpl> get copyWith =>

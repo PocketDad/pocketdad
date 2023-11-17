@@ -11,13 +11,7 @@ class Item with _$Item {
   const factory Item({
     required String id,
     required String name,
-    required String description,
-    required DateTime openDate,
-    DateTime? dueDate,
-    String? location,
-    String? completionDate,
-    @Default([]) List<String> notes,
-    bool? completed}) = _Item;
+    required String icon}) = _Item;
 
   factory Item.fromJson(Map<String, dynamic> json) => _$ItemFromJson(json);
 

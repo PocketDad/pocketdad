@@ -22,8 +22,12 @@ class ItemCollection {
     return userCollection.getUsers(itemUserCollection.getUserIDsWithItemID(itemID));
   }
 
-  List<Item> getAssociatedTasks(String taskID, ItemCollection itemCollection, ItemTaskCollection itemTaskCollection) {
-    return itemCollection.getItems(itemTaskCollection.getItemIDsWithTaskID(taskID));
+  List<Item> getItemsFromTaskID(String taskID, ItemTaskCollection itemTaskCollection) {
+    return getItems(itemTaskCollection.getItemIDsWithTaskID(taskID));
+  }
+
+  List<Item> getItemsFromUserID(String userID, ItemUserCollection itemUserCollection) {
+    return getItems(itemUserCollection.getItemIDsWithUserID(userID));
   }
 
   int size() {
