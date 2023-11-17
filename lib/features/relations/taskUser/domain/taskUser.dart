@@ -10,8 +10,8 @@ part 'taskUser.g.dart';
 class TaskUser with _$TaskUser {
   const factory TaskUser({
     required String id,
-    required String TaskID,
-    required String UserID,
+    required String taskID,
+    required String userID,
   }) = _TaskUser;
 
   factory TaskUser.fromJson(Map<String, dynamic> json) => _$TaskUserFromJson(json);

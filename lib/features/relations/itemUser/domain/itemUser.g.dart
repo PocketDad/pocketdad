@@ -9,13 +9,13 @@ part of 'itemUser.dart';
 _$ItemUserImpl _$$ItemUserImplFromJson(Map<String, dynamic> json) =>
     _$ItemUserImpl(
       id: json['id'] as String,
-      ItemID: json['ItemID'] as String,
-      UserID: json['UserID'] as String,
+      itemID: json['itemID'] as String,
+      userID: json['userID'] as String,
     );
 
 Map<String, dynamic> _$$ItemUserImplToJson(_$ItemUserImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'ItemID': instance.ItemID,
-      'UserID': instance.UserID,
+      'itemID': instance.itemID,
+      'userID': instance.userID,
     };

@@ -13,4 +13,12 @@ class ItemUserCollection {
   int size() {
     return _itemUsers.length;
   }
+
+  List<String> getItemIDsWithUserID(userID) {
+    return _itemUsers.where((itemUser) => itemUser.userID == userID).map((itemUser) => itemUser.itemID).toList();
+  }
+
+  List<String> getUserIDsWithItemID(itemID) {
+    return _itemUsers.where((itemUser) => itemUser.itemID == itemID).map((itemUser) => itemUser.userID).toList();
+  }
 }

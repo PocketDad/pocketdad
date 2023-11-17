@@ -1,3 +1,9 @@
+import '../../item/domain/item.dart';
+import '../../item/domain/item_collection.dart';
+import '../../relations/itemUser/domain/itemUser_collection.dart';
+import '../../relations/taskUser/domain/taskUser_collection.dart';
+import '../../task/domain/task.dart';
+import '../../task/domain/task_collection.dart';
 import 'user.dart';
 
 /// Encapsulates operations on the list of [User] returned from Firestore.
@@ -37,5 +43,13 @@ class UserCollection {
 
   List<String> getAllEmails() {
     return _users.map((user) => user.id).toList();
+  }
+
+  List<Item> getAssociatedItems(String userID, ItemCollection itemCollection, ItemUserCollection itemUserCollection) {
+    return itemCollection.getItems(itemUserCollection.getItemIDsWithUserID(userID));
+  }
+
+  List<Task> getAssociatedTasks(String userID, TaskCollection taskCollection, TaskUserCollection taskUserCollection) {
+    return taskCollection.getTasks(taskUserCollection.getTaskIDsWithUserID(userID));
   }
 }

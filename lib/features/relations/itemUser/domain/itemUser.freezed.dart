@@ -21,8 +21,8 @@ ItemUser _$ItemUserFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ItemUser {
   String get id => throw _privateConstructorUsedError;
-  String get ItemID => throw _privateConstructorUsedError;
-  String get UserID => throw _privateConstructorUsedError;
+  String get itemID => throw _privateConstructorUsedError;
+  String get userID => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +35,7 @@ abstract class $ItemUserCopyWith<$Res> {
   factory $ItemUserCopyWith(ItemUser value, $Res Function(ItemUser) then) =
       _$ItemUserCopyWithImpl<$Res, ItemUser>;
   @useResult
-  $Res call({String id, String ItemID, String UserID});
+  $Res call({String id, String itemID, String userID});
 }
 
 /// @nodoc
@@ -52,21 +52,21 @@ class _$ItemUserCopyWithImpl<$Res, $Val extends ItemUser>
   @override
   $Res call({
     Object? id = null,
-    Object? ItemID = null,
-    Object? UserID = null,
+    Object? itemID = null,
+    Object? userID = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      ItemID: null == ItemID
-          ? _value.ItemID
-          : ItemID // ignore: cast_nullable_to_non_nullable
+      itemID: null == itemID
+          ? _value.itemID
+          : itemID // ignore: cast_nullable_to_non_nullable
               as String,
-      UserID: null == UserID
-          ? _value.UserID
-          : UserID // ignore: cast_nullable_to_non_nullable
+      userID: null == userID
+          ? _value.userID
+          : userID // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -80,7 +80,7 @@ abstract class _$$ItemUserImplCopyWith<$Res>
       __$$ItemUserImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String ItemID, String UserID});
+  $Res call({String id, String itemID, String userID});
 }
 
 /// @nodoc
@@ -95,21 +95,21 @@ class __$$ItemUserImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? ItemID = null,
-    Object? UserID = null,
+    Object? itemID = null,
+    Object? userID = null,
   }) {
     return _then(_$ItemUserImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      ItemID: null == ItemID
-          ? _value.ItemID
-          : ItemID // ignore: cast_nullable_to_non_nullable
+      itemID: null == itemID
+          ? _value.itemID
+          : itemID // ignore: cast_nullable_to_non_nullable
               as String,
-      UserID: null == UserID
-          ? _value.UserID
-          : UserID // ignore: cast_nullable_to_non_nullable
+      userID: null == userID
+          ? _value.userID
+          : userID // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -119,7 +119,7 @@ class __$$ItemUserImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ItemUserImpl implements _ItemUser {
   const _$ItemUserImpl(
-      {required this.id, required this.ItemID, required this.UserID});
+      {required this.id, required this.itemID, required this.userID});
 
   factory _$ItemUserImpl.fromJson(Map<String, dynamic> json) =>
       _$$ItemUserImplFromJson(json);
@@ -127,13 +127,13 @@ class _$ItemUserImpl implements _ItemUser {
   @override
   final String id;
   @override
-  final String ItemID;
+  final String itemID;
   @override
-  final String UserID;
+  final String userID;
 
   @override
   String toString() {
-    return 'ItemUser(id: $id, ItemID: $ItemID, UserID: $UserID)';
+    return 'ItemUser(id: $id, itemID: $itemID, userID: $userID)';
   }
 
   @override
@@ -142,13 +142,13 @@ class _$ItemUserImpl implements _ItemUser {
         (other.runtimeType == runtimeType &&
             other is _$ItemUserImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.ItemID, ItemID) || other.ItemID == ItemID) &&
-            (identical(other.UserID, UserID) || other.UserID == UserID));
+            (identical(other.itemID, itemID) || other.itemID == itemID) &&
+            (identical(other.userID, userID) || other.userID == userID));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, ItemID, UserID);
+  int get hashCode => Object.hash(runtimeType, id, itemID, userID);
 
   @JsonKey(ignore: true)
   @override
@@ -167,8 +167,8 @@ class _$ItemUserImpl implements _ItemUser {
 abstract class _ItemUser implements ItemUser {
   const factory _ItemUser(
       {required final String id,
-      required final String ItemID,
-      required final String UserID}) = _$ItemUserImpl;
+      required final String itemID,
+      required final String userID}) = _$ItemUserImpl;
 
   factory _ItemUser.fromJson(Map<String, dynamic> json) =
       _$ItemUserImpl.fromJson;
@@ -176,9 +176,9 @@ abstract class _ItemUser implements ItemUser {
   @override
   String get id;
   @override
-  String get ItemID;
+  String get itemID;
   @override
-  String get UserID;
+  String get userID;
   @override
   @JsonKey(ignore: true)
   _$$ItemUserImplCopyWith<_$ItemUserImpl> get copyWith =>

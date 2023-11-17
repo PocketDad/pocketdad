@@ -10,8 +10,8 @@ part 'itemTask.g.dart';
 class ItemTask with _$ItemTask {
   const factory ItemTask({
     required String id,
-    required String ItemID,
-    required String TaskID,
+    required String itemID,
+    required String taskID,
   }) = _ItemTask;
 
   factory ItemTask.fromJson(Map<String, dynamic> json) => _$ItemTaskFromJson(json);
