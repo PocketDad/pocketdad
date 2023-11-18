@@ -8,7 +8,6 @@ import '../data/task_provider.dart';
 import '../domain/task_db.dart';
 import '../../user/domain/user_db.dart';
 import '../../item/domain/item_db.dart';
-import 'list_tasks.dart';
 
 import 'form_fields/task_name_field.dart';
 import 'form_fields/description_field.dart';
@@ -49,6 +48,7 @@ class AddTask extends ConsumerWidget  {
       String? location = _locationFieldKey.currentState?.value;
       String? item = itemDB.getItemIDFromName(_itemFieldKey.currentState?.value);
       List<String>? userIDs = userDB.getUserIDsFromString(_usersFieldKey.currentState?.value);
+      userIDs = userDB.validateUserNames(userIDs);
       if(!userIDs.contains(currentUserID)) {
         userIDs.add(currentUserID);
       }
@@ -63,6 +63,11 @@ class AddTask extends ConsumerWidget  {
       );
       // todo: reroute to list tasks screen
       // Navigator.pushReplacementNamed(context, ListTasks.routeName);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ListTasks())
+        );
     }
 
     void onClear() {

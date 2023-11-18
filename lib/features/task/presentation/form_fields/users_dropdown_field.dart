@@ -17,7 +17,7 @@ class UsersDropdownField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String fieldName = 'Description';
+    String fieldName = 'Users';
     return FieldPadding(
       child: FormBuilderTextField(
         name: fieldName,
