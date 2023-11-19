@@ -8,7 +8,7 @@ class ItemDropdownField extends StatelessWidget {
     {super.key, 
     required this.fieldKey,
     required this.itemNames,
-    this.currentItem
+    this.currentItem,
     }
   );
 

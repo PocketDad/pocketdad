@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pocketdad/features/user/data/user_provider.dart';
 import '../../item/data/item_provider.dart';
 import '../data/task_provider.dart';
 import '../domain/task_db.dart';
@@ -14,6 +15,7 @@ import 'form_fields/location_field.dart';
 import 'form_fields/items_dropdown_field.dart';
 import 'form_fields/submit_button.dart';
 import 'form_fields/clear_button.dart';
+import 'form_fields/users_dropdown_field.dart';
 
 class AddTask extends ConsumerWidget  {
   AddTask({Key? key}) : super(key: key);
@@ -25,30 +27,30 @@ class AddTask extends ConsumerWidget  {
   final _dueDateFieldKey = GlobalKey<FormBuilderFieldState>();
   final _locationFieldKey = GlobalKey<FormBuilderFieldState>();
   final _itemFieldKey = GlobalKey<FormBuilderFieldState>();
-  /* todo: implement notes and assigning users functionality
-  final _notesFieldKey = GlobalKey<FormBuilderState>();
-  final _usersFieldKey = GlobalKey<FormBuilderState>(); */
+  final _usersFieldKey = GlobalKey<FormBuilderFieldState>();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final TaskDB taskDB = ref.watch(taskDBProvider);
     final ItemDB itemDB = ref.watch(itemDBProvider);
+    final UserDB userDB = ref.watch(userDBProvider);
     final String currentUserID = ref.watch(currentUserIDProvider);
     List<String> itemNames = itemDB.getItemNames();
-    /* todo: "friend system" so people can only assign specific users
-    create users_dropdown_field.dart 
-    final UserDB userDB = ref.watch(userDBProvider);
-    */
-
+    List<String> userNames = userDB.getUserNames();
 
     void onSubmit() {
       bool isValid = _formKey.currentState?.saveAndValidate() ?? false;
       if (!isValid) return;
       String name = _nameFieldKey.currentState?.value;
       String description = _descriptionFieldKey.currentState?.value;
-      DateTime dueDate = _dueDateFieldKey.currentState?.value;
-      String location = _locationFieldKey.currentState?.value;
-      String item = itemDB.getItemIDFromName(_itemFieldKey.currentState?.value);
+      DateTime? dueDate = _dueDateFieldKey.currentState?.value;
+      String? location = _locationFieldKey.currentState?.value;
+      String? item = itemDB.getItemIDFromName(_itemFieldKey.currentState?.value);
+      List<String>? userIDs = userDB.getUserIDsFromString(_usersFieldKey.currentState?.value);
+      userIDs = userDB.validateUserNames(userIDs);
+      if(!userIDs.contains(currentUserID)) {
+        userIDs.add(currentUserID);
+      }
 
       taskDB.addTask(
         name: name,
@@ -56,9 +58,10 @@ class AddTask extends ConsumerWidget  {
         dueDate: dueDate,
         location: location,
         itemID: item,
-        userID: currentUserID
+        userIDs: userIDs
       );
       // todo: reroute to list tasks screen
+      Navigator.pop(context);
     }
 
     void onClear() {
@@ -67,7 +70,7 @@ class AddTask extends ConsumerWidget  {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         title: const Text("Add Task"),
         centerTitle: true,
       ),
@@ -85,6 +88,7 @@ class AddTask extends ConsumerWidget  {
                     TaskDateField(fieldKey: _dueDateFieldKey),
                     TaskLocationField(fieldKey: _locationFieldKey),
                     ItemDropdownField(fieldKey: _itemFieldKey, itemNames: itemNames),
+                    UsersDropdownField(fieldKey: _usersFieldKey, userNames: userNames)
                   ],
                 )
               ),

@@ -53,7 +53,6 @@ class TaskUserDB {
     _taskUsers.add(data);
   }
 
-
   List<UserData> getAssociatedUsers(String taskID) {
     UserDB userDB = ref.read(userDBProvider);
     List<String> userIDs = _taskUsers.where((data) => data.taskID == taskID).map((data) => data.userID).toList();
@@ -65,6 +64,17 @@ class TaskUserDB {
     List<String> taskIDs = _taskUsers.where((data) => data.userID == userID).map((data) => data.taskID).toList();
     return taskDB.getTasks(taskIDs);
   }
+
+  void removeFromTaskID({
+    required String taskID}) {
+    _taskUsers.removeWhere((data) => data.taskID == taskID);
+  }
+
+  void removeFromUserID({
+    required String taskID}) {
+    _taskUsers.removeWhere((data) => data.taskID == taskID);
+  }
+
 }
 
 final taskUserDBProvider = Provider<TaskUserDB>((ref) {
