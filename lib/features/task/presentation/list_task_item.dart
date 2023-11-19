@@ -25,13 +25,14 @@ class ListTaskItem extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 10),
-                      Text(task.description,
-                          style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w400
-                          )
-                      ),
+                      if (task.description != null)
+                        Text(task.description,
+                            style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w400
+                            )
+                        ),
                       SizedBox(height: 10),
                       Text(task.dueDate.toString()),
                     ]
