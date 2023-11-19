@@ -6,7 +6,6 @@ import 'package:pocketdad/features/user/domain/user_db.dart';
 import 'package:pocketdad/features/common/home_view.dart';
 import 'package:pocketdad/features/authentication/onboarding.dart';
 
-import '../common/theme.dart';
 import '../user/data/user_provider.dart';
 
 class SignIn extends ConsumerWidget {
@@ -28,11 +27,9 @@ class SignIn extends ConsumerWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 "Welcome to PocketDad!",
-                style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                  color: Theme.of(context).colorScheme.primary
-                ),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 20,),
