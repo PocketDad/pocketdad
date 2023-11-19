@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pocketdad/features/task/presentation/single_task_card.dart';
 
 class CheckIn extends StatelessWidget {
 
@@ -11,138 +10,129 @@ class CheckIn extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        titleTextStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
-          color: Theme.of(context).colorScheme.onPrimary,
-        ),
-        title: const Text("Check In"),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: const Text("PocketDad"),
         centerTitle: true,
       ),
-      body: ListView(
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              // greeting
-              Padding(
-                padding: EdgeInsets.fromLTRB(0, 25, 0, 15),
-                child: Text(
-                  "Good morning, kiddo!",
-                  style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurface,
-                    fontSize: 32,
-                  ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            // greeting
+            const Padding(
+              padding: EdgeInsets.fromLTRB(0, 20, 0, 10),
+              child: Text(
+                "Good morning, kiddo!",
+                style: TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
+            ),
 
-              // dad joke of the day
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 60),
-                margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.onSecondary,
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                  border: Border.all(
-                    color: Theme.of(context).colorScheme.onSecondary,
-                    width: 5,
-                  )
-                ),
-                child: Column(
-                  children: [
-                    Text(
-                      'Dad Joke of the Day!',
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        color: Theme.of(context).colorScheme.onSurface,
-                      )
-                      ,
-                    ),
-                    Text(
-                        'Why did the drum go to bed? It was beat.',
-                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          color: Theme.of(context).colorScheme.onSurface,
-                        )
-                    ),
-                  ],
+            // dad joke of the day
+            Container(
+              margin: const EdgeInsets.fromLTRB(35, 0, 35, 10),
+              padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Color.fromARGB(255, 251, 208, 19),
+                  width: 7.5,
                 )
               ),
-
-              const Divider(
-                color: Color(0xffbdbdbd),
-                indent: 30,
-                endIndent: 30,
+              child: const Text(
+                'Why did the drum go to bed? It was beat.',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontStyle: FontStyle.italic
+                )
               ),
+            ),
 
-              // today tasks
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 60),
-                margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
-                alignment: Alignment.centerLeft,
-                child: Column(
-                  children: [
-                    Text(
-                      "Today you have 2 tasks",
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        color: Theme.of(context).colorScheme.onSurface,
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
-                    SizedBox(height: 10,),
-                    ButtonTheme(
-                      minWidth: 150,
-                      height: 100,
-                      child: SingleTaskCard(task: "Sample Task 1", date: "4/4/23", item: "House"),
-                    ),
-                    ButtonTheme(
-                      minWidth: 150,
-                      height: 100,
-                      child: SingleTaskCard(task: "Sample Task 2", date: "4/4/23", item: "Car"),
-                    ),
-                  ]
+
+            // today tasks
+            const Padding(
+              padding: EdgeInsets.fromLTRB(0, 5, 0, 15),
+              child: Text(
+                "Today you have 2 tasks",
+                style: TextStyle(
+                  fontSize: 24,
                 ),
               ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                int i = 0;
+                i++;
+                // change to point towards individual task
+              },
+              child: const Text("Clean the gutters",
+                style: TextStyle(
+                  fontSize: 24,
+                )
+              )
+            ),
+            ElevatedButton(
+              onPressed: () {
+                int i = 0;
+                i++;
+                // change to point towards individual task
+              },
+              child: const Text("Buy new filters",
+                style: TextStyle(
+                  fontSize: 24,
+                )
+              )
+            ),
 
-              const Divider(
-                color: Color(0xffbdbdbd),
-                indent: 30,
-                endIndent: 30,
-              ),
-
-              // week tasks
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 60),
-                margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
-                alignment: Alignment.centerLeft,
-                child: Column(
-                  children: [
-                    Text(
-                      "This week you have 3 tasks",
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        color: Theme.of(context).colorScheme.onSurface,
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
-                    SizedBox(height: 10,),
-                    ButtonTheme(
-                      minWidth: 150,
-                      height: 100,
-                      child: SingleTaskCard(task: "Sample Task 3", date: "4/4/23", item: "House"),
-                    ),
-                    ButtonTheme(
-                      minWidth: 150,
-                      height: 100,
-                      child: SingleTaskCard(task: "Sample Task 4", date: "4/4/23", item: "House"),
-                    ),
-                    ButtonTheme(
-                      minWidth: 150,
-                      height: 100,
-                      child: SingleTaskCard(task: "Sample Task 5", date: "4/4/23", item: "House"),
-                    ),
-                  ],
+            // week tasks
+            const Padding(
+              padding: EdgeInsets.fromLTRB(0, 20, 0, 15),
+              child: Text(
+                "This week you have 3 tasks",
+                style: TextStyle(
+                  fontSize: 24,
                 ),
               ),
-            ],
-          ),
-        ]
+            ),
+            ElevatedButton(
+              onPressed: () {
+                int i = 0;
+                i++;
+                // change to point towards individual task
+              },
+              child: const Text("Change oil",
+                style: TextStyle(
+                  fontSize: 24,
+                )
+              )
+            ),
+            ElevatedButton(
+              onPressed: () {
+                int i = 0;
+                i++;
+                // change to point towards individual task
+              },
+              child: const Text("Call plumber for bathroom",
+                style: TextStyle(
+                  fontSize: 24,
+                )
+              )
+            ),
+            ElevatedButton(
+              onPressed: () {
+                int i = 0;
+                i++;
+                // change to point towards individual task
+              },
+              child: const Text("Restock the fridge",
+                style: TextStyle(
+                  fontSize: 24,
+                )
+              )
+            ),
+          ],
+        ),
       ),
     );
   }

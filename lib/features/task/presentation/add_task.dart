@@ -2,8 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pocketdad/features/user/data/user_provider.dart';
+import 'package:pocketdad/features/pocketDadLoading.dart';
+import '../../all_data_provider.dart';
 import '../../item/data/item_provider.dart';
+import '../../item/domain/item.dart';
+import '../../item/domain/item_collection.dart';
+import '../../pocketDadError.dart';
+import '../../relations/itemTask/domain/itemTask.dart';
+import '../../relations/itemTask/domain/itemTask_collection.dart';
+import '../../relations/itemUser/domain/itemUser.dart';
+import '../../relations/itemUser/domain/itemUser_collection.dart';
+import '../../relations/taskUser/domain/taskUser.dart';
+import '../../relations/taskUser/domain/taskUser_collection.dart';
+import '../../user/domain/user.dart';
+import '../../user/domain/user_collection.dart';
 import '../data/task_provider.dart';
+import '../domain/task.dart';
+import '../domain/task_collection.dart';
 import '../domain/task_db.dart';
 import '../../user/domain/user_db.dart';
 import '../../item/domain/item_db.dart';
@@ -31,35 +46,89 @@ class AddTask extends ConsumerWidget  {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final TaskDB taskDB = ref.watch(taskDBProvider);
-    final ItemDB itemDB = ref.watch(itemDBProvider);
-    final UserDB userDB = ref.watch(userDBProvider);
-    final String currentUserID = ref.watch(currentUserIDProvider);
-    List<String> itemNames = itemDB.getItemNames();
-    List<String> userNames = userDB.getUserNames();
+    // final TaskDB taskDB = ref.watch(taskDBProvider);
+    // final ItemDB itemDB = ref.watch(itemDBProvider);
+    // final UserDB userDB = ref.watch(userDBProvider);
+    // final String currentUserID = ref.watch(currentUserIDProvider);
+    // List<String> itemNames = itemDB.getItemNames();
+    // List<String> userNames = userDB.getUserNames();
+    //
+    // void onSubmit() {
+    //   bool isValid = _formKey.currentState?.saveAndValidate() ?? false;
+    //   if (!isValid) return;
+    //   String name = _nameFieldKey.currentState?.value;
+    //   String description = _descriptionFieldKey.currentState?.value;
+    //   DateTime? dueDate = _dueDateFieldKey.currentState?.value;
+    //   String? location = _locationFieldKey.currentState?.value;
+    //   String? item = itemDB.getItemIDFromName(_itemFieldKey.currentState?.value);
+    //   List<String>? userIDs = userDB.getUserIDsFromString(_usersFieldKey.currentState?.value);
+    //   userIDs = userDB.validateUserNames(userIDs);
+    //   if(!userIDs.contains(currentUserID)) {
+    //     userIDs.add(currentUserID);
+    //   }
+    //
+    //   taskDB.addTask(
+    //     name: name,
+    //     description: description,
+    //     dueDate: dueDate,
+    //     location: location,
+    //     itemID: item,
+    //     userIDs: userIDs
+    //   );
+    final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
+    return asyncAllData.when(
+        data: (allData) =>
+            _build(
+                context: context,
+                ref: ref,
+                currentUserID: allData.currentUserID,
+                items: allData.items,
+                tasks: allData.tasks,
+                users: allData.users,
+                itemTasks: allData.itemTasks,
+                itemUsers: allData.itemUsers,
+                taskUsers: allData.taskUsers),
+        loading: () => const PocketDadLoading(),
+        error: (error, st) => PocketDadError(error.toString(), st.toString()));
+  }
+
+  Widget _build(
+    {required BuildContext context,
+        required String currentUserID,
+        required List<Item> items,
+        required List<Task> tasks,
+        required List<User> users,
+        required List<ItemTask> itemTasks,
+        required List<ItemUser> itemUsers,
+        required List<TaskUser> taskUsers,
+    required WidgetRef ref}) {
+
+    ItemCollection itemCollection = ItemCollection(items);
+    TaskCollection taskCollection = TaskCollection(tasks);
+    UserCollection userCollection = UserCollection(users);
+    ItemTaskCollection itemTaskCollection = ItemTaskCollection(itemTasks);
+    ItemUserCollection itemUserCollection = ItemUserCollection(itemUsers);
+    TaskUserCollection taskUserCollection = TaskUserCollection(taskUsers);
+
+    List<String> itemNames = itemCollection.getItemsFromUserID(currentUserID, itemUserCollection).map((item) => item.name).toList();
 
     void onSubmit() {
-      bool isValid = _formKey.currentState?.saveAndValidate() ?? false;
-      if (!isValid) return;
-      String name = _nameFieldKey.currentState?.value;
-      String description = _descriptionFieldKey.currentState?.value;
-      DateTime? dueDate = _dueDateFieldKey.currentState?.value;
-      String? location = _locationFieldKey.currentState?.value;
-      String? item = itemDB.getItemIDFromName(_itemFieldKey.currentState?.value);
-      List<String>? userIDs = userDB.getUserIDsFromString(_usersFieldKey.currentState?.value);
-      userIDs = userDB.validateUserNames(userIDs);
-      if(!userIDs.contains(currentUserID)) {
-        userIDs.add(currentUserID);
-      }
-
-      taskDB.addTask(
-        name: name,
-        description: description,
-        dueDate: dueDate,
-        location: location,
-        itemID: item,
-        userIDs: userIDs
-      );
+      // bool isValid = _formKey.currentState?.saveAndValidate() ?? false;
+      // if (!isValid) return;
+      // String name = _nameFieldKey.currentState?.value;
+      // String description = _descriptionFieldKey.currentState?.value;
+      // DateTime dueDate = _dueDateFieldKey.currentState?.value;
+      // String location = _locationFieldKey.currentState?.value;
+      // String item = itemDB.getItemIDFromName(_itemFieldKey.currentState?.value);
+      //
+      // taskDB.addTask(
+      //   name: name,
+      //   description: description,
+      //   dueDate: dueDate,
+      //   location: location,
+      //   itemID: item,
+      //   userID: currentUserID
+      // );
       // todo: reroute to list tasks screen
       Navigator.pop(context);
     }
@@ -88,7 +157,7 @@ class AddTask extends ConsumerWidget  {
                     TaskDateField(fieldKey: _dueDateFieldKey),
                     TaskLocationField(fieldKey: _locationFieldKey),
                     ItemDropdownField(fieldKey: _itemFieldKey, itemNames: itemNames),
-                    UsersDropdownField(fieldKey: _usersFieldKey, userNames: userNames)
+                    // UsersDropdownField(fieldKey: _usersFieldKey, userNames: userNames)
                   ],
                 )
               ),

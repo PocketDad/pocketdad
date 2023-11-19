@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import '../domain/task.dart';
 import '../domain/task_db.dart';
-import 'package:pocketdad/features/common/theme.dart';
 
 class ListTaskItem extends StatelessWidget {
   const ListTaskItem({Key? key, required this.task}) : super(key: key);
 
-  final TaskData task;
+  final Task task;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -20,10 +20,11 @@ class ListTaskItem extends StatelessWidget {
                     children: [
                       Text(
                         task.name,
-                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          color: Theme.of(context).colorScheme.onBackground,
-                        ),
-                      ),
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w400
+                        )),
                       SizedBox(height: 10),
                       if (task.description != null)
                         Text(task.description,

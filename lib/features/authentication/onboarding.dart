@@ -25,24 +25,22 @@ class OnboardingForm extends ConsumerWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   "Welcome to PocketDad!",
-                  style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                    color: Theme.of(context).colorScheme.primary
-                  ),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 50),
                 TextField(
                   controller: nameController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     filled: true,
                     labelText: 'Your name',
                     border: OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         width: 2.0,
-                        color: Theme.of(context).colorScheme.secondary,
+                        color: Colors.orangeAccent,
                       ),
                     ),
                   ),
@@ -50,14 +48,14 @@ class OnboardingForm extends ConsumerWidget {
                 const SizedBox(height: 20,),
                 TextField(
                   controller: usernameController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     filled: true,
                     labelText: 'Username',
                     border: OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         width: 2.0,
-                        color: Theme.of(context).colorScheme.secondary,
+                        color: Colors.orangeAccent,
                       ),
                     ),
                   ),
@@ -65,14 +63,14 @@ class OnboardingForm extends ConsumerWidget {
                 const SizedBox(height: 20,),
                 TextField(
                   controller: emailController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     filled: true,
                     labelText: 'Your email',
                     border: OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         width: 2.0,
-                        color: Theme.of(context).colorScheme.secondary,
+                        color: Colors.orangeAccent,
                       ),
                     ),
                   ),
@@ -85,22 +83,20 @@ class OnboardingForm extends ConsumerWidget {
         // When the user presses the button, show an alert dialog containing
         // the text that the user has entered into the text field.
         onPressed: () {
-          int thisID = (ref.watch(userDBProvider).getNextUserNum());
-          UserData(
-            email: emailController.text,
-            id: "user-$thisID",
-            name: nameController.text,
-            username: usernameController.text,
-          );
-          ref.read(currentUserIDProvider.notifier).state = "user-$thisID";
-          Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => HomeView())
-          );
+          // int thisID = (ref.watch(userDBProvider).getNextUserNum());
+          // UserData(
+          //   email: emailController.text,
+          //   id: "user-$thisID",
+          //   name: nameController.text,
+          //   username: usernameController.text,
+          // );
+          // ref.read(currentUserIDProvider.notifier).state = "user-$thisID";
+          // Navigator.push(
+          //     context,
+          //     MaterialPageRoute(builder: (context) => HomeView())
+          // );
         },
-        child: const Text(
-          "Register"
-        ),
+        child: const Text("Sign up"),
       ),
     );
   }
