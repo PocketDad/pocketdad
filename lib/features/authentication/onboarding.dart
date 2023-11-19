@@ -1,8 +1,6 @@
-import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pocketdad/features/user/domain/user_db.dart';
-import 'package:pocketdad/features/authentication/verify_email_view.dart';
 
 import '../user/data/user_provider.dart';
 import '../common/home_view.dart';
