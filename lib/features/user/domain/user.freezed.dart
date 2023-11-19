@@ -22,9 +22,12 @@ User _$UserFromJson(Map<String, dynamic> json) {
 mixin _$User {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
-  String? get imagePath => throw _privateConstructorUsedError;
   String get initials => throw _privateConstructorUsedError;
+  String? get imagePath => throw _privateConstructorUsedError;
+  String? get dadName => throw _privateConstructorUsedError;
+  String? get dadPic => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,9 +42,12 @@ abstract class $UserCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
+      String email,
       String username,
+      String initials,
       String? imagePath,
-      String initials});
+      String? dadName,
+      String? dadPic});
 }
 
 /// @nodoc
@@ -59,9 +65,12 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? email = null,
     Object? username = null,
-    Object? imagePath = freezed,
     Object? initials = null,
+    Object? imagePath = freezed,
+    Object? dadName = freezed,
+    Object? dadPic = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -72,18 +81,30 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
       username: null == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
+              as String,
+      initials: null == initials
+          ? _value.initials
+          : initials // ignore: cast_nullable_to_non_nullable
               as String,
       imagePath: freezed == imagePath
           ? _value.imagePath
           : imagePath // ignore: cast_nullable_to_non_nullable
               as String?,
-      initials: null == initials
-          ? _value.initials
-          : initials // ignore: cast_nullable_to_non_nullable
-              as String,
+      dadName: freezed == dadName
+          ? _value.dadName
+          : dadName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dadPic: freezed == dadPic
+          ? _value.dadPic
+          : dadPic // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -98,9 +119,12 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
+      String email,
       String username,
+      String initials,
       String? imagePath,
-      String initials});
+      String? dadName,
+      String? dadPic});
 }
 
 /// @nodoc
@@ -115,9 +139,12 @@ class __$$UserImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? email = null,
     Object? username = null,
-    Object? imagePath = freezed,
     Object? initials = null,
+    Object? imagePath = freezed,
+    Object? dadName = freezed,
+    Object? dadPic = freezed,
   }) {
     return _then(_$UserImpl(
       id: null == id
@@ -128,18 +155,30 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
       username: null == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
+              as String,
+      initials: null == initials
+          ? _value.initials
+          : initials // ignore: cast_nullable_to_non_nullable
               as String,
       imagePath: freezed == imagePath
           ? _value.imagePath
           : imagePath // ignore: cast_nullable_to_non_nullable
               as String?,
-      initials: null == initials
-          ? _value.initials
-          : initials // ignore: cast_nullable_to_non_nullable
-              as String,
+      dadName: freezed == dadName
+          ? _value.dadName
+          : dadName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dadPic: freezed == dadPic
+          ? _value.dadPic
+          : dadPic // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -150,9 +189,12 @@ class _$UserImpl extends _User {
   const _$UserImpl(
       {required this.id,
       required this.name,
+      required this.email,
       required this.username,
+      required this.initials,
       this.imagePath,
-      required this.initials})
+      this.dadName,
+      this.dadPic})
       : super._();
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
@@ -163,15 +205,21 @@ class _$UserImpl extends _User {
   @override
   final String name;
   @override
+  final String email;
+  @override
   final String username;
+  @override
+  final String initials;
   @override
   final String? imagePath;
   @override
-  final String initials;
+  final String? dadName;
+  @override
+  final String? dadPic;
 
   @override
   String toString() {
-    return 'User(id: $id, name: $name, username: $username, imagePath: $imagePath, initials: $initials)';
+    return 'User(id: $id, name: $name, email: $email, username: $username, initials: $initials, imagePath: $imagePath, dadName: $dadName, dadPic: $dadPic)';
   }
 
   @override
@@ -181,18 +229,21 @@ class _$UserImpl extends _User {
             other is _$UserImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.email, email) || other.email == email) &&
             (identical(other.username, username) ||
                 other.username == username) &&
+            (identical(other.initials, initials) ||
+                other.initials == initials) &&
             (identical(other.imagePath, imagePath) ||
                 other.imagePath == imagePath) &&
-            (identical(other.initials, initials) ||
-                other.initials == initials));
+            (identical(other.dadName, dadName) || other.dadName == dadName) &&
+            (identical(other.dadPic, dadPic) || other.dadPic == dadPic));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, name, username, imagePath, initials);
+  int get hashCode => Object.hash(runtimeType, id, name, email, username,
+      initials, imagePath, dadName, dadPic);
 
   @JsonKey(ignore: true)
   @override
@@ -212,9 +263,12 @@ abstract class _User extends User {
   const factory _User(
       {required final String id,
       required final String name,
+      required final String email,
       required final String username,
+      required final String initials,
       final String? imagePath,
-      required final String initials}) = _$UserImpl;
+      final String? dadName,
+      final String? dadPic}) = _$UserImpl;
   const _User._() : super._();
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
@@ -224,11 +278,17 @@ abstract class _User extends User {
   @override
   String get name;
   @override
+  String get email;
+  @override
   String get username;
+  @override
+  String get initials;
   @override
   String? get imagePath;
   @override
-  String get initials;
+  String? get dadName;
+  @override
+  String? get dadPic;
   @override
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>

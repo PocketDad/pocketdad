@@ -4,6 +4,7 @@
     "name": "John Doe",
     "email": "johndoe@gmail.com",
     "username": "johnnydoe",
+    "initials": "JD",
     "dadName": "John's dad",
     "dadPic": "assets/images/dad2.JPG"
   },
@@ -12,6 +13,7 @@
     "name": "Jane Roe",
     "email": "janeroe@gmail.com",
     "username": "janeroe002",
+    "initials": "JR",
     "dadName": "Jane's dad",
     "dadPic": "assets/images/dad3.JPG"
   },
@@ -20,6 +22,7 @@
     "name": "Justin Jandoc",
     "email": "justinjandoc@hawaii.com",
     "username": "justinjandoc",
+    "initials": "JJ",
     "dadName": "justin's dad",
     "dadPic": "assets/images/dad4.JPG"
   },
@@ -28,6 +31,7 @@
     "name": "Sydney Kim",
     "email": "sydneykim@hawaii.com",
     "username": "sydneykim",
+    "initials": "SK",
     "dadName": "Sydney's dad",
     "dadPic": "assets/images/dad6.JPG"
   },
@@ -36,6 +40,7 @@
     "name": "Yong-Sung Masuda",
     "email": "yongsungmasuda@hawaii.com",
     "username": "yongsungmasuda",
+    "initials": "YM",
     "dadName": "Yong-Sung's dad",
     "dadPic": "assets/images/dad5.JPG"
   }

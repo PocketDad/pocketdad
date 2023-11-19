@@ -24,7 +24,7 @@ class Task with _$Task {
   // Test that the json file can be converted into entities.
   static Future<List<Task>> checkInitialData() async {
     String content =
-    await rootBundle.loadString("assets/initialData/gardens.json");
+    await rootBundle.loadString("assets/initialData/tasks.json");
     List<dynamic> initialData = json.decode(content);
     return initialData.map((jsonData) => Task.fromJson(jsonData)).toList();
   }

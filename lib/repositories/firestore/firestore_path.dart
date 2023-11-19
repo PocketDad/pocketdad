@@ -1,7 +1,7 @@
 /// Defines the domain model path strings for [FirestoreService].
 class FirestorePath {
-  static String item(String chapterID) => 'chapters/$chapterID';
-  static String items() => 'chapters';
+  static String item(String itemID) => 'items/$itemID';
+  static String items() => 'items';
 
   static String task(String taskID) => 'tasks/$taskID';
   static String tasks() => 'tasks';

@@ -13,9 +13,12 @@ class User with _$User {
   const factory User({
     required String id,
     required String name,
+    required String email,
     required String username,
-    String? imagePath,
     required String initials,
+    String? imagePath,
+    String? dadName,
+    String? dadPic,
   }) = _User;
 
   const User._();
