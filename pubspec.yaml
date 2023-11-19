@@ -46,3 +46,17 @@ flutter:
   assets:
     # Add assets from the images directory to the application.
     - assets/images/
+
+  fonts:
+    - family: Chakra Petch
+      fonts:
+        - asset: fonts/Chakra_Petch/ChakraPetch-Regular.ttf
+        - asset: fonts/Chakra_Petch/ChakraPetch-SemiBold.ttf
+    - family: Mulish
+      fonts:
+        - asset: fonts/Mulish/static/Mulish-LightItalic.ttf
+        - asset: fonts/Mulish/static/Mulish-Light.ttf
+        - asset: fonts/Mulish/static/Mulish-Italic.ttf
+        - asset: fonts/Mulish/static/Mulish-Medium.ttf
+        - asset: fonts/Mulish/static/Mulish-Regular.ttf
+        - asset: fonts/Mulish/static/Mulish-SemiBold.ttf

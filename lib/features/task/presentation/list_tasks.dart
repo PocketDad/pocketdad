@@ -66,20 +66,20 @@ class ListTasks extends ConsumerWidget {
         length: 2,
         child: Scaffold(
           appBar: AppBar(
-            bottom: const TabBar(
-              tabs: [
+            bottom: TabBar(
+              indicatorColor: Theme.of(context).colorScheme.secondary,
+              tabs: const [
                 Tab(text: 'All'),
                 Tab(text: 'Filter by'),
               ],
             ),
             centerTitle: true,
             backgroundColor: Theme.of(context).colorScheme.primary,
-            title: const Text(
+            title: Text(
                 "Tasks",
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                )
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  color: Theme.of(context).colorScheme.onPrimary,//???
+                ),
             )
           ),
           body: ListView(
@@ -92,6 +92,7 @@ class ListTasks extends ConsumerWidget {
             },
             tooltip: 'Add Task',
             child: const Icon(Icons.add),
+            backgroundColor: Theme.of(context).colorScheme.primary,
         )
         ),
       ),

@@ -25,22 +25,24 @@ class OnboardingForm extends ConsumerWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
+                Text(
                   "Welcome to PocketDad!",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50),
+                  style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                    color: Theme.of(context).colorScheme.primary
+                  ),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 50),
                 TextField(
                   controller: nameController,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     filled: true,
                     labelText: 'Your name',
                     border: OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         width: 2.0,
-                        color: Colors.orangeAccent,
+                        color: Theme.of(context).colorScheme.secondary,
                       ),
                     ),
                   ),
@@ -48,14 +50,14 @@ class OnboardingForm extends ConsumerWidget {
                 const SizedBox(height: 20,),
                 TextField(
                   controller: usernameController,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     filled: true,
                     labelText: 'Username',
                     border: OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         width: 2.0,
-                        color: Colors.orangeAccent,
+                        color: Theme.of(context).colorScheme.secondary,
                       ),
                     ),
                   ),
@@ -63,14 +65,14 @@ class OnboardingForm extends ConsumerWidget {
                 const SizedBox(height: 20,),
                 TextField(
                   controller: emailController,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     filled: true,
                     labelText: 'Your email',
                     border: OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         width: 2.0,
-                        color: Colors.orangeAccent,
+                        color: Theme.of(context).colorScheme.secondary,
                       ),
                     ),
                   ),
@@ -96,7 +98,9 @@ class OnboardingForm extends ConsumerWidget {
           //     MaterialPageRoute(builder: (context) => HomeView())
           // );
         },
-        child: const Text("Sign up"),
+        child: const Text(
+          "Register"
+        ),
       ),
     );
   }
