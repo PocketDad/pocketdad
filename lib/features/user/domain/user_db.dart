@@ -91,32 +91,38 @@ class UserDB {
     return _users.map((user) => user.id).toList();
   }
 
+  List<String> getUserUsernames() {
+    return _users.map((user) => user.username).toList();
+  }
+
   List<String> getUserIDsFromString(String userNames) {
-    List<String> validUsers = getUserNames();
+    List<String> validUsers = getUserUsernames();
     List<String> userInputs = userNames.split(',').map((e) => e.trim()).toList();
     List<String> ret = [];
     for (final i in userInputs) {
       // only valid usernames
-      if (!validUsers.contains(i)) {
+      if (validUsers.contains(i)) {
         ret.add(i);
       }
     }
     for (int i = 0; i < ret.length; i++) {
       if(ret[i] != null){
-        ret[i] = getUsername(ret[i]).id;
+        ret[i] = getUsername(ret[i])!.id;
       }
     }
+    print(validUsers);
     print(ret);
     return ret;
   }
 
   List<String> validateUserNames(List<String> userNames) {
-    List<String> validUsers = getUserNames();
-    List<String> ret = userNames;
-    for (final i in ret) {
+    List<String> validUsers = getUserUsernames();
+    List<String> userInputs = userNames;
+    List<String> ret = [];
+    for (final i in userInputs) {
       // only valid usernames
-      if (!validUsers.contains(i)) {
-        ret.remove(i);
+      if (validUsers.contains(i)) {
+        ret.add(i);
       }
     }
     for (int i = 0; i < ret.length; i++) {

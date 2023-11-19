@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pocketdad/features/task/presentation/list_tasks.dart';
 import 'package:pocketdad/features/user/data/user_provider.dart';
 import '../../item/data/item_provider.dart';
 import '../data/task_provider.dart';
@@ -62,12 +61,7 @@ class AddTask extends ConsumerWidget  {
         userIDs: userIDs
       );
       // todo: reroute to list tasks screen
-      // Navigator.pushReplacementNamed(context, ListTasks.routeName);
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ListTasks())
-        );
+      Navigator.pop(context);
     }
 
     void onClear() {

@@ -78,6 +78,7 @@ class EditTask extends ConsumerWidget  {
         userIDs: users
       );
       // todo: reroute to individual task screen
+      Navigator.pop(context);
     }
 
     void onClear() {
