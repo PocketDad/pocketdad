@@ -1,0 +1,17 @@
+[
+  {
+    "id": "item-001",
+    "name": "Car",
+    "icon": "assets/images/car.png"
+  },
+  {
+    "id": "item-002",
+    "name": "House",
+    "icon": "assets/images/house.png"
+  },
+  {
+    "id": "item-003",
+    "name": "Condo",
+    "icon": "assets/images/condo.png"
+  }
+]

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "424834373001",
+    "project_id": "pocketdad-204bf",
+    "storage_bucket": "pocketdad-204bf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:424834373001:android:aa91d9f85bcf208cabfd58",
+        "android_client_info": {
+          "package_name": "com.example.pocketdad"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7JFBF8eFsQUHXtpBf_NroauJHtKXmv5U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,20 +1,57 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pocketdad/features/item/domain/item_db.dart';
-
-import '../../relations/data/item_user_provider.dart';
-import '../../relations/domain/item_user_db.dart';
-import '../../user/domain/user_db.dart';
-import '../../relations/data/item_user_provider.dart';
+import '../../all_data_provider.dart';
+import '../../pocketDadError.dart';
+import '../../pocketDadLoading.dart';
+import '../../relations/itemTask/domain/itemTask.dart';
+import '../../relations/itemUser/domain/itemUser.dart';
+import '../../relations/itemUser/domain/itemUser_collection.dart';
+import '../../relations/taskUser/domain/taskUser.dart';
+import '../../task/domain/task.dart';
+import '../../user/domain/user.dart';
+import '../../user/domain/user_collection.dart';
+import '../domain/item.dart';
+import '../domain/item_collection.dart';
 
 class ListItemItem extends ConsumerWidget {
   ListItemItem({Key? key, required this.item}) : super(key: key);
 
-  final ItemData item;
+  final Item item;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final ItemUserDB itemUserDB = ref.watch(itemUserDBProvider);
-    final List<UserData> associatedUsers = itemUserDB.getAssociatedUsers(item.id);
+    final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
+    return asyncAllData.when(
+        data: (allData) =>
+            _build(
+                context: context,
+                ref: ref,
+                currentUserID: allData.currentUserID,
+                items: allData.items,
+                tasks: allData.tasks,
+                users: allData.users,
+                itemTasks: allData.itemTasks,
+                itemUsers: allData.itemUsers,
+                taskUsers: allData.taskUsers),
+        loading: () => const PocketDadLoading(),
+        error: (error, st) => PocketDadError(error.toString(), st.toString()));
+  }
+
+  @override
+  Widget _build(
+      {required BuildContext context,
+        required String currentUserID,
+        required List<Item> items,
+        required List<Task> tasks,
+        required List<User> users,
+        required List<ItemTask> itemTasks,
+        required List<ItemUser> itemUsers,
+        required List<TaskUser> taskUsers,
+        required WidgetRef ref}) {
+
+    ItemCollection itemCollection = ItemCollection(items);
+    UserCollection userCollection = UserCollection(users);ItemUserCollection itemUserCollection = ItemUserCollection(itemUsers);
+    final List<User> associatedUsers = itemCollection.getAssociatedUsers(item.id, userCollection, itemUserCollection);
     return Center(
       child: Card(
         child: SizedBox(
