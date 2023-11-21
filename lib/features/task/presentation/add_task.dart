@@ -113,14 +113,42 @@ class AddTask extends ConsumerWidget  {
     List<String> itemNames = itemCollection.getItemsFromUserID(currentUserID, itemUserCollection).map((item) => item.name).toList();
 
     void onSubmit() {
-      // bool isValid = _formKey.currentState?.saveAndValidate() ?? false;
-      // if (!isValid) return;
-      // String name = _nameFieldKey.currentState?.value;
-      // String description = _descriptionFieldKey.currentState?.value;
-      // DateTime dueDate = _dueDateFieldKey.currentState?.value;
-      // String location = _locationFieldKey.currentState?.value;
-      // String item = itemDB.getItemIDFromName(_itemFieldKey.currentState?.value);
-      //
+      bool isValid = _formKey.currentState?.saveAndValidate() ?? false;
+      if (!isValid) return;
+      int numTasks = taskCollection.size();
+      String id = 'task-${(numTasks + 1).toString().padLeft(3, '0')}';
+      String name = _nameFieldKey.currentState?.value;
+      String description = _descriptionFieldKey.currentState?.value;
+      DateTime openDate = DateTime.now();
+      DateTime dueDate = _dueDateFieldKey.currentState?.value;
+      String location = _locationFieldKey.currentState?.value;
+      Task task = Task(
+        id: id,
+        name: name,
+        description: description,
+        dueDate: dueDate,
+        openDate: openDate,
+        location: location,
+      );
+      String item = itemCollection.getItemIDFromName(_itemFieldKey.currentState?.value);
+      int numItemTasks = itemTaskCollection.size();
+      String itemTaskID = 'itemTask-${(numItemTasks + 1).toString().padLeft(3, '0')}';
+      ItemTask itemTask = ItemTask(
+        id: itemTaskID, 
+        itemID: item, 
+        taskID: id
+      );
+      int numTaskUsers = taskUserCollection.size();
+      String taskUserID = 'taskUser-${(numTaskUsers + 1).toString().padLeft(3, '0')}';
+      TaskUser taskUser = TaskUser(
+        id: taskUserID, 
+        taskID: id, 
+        userID: currentUserID
+      );
+      //ref.read()
+
+
+      
       // taskDB.addTask(
       //   name: name,
       //   description: description,

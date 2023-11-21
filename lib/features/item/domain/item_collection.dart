@@ -37,4 +37,8 @@ class ItemCollection {
   List<String> getItemIDs() {
     return _items.map((data) => data.id).toList();
   }
+
+  String getItemIDFromName(String name) {
+    return _items.firstWhere((item) => item.name == name).id;
+  }
 }
