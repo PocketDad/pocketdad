@@ -10,6 +10,7 @@ import 'features/settings/settings_db.dart';
 import 'features/settings/settings_view.dart';
 import 'features/authentication/onboarding.dart';
 import 'features/authentication/signin_view.dart';
+import 'package:pocketdad/features/common/theme.dart';
 
 /// The Widget that configures your application.
 class MyApp extends ConsumerWidget {
@@ -19,14 +20,8 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       scaffoldMessengerKey: GlobalSnackBar.key,
-      theme: FlexThemeData.light(
-          scheme: FlexScheme.gold,
-          subThemesData: const FlexSubThemesData(
-              inputDecoratorBorderType: FlexInputBorderType.outline)),
-      darkTheme: FlexThemeData.dark(
-          scheme: FlexScheme.gold,
-          subThemesData: const FlexSubThemesData(
-              inputDecoratorBorderType: FlexInputBorderType.outline)),
+      theme: lightTheme,
+      darkTheme: darkTheme,
       themeMode: ref.watch(currentThemeModeProvider),
       onGenerateRoute: (RouteSettings routeSettings) {
         return MaterialPageRoute<void>(

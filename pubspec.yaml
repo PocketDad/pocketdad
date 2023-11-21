@@ -42,6 +42,14 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
+  fonts:
+    - family: Chakra Petch
+      fonts:
+        - asset: fonts/Chakra_Petch/ChakraPetch-Bold.ttf
+    - family: Mulish
+      fonts:
+        - asset: fonts/Mulish/static/Mulish-Bold.ttf
+        - asset: fonts/Mulish/static/Mulish-Italic.ttf
   # Enable generation of localized Strings from arb files.
   generate: true
 

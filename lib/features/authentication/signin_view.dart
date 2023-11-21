@@ -57,6 +57,7 @@ class SignInView extends StatelessWidget {
             action == AuthAction.signIn
                 ? 'Welcome to PocketDad! Please sign in.'
                 : 'Welcome to PocketDad! Please create an account.',
+            style: Theme.of(context).textTheme.displaySmall?.copyWith(color: Theme.of(context).colorScheme.primary),
           ),
         );
       },
@@ -68,7 +69,7 @@ class SignInView extends StatelessWidget {
               action == AuthAction.signIn
                   ? 'By signing in, you agree to our terms and conditions.'
                   : 'By registering, you agree to our terms and conditions.',
-              style: const TextStyle(color: Colors.grey),
+              style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
             ),
           ),
         );

@@ -4,6 +4,7 @@
 
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:pocketdad/features/common/theme.dart';
 
 /// Customize the Header section of the Signin page.
 HeaderBuilder headerImage(String assetName) {
@@ -22,7 +23,7 @@ HeaderBuilder headerIcon(IconData icon) {
       padding: const EdgeInsets.all(20).copyWith(top: 40),
       child: Icon(
         icon,
-        color: Colors.blue,
+        color: Theme.of(context).colorScheme.secondary,
         size: constraints.maxWidth / 4 * (1 - shrinkOffset),
       ),
     );
@@ -48,7 +49,7 @@ SideBuilder sideIcon(IconData icon) {
       padding: const EdgeInsets.all(20),
       child: Icon(
         icon,
-        color: Colors.blue,
+        color: Theme.of(context).colorScheme.secondary,
         size: constraints.maxWidth / 3,
       ),
     );
