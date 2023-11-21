@@ -19,4 +19,36 @@ class TaskController extends _$TaskController {
     ref.onDispose(() => mounted = false);
     state = const AsyncData(null);
   }
+
+  Future<void> updateTask({
+    required Task task,
+    required VoidCallback onSuccess,
+  }) async {
+    state = const AsyncLoading();
+    TaskDatabase taskDatabase = ref.watch(taskDatabaseProvider);
+    final newState = 
+      await AsyncValue.guard(() => taskDatabase.setTask(task));
+    if (mounted) {
+      state = newState;
+    }
+    if(!state.hasError) {
+      onSuccess();
+    }
+  }
+
+  Future<void> deleteTask({
+    required Task task,
+    required VoidCallback onSuccess,
+  }) async {
+    state = const AsyncLoading();
+    TaskDatabase taskDatabase = ref.watch(taskDatabaseProvider);
+    final newState =
+      await AsyncValue.guard(() => taskDatabase.deleteTask(task));
+    if (mounted) {
+      state = newState;
+    }
+    if(!state.hasError) {
+      onSuccess();
+    }
+  }
 }

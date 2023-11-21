@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pocketdad/features/task/presentation/task_controller.dart';
 import 'package:pocketdad/features/user/data/user_provider.dart';
 import 'package:pocketdad/features/pocketDadLoading.dart';
 import '../../all_data_provider.dart';
@@ -130,7 +131,7 @@ class AddTask extends ConsumerWidget  {
         openDate: openDate,
         location: location,
       );
-      String item = itemCollection.getItemIDFromName(_itemFieldKey.currentState?.value);
+      /* String item = itemCollection.getItemIDFromName(_itemFieldKey.currentState?.value);
       int numItemTasks = itemTaskCollection.size();
       String itemTaskID = 'itemTask-${(numItemTasks + 1).toString().padLeft(3, '0')}';
       ItemTask itemTask = ItemTask(
@@ -144,11 +145,15 @@ class AddTask extends ConsumerWidget  {
         id: taskUserID, 
         taskID: id, 
         userID: currentUserID
+      ); */
+      ref.read(taskControllerProvider.notifier).updateTask(
+        task: task,
+        onSuccess: () {
+        }
       );
-      //ref.read()
 
 
-      
+
       // taskDB.addTask(
       //   name: name,
       //   description: description,
@@ -185,7 +190,7 @@ class AddTask extends ConsumerWidget  {
                     TaskDateField(fieldKey: _dueDateFieldKey),
                     TaskLocationField(fieldKey: _locationFieldKey),
                     ItemDropdownField(fieldKey: _itemFieldKey, itemNames: itemNames),
-                    // UsersDropdownField(fieldKey: _usersFieldKey, userNames: userNames)
+                    UsersDropdownField(fieldKey: _usersFieldKey, userNames: [])
                   ],
                 )
               ),
