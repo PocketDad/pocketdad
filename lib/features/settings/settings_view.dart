@@ -27,33 +27,47 @@ class SettingsView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // Update the page if theme mode changes.
     ref.watch(currentThemeModeProvider);
-    return Scaffold(
-      // drawer: const DrawerView(),
-      appBar: AppBar(
-        title: const Text('Settings'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: DropdownButton<ThemeMode>(
-          value: ref.read(currentThemeModeProvider),
-          onChanged: (ThemeMode? newThemeMode) =>
-              updateThemeMode(newThemeMode, ref),
-          items: const [
-            DropdownMenuItem(
-              value: ThemeMode.system,
-              child: Text('System Theme'),
-            ),
-            DropdownMenuItem(
-              value: ThemeMode.light,
-              child: Text('Light Theme'),
-            ),
-            DropdownMenuItem(
-              value: ThemeMode.dark,
-              child: Text('Dark Theme'),
-            )
-          ],
-        ),
-      ),
+    return IconButton(
+      padding: const EdgeInsets.all(16),
+      icon: Icon(Icons.settings),
+      color: Theme.of(context).colorScheme.onPrimary,
+      onPressed: () {
+        showDialog(
+          context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text("Settings", style: Theme.of(context).textTheme.titleLarge,),
+                actions: [
+                  DropdownButton<ThemeMode>(
+                    value: ref.read(currentThemeModeProvider),
+                    onChanged: (ThemeMode? newThemeMode) =>
+                        updateThemeMode(newThemeMode, ref),
+                    items: [
+                      DropdownMenuItem(
+                        value: ThemeMode.system,
+                        child: Text(
+                          'Dark Theme',
+                          style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                            color: Theme.of(context).colorScheme.onSurface,
+                          ),
+                        ),
+                      ),
+                      DropdownMenuItem(
+                        value: ThemeMode.light,
+                        child: Text(
+                            'Light Theme',
+                            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                              color: Theme.of(context).colorScheme.onSurface,
+                            )
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              );
+            }
+         );
+      },
     );
   }
 }
