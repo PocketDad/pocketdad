@@ -23,6 +23,10 @@ class SingleTaskCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               ClipRRect(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(15),
+                  topRight: Radius.circular(15),
+                ),
                 child: TextButton(
                   style: TextButton.styleFrom(
                     backgroundColor: Theme.of(context).colorScheme.primary,

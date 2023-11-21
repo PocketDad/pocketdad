@@ -44,10 +44,10 @@ class CheckIn extends StatelessWidget {
                     padding: EdgeInsets.symmetric(vertical: 8, horizontal: 60),
                     margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
                     decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.onSecondary,
+                        color: Theme.of(context).colorScheme.secondary,
                         borderRadius: BorderRadius.all(Radius.circular(20)),
                         border: Border.all(
-                          color: Theme.of(context).colorScheme.onSecondary,
+                          color: Theme.of(context).colorScheme.secondary,
                           width: 5,
                         )
                     ),
@@ -56,14 +56,14 @@ class CheckIn extends StatelessWidget {
                         Text(
                           'Dad Joke of the Day!',
                           style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            color: Theme.of(context).colorScheme.background,
+                            color: Theme.of(context).colorScheme.onSecondary,
                           )
                           ,
                         ),
                         Text(
                             'Why did the drum go to bed? It was beat.',
                             style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: Theme.of(context).colorScheme.background,
+                              color: Theme.of(context).colorScheme.onSecondary,
                             )
                         ),
                       ],
