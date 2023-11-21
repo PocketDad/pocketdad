@@ -24,7 +24,7 @@ ColorScheme darkScheme = ColorScheme(
     onError: Color(0xffc62828),
     background: Color(0xff263238),
     onBackground: Color(0xfffff8e1),
-    surface: Color(0xffffd180),
+    surface: Color(0xfffff8e1),
     onSurface: Color(0xfffff8e1)
 );
 
