@@ -18,6 +18,7 @@ class SingleTaskCard extends StatelessWidget {
                 Radius.circular(15)
             )
         ),
+        color: Theme.of(context).colorScheme.surface,
         child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [

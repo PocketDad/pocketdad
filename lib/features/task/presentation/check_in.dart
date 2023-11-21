@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pocketdad/features/settings/settings_view.dart';
 import 'package:pocketdad/features/task/presentation/single_task_card.dart';
 
 class CheckIn extends StatelessWidget {
@@ -15,6 +16,9 @@ class CheckIn extends StatelessWidget {
         titleTextStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
           color: Theme.of(context).colorScheme.onPrimary,
         ),
+        actions: const [
+          SettingsView(),
+        ],
         title: const Text("Check In"),
         centerTitle: true,
       ),
