@@ -3,12 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pocketdad/features/chat/presentation/chat_bubble.dart';
 
 class Chat extends ConsumerWidget {
-
   Chat({super.key});
   final chatProvider = Provider<List<ChatBubble>>((ref) {
     return [];
   });
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
@@ -24,18 +22,18 @@ class Chat extends ConsumerWidget {
         children: [
           Expanded(
             child: Consumer(
-              builder: (context, watch, child) {
-                final chatList = context.read(chatProvider);
-                return ListView.builder(
-                  padding: EdgeInsets.fromLTRB(32, 16, 32, 16),
-                  itemCount: chatList.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: chatList[index],
-                    );
-                  },
-                );
-              }
+                builder: (context, watch, child) {
+                  final chatList = ref.watch(chatProvider);
+                  return ListView.builder(
+                    padding: EdgeInsets.fromLTRB(32, 16, 32, 16),
+                    itemCount: chatList.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title: chatList[index],
+                      );
+                    },
+                  );
+                }
             ),
           ),
           Padding(

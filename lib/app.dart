@@ -11,6 +11,7 @@ import 'features/settings/settings_view.dart';
 import 'features/authentication/onboarding.dart';
 import 'features/authentication/signin_view.dart';
 import 'package:pocketdad/features/common/theme.dart';
+import 'package:pocketdad/features/chat/data/chat_provider.dart';
 
 /// The Widget that configures your application.
 class MyApp extends ConsumerWidget {
