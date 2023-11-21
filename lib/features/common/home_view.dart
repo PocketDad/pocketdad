@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pocketdad/features/task/presentation/add_task.dart';
-import 'package:pocketdad/features/chat/chat.dart';
+import 'package:pocketdad/features/chat/presentation/chat.dart';
 import 'package:pocketdad/features/task/presentation/check_in.dart';
 import 'package:pocketdad/features/user/presentation/choose_avatar.dart';
 import 'package:pocketdad/features/task/presentation/list_tasks.dart';
@@ -34,7 +34,7 @@ class HomeView extends StatefulWidget {
     },
     2: {
       'title': const Text('Chat'),
-      'body': const Chat(),
+      'body': Chat(),
       'navItem': const BottomNavigationBarItem(
         icon: Icon(Icons.chat),
           label: "Chat"

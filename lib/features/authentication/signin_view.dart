@@ -53,11 +53,25 @@ class SignInView extends StatelessWidget {
       subtitleBuilder: (context, action) {
         return Padding(
           padding: const EdgeInsets.only(bottom: 8),
-          child: Text(
-            action == AuthAction.signIn
-                ? 'Welcome to PocketDad! Please sign in.'
-                : 'Welcome to PocketDad! Please create an account.',
-            style: Theme.of(context).textTheme.displaySmall?.copyWith(color: Theme.of(context).colorScheme.primary),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text(
+                "Welcome to PocketDad!",
+                style: Theme.of(context).textTheme.displaySmall?.copyWith(color: Theme.of(context).colorScheme.primary),
+              ),
+              Row(
+                children: [
+                  Text(
+                    action == AuthAction.signIn
+                        ? 'Please sign in.'
+                        : 'Please create an account.',
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.secondary),
+                    textAlign: TextAlign.start,
+                  ),
+                ],
+              )
+            ],
           ),
         );
       },
