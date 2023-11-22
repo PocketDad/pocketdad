@@ -110,6 +110,8 @@ class AddTask extends ConsumerWidget  {
     ItemUserCollection itemUserCollection = ItemUserCollection(itemUsers);
     TaskUserCollection taskUserCollection = TaskUserCollection(taskUsers);
 
+    print("currentUserID: $currentUserID");
+    print("items: $items");
     List<String> itemNames = itemCollection.getItemsFromUserID(currentUserID, itemUserCollection).map((item) => item.name).toList();
 
     void onSubmit() {

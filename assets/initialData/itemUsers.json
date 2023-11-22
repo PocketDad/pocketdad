@@ -2,7 +2,7 @@
   {
     "id": "itemUser-001",
     "itemID": "item-001",
-    "userID": "user-001"
+    "userID": "ydmasuda@hawaii.edu"
   },
   {
     "id": "itemUser-002",
@@ -12,16 +12,16 @@
   {
     "id": "itemUser-003",
     "itemID": "item-002",
-    "userID": "user-003"
+    "userID": "jjandoc@hawaii.edu"
   },
   {
     "id": "itemUser-004",
     "itemID": "item-003",
-    "userID": "user-004"
+    "userID": "sydneykim@hawaii.edu"
   },
   {
     "id": "itemUser-005",
     "itemID": "item-003",
-    "userID": "user-001"
+    "userID": "ydmasuda@hawaii.edu"
   }
 ]

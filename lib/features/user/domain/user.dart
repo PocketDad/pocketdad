@@ -13,7 +13,6 @@ class User with _$User {
   const factory User({
     required String id,
     required String name,
-    required String email,
     required String username,
     required String initials,
     String? imagePath,
