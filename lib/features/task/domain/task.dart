@@ -15,9 +15,9 @@ class Task with _$Task {
     required DateTime openDate,
     DateTime? dueDate,
     String? location,
-    String? completionDate,
+    DateTime? completionDate,
     @Default([]) List<String> notes,
-    bool? completed}) = _Task;
+    @Default(false) completed}) = _Task;
 
   factory Task.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
 

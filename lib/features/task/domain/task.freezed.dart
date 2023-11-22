@@ -26,9 +26,9 @@ mixin _$Task {
   DateTime get openDate => throw _privateConstructorUsedError;
   DateTime? get dueDate => throw _privateConstructorUsedError;
   String? get location => throw _privateConstructorUsedError;
-  String? get completionDate => throw _privateConstructorUsedError;
+  DateTime? get completionDate => throw _privateConstructorUsedError;
   List<String> get notes => throw _privateConstructorUsedError;
-  bool? get completed => throw _privateConstructorUsedError;
+  dynamic get completed => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -47,9 +47,9 @@ abstract class $TaskCopyWith<$Res> {
       DateTime openDate,
       DateTime? dueDate,
       String? location,
-      String? completionDate,
+      DateTime? completionDate,
       List<String> notes,
-      bool? completed});
+      dynamic completed});
 }
 
 /// @nodoc
@@ -103,7 +103,7 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
       completionDate: freezed == completionDate
           ? _value.completionDate
           : completionDate // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
       notes: null == notes
           ? _value.notes
           : notes // ignore: cast_nullable_to_non_nullable
@@ -111,7 +111,7 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
       completed: freezed == completed
           ? _value.completed
           : completed // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
     ) as $Val);
   }
 }
@@ -130,9 +130,9 @@ abstract class _$$TaskImplCopyWith<$Res> implements $TaskCopyWith<$Res> {
       DateTime openDate,
       DateTime? dueDate,
       String? location,
-      String? completionDate,
+      DateTime? completionDate,
       List<String> notes,
-      bool? completed});
+      dynamic completed});
 }
 
 /// @nodoc
@@ -183,15 +183,12 @@ class __$$TaskImplCopyWithImpl<$Res>
       completionDate: freezed == completionDate
           ? _value.completionDate
           : completionDate // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
       notes: null == notes
           ? _value._notes
           : notes // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      completed: freezed == completed
-          ? _value.completed
-          : completed // ignore: cast_nullable_to_non_nullable
-              as bool?,
+      completed: freezed == completed ? _value.completed! : completed,
     ));
   }
 }
@@ -208,7 +205,7 @@ class _$TaskImpl implements _Task {
       this.location,
       this.completionDate,
       final List<String> notes = const [],
-      this.completed})
+      this.completed = false})
       : _notes = notes;
 
   factory _$TaskImpl.fromJson(Map<String, dynamic> json) =>
@@ -227,7 +224,7 @@ class _$TaskImpl implements _Task {
   @override
   final String? location;
   @override
-  final String? completionDate;
+  final DateTime? completionDate;
   final List<String> _notes;
   @override
   @JsonKey()
@@ -238,7 +235,8 @@ class _$TaskImpl implements _Task {
   }
 
   @override
-  final bool? completed;
+  @JsonKey()
+  final dynamic completed;
 
   @override
   String toString() {
@@ -262,8 +260,7 @@ class _$TaskImpl implements _Task {
             (identical(other.completionDate, completionDate) ||
                 other.completionDate == completionDate) &&
             const DeepCollectionEquality().equals(other._notes, _notes) &&
-            (identical(other.completed, completed) ||
-                other.completed == completed));
+            const DeepCollectionEquality().equals(other.completed, completed));
   }
 
   @JsonKey(ignore: true)
@@ -278,7 +275,7 @@ class _$TaskImpl implements _Task {
       location,
       completionDate,
       const DeepCollectionEquality().hash(_notes),
-      completed);
+      const DeepCollectionEquality().hash(completed));
 
   @JsonKey(ignore: true)
   @override
@@ -302,9 +299,9 @@ abstract class _Task implements Task {
       required final DateTime openDate,
       final DateTime? dueDate,
       final String? location,
-      final String? completionDate,
+      final DateTime? completionDate,
       final List<String> notes,
-      final bool? completed}) = _$TaskImpl;
+      final dynamic completed}) = _$TaskImpl;
 
   factory _Task.fromJson(Map<String, dynamic> json) = _$TaskImpl.fromJson;
 
@@ -321,11 +318,11 @@ abstract class _Task implements Task {
   @override
   String? get location;
   @override
-  String? get completionDate;
+  DateTime? get completionDate;
   @override
   List<String> get notes;
   @override
-  bool? get completed;
+  dynamic get completed;
   @override
   @JsonKey(ignore: true)
   _$$TaskImplCopyWith<_$TaskImpl> get copyWith =>
