@@ -41,5 +41,5 @@ void main() async {
   FirebaseUIAuth.configureProviders([EmailAuthProvider()]);
   await verifyInitialData();
   runApp(
-    const ProviderScope(child: MyApp()));
+      ProviderScope(child: MyApp()));
 }
