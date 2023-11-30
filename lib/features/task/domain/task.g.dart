@@ -15,11 +15,13 @@ _$TaskImpl _$$TaskImplFromJson(Map<String, dynamic> json) => _$TaskImpl(
           ? null
           : DateTime.parse(json['dueDate'] as String),
       location: json['location'] as String?,
-      completionDate: json['completionDate'] as String?,
+      completionDate: json['completionDate'] == null
+          ? null
+          : DateTime.parse(json['completionDate'] as String),
       notes:
           (json['notes'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               const [],
-      completed: json['completed'] as bool?,
+      completed: json['completed'] ?? false,
     );
 
 Map<String, dynamic> _$$TaskImplToJson(_$TaskImpl instance) =>
@@ -30,7 +32,7 @@ Map<String, dynamic> _$$TaskImplToJson(_$TaskImpl instance) =>
       'openDate': instance.openDate.toIso8601String(),
       'dueDate': instance.dueDate?.toIso8601String(),
       'location': instance.location,
-      'completionDate': instance.completionDate,
+      'completionDate': instance.completionDate?.toIso8601String(),
       'notes': instance.notes,
       'completed': instance.completed,
     };

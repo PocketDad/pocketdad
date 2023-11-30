@@ -5,6 +5,8 @@ import 'package:pocketdad/features/task/presentation/task_controller.dart';
 import 'package:pocketdad/features/user/data/user_provider.dart';
 import 'package:pocketdad/features/pocketDadLoading.dart';
 import '../../all_data_provider.dart';
+import '../../common/home_view.dart';
+import '../../global_snackbar.dart';
 import '../../item/data/item_provider.dart';
 import '../../item/domain/item.dart';
 import '../../item/domain/item_collection.dart';
@@ -15,6 +17,7 @@ import '../../relations/itemUser/domain/itemUser.dart';
 import '../../relations/itemUser/domain/itemUser_collection.dart';
 import '../../relations/taskUser/domain/taskUser.dart';
 import '../../relations/taskUser/domain/taskUser_collection.dart';
+import '../../relations/taskUser/presentation/edit_taskUser_controller.dart';
 import '../../user/domain/user.dart';
 import '../../user/domain/user_collection.dart';
 import '../data/task_provider.dart';
@@ -24,6 +27,7 @@ import '../domain/task_db.dart';
 import '../../user/domain/user_db.dart';
 import '../../item/domain/item_db.dart';
 
+import 'edit_task_controller.dart';
 import 'form_fields/task_name_field.dart';
 import 'form_fields/description_field.dart';
 import 'form_fields/date_field.dart';
@@ -32,6 +36,7 @@ import 'form_fields/items_dropdown_field.dart';
 import 'form_fields/submit_button.dart';
 import 'form_fields/clear_button.dart';
 import 'form_fields/users_dropdown_field.dart';
+import 'list_tasks.dart';
 
 class AddTask extends ConsumerWidget  {
   AddTask({Key? key}) : super(key: key);
@@ -110,8 +115,13 @@ class AddTask extends ConsumerWidget  {
     ItemTaskCollection itemTaskCollection = ItemTaskCollection(itemTasks);
     ItemUserCollection itemUserCollection = ItemUserCollection(itemUsers);
     TaskUserCollection taskUserCollection = TaskUserCollection(taskUsers);
+    items = itemCollection.getItemsFromUserID(currentUserID, itemUserCollection).toList();
+    List<String> itemNames = items.map((item) => item.name).toList();
+    Map<String, String> itemNameToID = {};
+    for (var item in items) {
+      itemNameToID[item.name] = item.id;
+    }
 
-    List<String> itemNames = itemCollection.getItemsFromUserID(currentUserID, itemUserCollection).map((item) => item.name).toList();
 
     void onSubmit() {
       bool isValid = _formKey.currentState?.saveAndValidate() ?? false;
@@ -163,7 +173,49 @@ class AddTask extends ConsumerWidget  {
       //   userID: currentUserID
       // );
       // todo: reroute to list tasks screen
-      Navigator.pop(context);
+      // Navigator.pop(context);
+
+      bool isValid = _formKey.currentState?.saveAndValidate() ?? false;
+      if (!isValid) return;
+      // Since validation passed, we can safely access the values.
+      String name = _nameFieldKey.currentState?.value;
+      String description = _descriptionFieldKey.currentState?.value;
+      DateTime openDate = DateTime.now();
+      DateTime dueDate = _dueDateFieldKey.currentState?.value;
+      String location = _locationFieldKey.currentState?.value;
+      String itemName = _itemFieldKey.currentState?.value;
+      String item = itemNameToID[itemName] ?? '';
+      int numTasks = taskCollection.size();
+
+      String taskID = 'task-${(numTasks + 1).toString().padLeft(3, '0')}';
+      Task task = Task(
+          id: taskID,
+          name: name,
+          description: description,
+          openDate: openDate,
+          dueDate: dueDate,
+          location: location
+      );
+      ref.read(editTaskControllerProvider.notifier).updateTask(
+        task: task,
+        onSuccess: () {
+          GlobalSnackBar.show('Task "$name" added.');
+        },
+      );
+      int numTaskUsers = taskUserCollection.size();
+      String taskUserID = 'taskUser-${(numTaskUsers + 1).toString().padLeft(3, '0')}';
+      TaskUser taskUser = TaskUser(
+          id: taskUserID,
+          taskID: taskID,
+          userID: currentUserID
+      );
+      ref.read(editTaskUserControllerProvider.notifier).updateTaskUser(
+        taskUser: taskUser,
+        onSuccess: () {
+          Navigator.pushReplacementNamed(context, HomeView.routeName);
+          GlobalSnackBar.show('TaskUser "$name" added.');
+        },
+      );
     }
 
     void onClear() {

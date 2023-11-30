@@ -22,7 +22,6 @@ User _$UserFromJson(Map<String, dynamic> json) {
 mixin _$User {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
   String get initials => throw _privateConstructorUsedError;
   String? get imagePath => throw _privateConstructorUsedError;
@@ -42,7 +41,6 @@ abstract class $UserCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      String email,
       String username,
       String initials,
       String? imagePath,
@@ -65,7 +63,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? email = null,
     Object? username = null,
     Object? initials = null,
     Object? imagePath = freezed,
@@ -80,10 +77,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
               as String,
       username: null == username
           ? _value.username
@@ -119,7 +112,6 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      String email,
       String username,
       String initials,
       String? imagePath,
@@ -139,7 +131,6 @@ class __$$UserImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? email = null,
     Object? username = null,
     Object? initials = null,
     Object? imagePath = freezed,
@@ -154,10 +145,6 @@ class __$$UserImplCopyWithImpl<$Res>
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
               as String,
       username: null == username
           ? _value.username
@@ -189,7 +176,6 @@ class _$UserImpl extends _User {
   const _$UserImpl(
       {required this.id,
       required this.name,
-      required this.email,
       required this.username,
       required this.initials,
       this.imagePath,
@@ -205,8 +191,6 @@ class _$UserImpl extends _User {
   @override
   final String name;
   @override
-  final String email;
-  @override
   final String username;
   @override
   final String initials;
@@ -219,7 +203,7 @@ class _$UserImpl extends _User {
 
   @override
   String toString() {
-    return 'User(id: $id, name: $name, email: $email, username: $username, initials: $initials, imagePath: $imagePath, dadName: $dadName, dadPic: $dadPic)';
+    return 'User(id: $id, name: $name, username: $username, initials: $initials, imagePath: $imagePath, dadName: $dadName, dadPic: $dadPic)';
   }
 
   @override
@@ -229,7 +213,6 @@ class _$UserImpl extends _User {
             other is _$UserImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.email, email) || other.email == email) &&
             (identical(other.username, username) ||
                 other.username == username) &&
             (identical(other.initials, initials) ||
@@ -242,8 +225,8 @@ class _$UserImpl extends _User {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, email, username,
-      initials, imagePath, dadName, dadPic);
+  int get hashCode => Object.hash(
+      runtimeType, id, name, username, initials, imagePath, dadName, dadPic);
 
   @JsonKey(ignore: true)
   @override
@@ -263,7 +246,6 @@ abstract class _User extends User {
   const factory _User(
       {required final String id,
       required final String name,
-      required final String email,
       required final String username,
       required final String initials,
       final String? imagePath,
@@ -277,8 +259,6 @@ abstract class _User extends User {
   String get id;
   @override
   String get name;
-  @override
-  String get email;
   @override
   String get username;
   @override

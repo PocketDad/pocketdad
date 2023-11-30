@@ -28,6 +28,9 @@ class TaskUserDatabase {
       path: FirestorePath.taskUser(taskUserId),
       builder: (data, documentId) => TaskUser.fromJson(data!));
 
+  Future<void> setTaskUser(TaskUser taskUser) => _service.setData(
+      path: FirestorePath.taskUser(taskUser.id), data: taskUser.toJson());
+
   Future<void> deleteTaskUser(TaskUser taskUser) =>
       _service.deleteData(path: FirestorePath.taskUser(taskUser.id));
 }
