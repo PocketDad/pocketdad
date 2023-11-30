@@ -189,8 +189,8 @@ class AddTask extends ConsumerWidget  {
                     TaskDescriptionField(fieldKey: _descriptionFieldKey),
                     TaskDateField(fieldKey: _dueDateFieldKey),
                     TaskLocationField(fieldKey: _locationFieldKey),
-                    ItemDropdownField(fieldKey: _itemFieldKey, itemNames: itemNames),
-                    UsersDropdownField(fieldKey: _usersFieldKey, userNames: [])
+                    //ItemDropdownField(fieldKey: _itemFieldKey, itemNames: itemNames),
+                    //UsersDropdownField(fieldKey: _usersFieldKey, userNames: [])
                   ],
                 )
               ),
