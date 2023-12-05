@@ -174,7 +174,7 @@ class AddTask extends ConsumerWidget  {
       // );
       // todo: reroute to list tasks screen
       // Navigator.pop(context);
-
+      /* 
       bool isValid = _formKey.currentState?.saveAndValidate() ?? false;
       if (!isValid) return;
       // Since validation passed, we can safely access the values.
@@ -195,7 +195,8 @@ class AddTask extends ConsumerWidget  {
           openDate: openDate,
           dueDate: dueDate,
           location: location
-      );
+      ); */
+
       ref.read(editTaskControllerProvider.notifier).updateTask(
         task: task,
         onSuccess: () {
@@ -206,7 +207,7 @@ class AddTask extends ConsumerWidget  {
       String taskUserID = 'taskUser-${(numTaskUsers + 1).toString().padLeft(3, '0')}';
       TaskUser taskUser = TaskUser(
           id: taskUserID,
-          taskID: taskID,
+          taskID: id,
           userID: currentUserID
       );
       ref.read(editTaskUserControllerProvider.notifier).updateTaskUser(
