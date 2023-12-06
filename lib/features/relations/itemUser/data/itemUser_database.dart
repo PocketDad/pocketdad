@@ -28,6 +28,9 @@ class ItemUserDatabase {
       path: FirestorePath.itemUser(itemUserId),
       builder: (data, documentId) => ItemUser.fromJson(data!));
 
+  Future<void> setItemUser(ItemUser itemUser) => _service.setData(
+      path: FirestorePath.itemUser(itemUser.id), data: itemUser.toJson());
+
   Future<void> deleteItemUser(ItemUser itemUser) =>
       _service.deleteData(path: FirestorePath.itemUser(itemUser.id));
 }

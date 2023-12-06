@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
+
 import '../../all_data_provider.dart';
 import '../../item/domain/item.dart';
 import '../../item/domain/item_collection.dart';
@@ -103,7 +105,7 @@ class SingleTaskCard extends ConsumerWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text(task.dueDate.toString() ?? "no due date"),
+                      Text((task.dueDate != null) ? DateFormat.yMMMMd().format(task.dueDate ?? DateTime.now()) : "no due date"),
                     ],
                   ),
                 )

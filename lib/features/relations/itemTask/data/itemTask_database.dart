@@ -30,6 +30,9 @@ class ItemTaskDatabase {
 
   Future<void> setItemTaskError(ItemTask itemTask) =>
       Future.delayed(const Duration(milliseconds: 2000), () => throw Error());
+  
+  Future<void> setItemTask(ItemTask itemTask) => _service.setData(
+      path: FirestorePath.itemTask(itemTask.id), data: itemTask.toJson());
 
   Future<void> deleteItemTask(ItemTask itemTask) =>
       _service.deleteData(path: FirestorePath.itemTask(itemTask.id));
