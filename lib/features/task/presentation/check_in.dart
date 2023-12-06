@@ -63,9 +63,8 @@ class CheckIn extends ConsumerWidget {
 
     final DateTime currentTime = DateTime.now();
     final List<Task> associatedTasks = userCollection.getAssociatedTasks(currentUserID, taskCollection, taskUserCollection);
-    final List<Task> todayTasks = associatedTasks.where((task) => task.dueDate?.difference(currentTime).inDays == 0).toList();
-    final List<Task> weekTasks = associatedTasks.where((task) => 0 < (task.dueDate?.difference(currentTime).inDays ?? 0) &&
-        (task.dueDate?.difference(currentTime).inDays ?? 7) < 7).toList();
+    final List<Task> todayTasks = associatedTasks.where((task) => task.dueDate?.day == currentTime.day).toList();
+    final List<Task> weekTasks = associatedTasks.where((task) => !task.dueDate!.difference(currentTime).isNegative && (task.dueDate?.difference(currentTime).inDays ?? 7) < 7 && task.dueDate?.day != currentTime.day).toList();
     final List<Task> overDueTasks = associatedTasks.where((task) => (task.dueDate?.difference(currentTime).isNegative ?? false) && !task.completed).toList();
     return Scaffold(
       appBar: AppBar(
