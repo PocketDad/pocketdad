@@ -17,9 +17,6 @@ import '../../user/domain/user.dart';
 import '../../user/domain/user_collection.dart';
 import '../domain/task.dart';
 import '../domain/task_collection.dart';
-import '../domain/task_db.dart';
-import '../../user/domain/user_db.dart';
-import 'list_task_item.dart';
 import 'add_task.dart';
 
 class ListTasks extends ConsumerWidget {
@@ -80,7 +77,7 @@ class ListTasks extends ConsumerWidget {
           body: ListView(
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 60),
             children: associatedTasks.map((task) => (
-                SingleTaskCard(task: task.name, date: task.dueDate.toString(), item: "ItemEx",))).toList(),
+                SingleTaskCard(task: task))).toList(),
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
