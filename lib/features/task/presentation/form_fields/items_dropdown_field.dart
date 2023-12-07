@@ -22,14 +22,11 @@ class ItemDropdownField extends StatelessWidget {
     return FieldPadding(
       child: FormBuilderDropdown<String>(
         name: fieldName,
-        initialValue: currentItem,
+        initialValue: "None",
         key: fieldKey,
         decoration: InputDecoration(
           labelText: fieldName
         ),
-        validator: FormBuilderValidators.compose([
-          FormBuilderValidators.required()
-        ]),
         items: itemNames.map((name) => DropdownMenuItem(
           alignment: AlignmentDirectional.centerStart,
           value: name,

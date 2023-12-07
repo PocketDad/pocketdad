@@ -21,9 +21,6 @@ class TaskLocationField extends StatelessWidget {
         decoration: InputDecoration(
           labelText: fieldName,
         ),
-        validator: FormBuilderValidators.compose([
-          FormBuilderValidators.required()
-        ]),
       )
     );
   }

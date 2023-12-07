@@ -53,35 +53,7 @@ class AddTask extends ConsumerWidget  {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final TaskDB taskDB = ref.watch(taskDBProvider);
-    // final ItemDB itemDB = ref.watch(itemDBProvider);
-    // final UserDB userDB = ref.watch(userDBProvider);
-    // final String currentUserID = ref.watch(currentUserIDProvider);
-    // List<String> itemNames = itemDB.getItemNames();
-    // List<String> userNames = userDB.getUserNames();
-    //
-    // void onSubmit() {
-    //   bool isValid = _formKey.currentState?.saveAndValidate() ?? false;
-    //   if (!isValid) return;
-    //   String name = _nameFieldKey.currentState?.value;
-    //   String description = _descriptionFieldKey.currentState?.value;
-    //   DateTime? dueDate = _dueDateFieldKey.currentState?.value;
-    //   String? location = _locationFieldKey.currentState?.value;
-    //   String? item = itemDB.getItemIDFromName(_itemFieldKey.currentState?.value);
-    //   List<String>? userIDs = userDB.getUserIDsFromString(_usersFieldKey.currentState?.value);
-    //   userIDs = userDB.validateUserNames(userIDs);
-    //   if(!userIDs.contains(currentUserID)) {
-    //     userIDs.add(currentUserID);
-    //   }
-    //
-    //   taskDB.addTask(
-    //     name: name,
-    //     description: description,
-    //     dueDate: dueDate,
-    //     location: location,
-    //     itemID: item,
-    //     userIDs: userIDs
-    //   );
+
     final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
     return asyncAllData.when(
         data: (allData) =>
@@ -117,7 +89,7 @@ class AddTask extends ConsumerWidget  {
     ItemUserCollection itemUserCollection = ItemUserCollection(itemUsers);
     TaskUserCollection taskUserCollection = TaskUserCollection(taskUsers);
     items = itemCollection.getItemsFromUserID(currentUserID, itemUserCollection).toList();
-    List<String> itemNames = items.map((item) => item.name).toList();
+    List<String> itemNames = [...items.map((item) => item.name), "None"].toList();
     Map<String, String> itemNameToID = {};
     for (var item in items) {
       itemNameToID[item.name] = item.id;
@@ -133,7 +105,7 @@ class AddTask extends ConsumerWidget  {
       String description = _descriptionFieldKey.currentState?.value;
       DateTime openDate = DateTime.now();
       DateTime dueDate = _dueDateFieldKey.currentState?.value;
-      String location = _locationFieldKey.currentState?.value;
+      String location = _locationFieldKey.currentState?.value ?? '';
       String itemName = _itemFieldKey.currentState?.value;
       String itemID = itemNameToID[itemName] ?? '';
       int numTasks = taskCollection.size();
@@ -165,23 +137,23 @@ class AddTask extends ConsumerWidget  {
         taskUser: taskUser,
         onSuccess: () {
           Navigator.pushReplacementNamed(context, HomeView.routeName);
-          GlobalSnackBar.show('TaskUser "$name" added.');
         },
       );
-      int numItemTasks = itemTaskCollection.size();
-      String itemTaskID = 'itemTask-${(numItemTasks + 1).toString().padLeft(3, '0')}';
-      ItemTask itemTask = ItemTask(
+      if(itemID != '') {
+        int numItemTasks = itemTaskCollection.size();
+        String itemTaskID = 'itemTask-${(numItemTasks + 1).toString().padLeft(3, '0')}';
+        ItemTask itemTask = ItemTask(
           id: itemTaskID,
           itemID: itemID,
           taskID: taskID,
-      );
-      ref.read(editItemTaskControllerProvider.notifier).updateItemTask(
-        itemTask: itemTask,
-        onSuccess: () {
-          Navigator.pushReplacementNamed(context, HomeView.routeName);
-          GlobalSnackBar.show('TaskUser "$name" added.');
-        },
-      );
+        );
+        ref.read(editItemTaskControllerProvider.notifier).updateItemTask(
+          itemTask: itemTask,
+          onSuccess: () {
+            Navigator.pushReplacementNamed(context, HomeView.routeName);
+          },
+        );
+      }
     }
 
     void onClear() {
