@@ -88,7 +88,7 @@ class AddTask extends ConsumerWidget  {
     ItemUserCollection itemUserCollection = ItemUserCollection(itemUsers);
     TaskUserCollection taskUserCollection = TaskUserCollection(taskUsers);
     items = itemCollection.getItemsFromUserID(currentUserID, itemUserCollection).toList();
-    List<String> itemNames = items.map((item) => item.name).toList();
+    List<String> itemNames = [...items.map((item) => item.name), "None"].toList();
     Map<String, String> itemNameToID = {};
     for (var item in items) {
       itemNameToID[item.name] = item.id;
@@ -103,9 +103,9 @@ class AddTask extends ConsumerWidget  {
       String description = _descriptionFieldKey.currentState?.value;
       DateTime openDate = DateTime.now();
       DateTime dueDate = _dueDateFieldKey.currentState?.value;
-      String location = _locationFieldKey.currentState?.value;
-      // String itemName = _itemFieldKey.currentState?.value;
-      // String itemID = itemNameToID[itemName] ?? '';
+      String location = _locationFieldKey.currentState?.value ?? '';
+      String itemName = _itemFieldKey.currentState?.value;
+      String itemID = itemNameToID[itemName] ?? '';
       int numTasks = taskCollection.size();
 
       String taskID = 'task-${(numTasks + 1).toString().padLeft(3, '0')}';
@@ -134,23 +134,23 @@ class AddTask extends ConsumerWidget  {
         taskUser: taskUser,
         onSuccess: () {
           Navigator.pushReplacementNamed(context, HomeView.routeName);
-          GlobalSnackBar.show('TaskUser "$name" added.');
         },
       );
-      // int numItemTasks = itemTaskCollection.size();
-      // String itemTaskID = 'itemTask-${(numItemTasks + 1).toString().padLeft(3, '0')}';
-      // ItemTask itemTask = ItemTask(
-      //     id: itemTaskID,
-      //     itemID: itemID,
-      //     taskID: taskID,
-      // );
-      // ref.read(editItemTaskControllerProvider.notifier).updateItemTask(
-      //   itemTask: itemTask,
-      //   onSuccess: () {
-      //     Navigator.pushReplacementNamed(context, HomeView.routeName);
-      //     GlobalSnackBar.show('ItemTask "$name" added.');
-      //   },
-      // );
+      if(itemID != '') {
+        int numItemTasks = itemTaskCollection.size();
+        String itemTaskID = 'itemTask-${(numItemTasks + 1).toString().padLeft(3, '0')}';
+        ItemTask itemTask = ItemTask(
+          id: itemTaskID,
+          itemID: itemID,
+          taskID: taskID,
+        );
+        ref.read(editItemTaskControllerProvider.notifier).updateItemTask(
+          itemTask: itemTask,
+          onSuccess: () {
+            Navigator.pushReplacementNamed(context, HomeView.routeName);
+          },
+        );
+      }
     }
 
     void onClear() {
@@ -176,7 +176,7 @@ class AddTask extends ConsumerWidget  {
                     TaskDescriptionField(fieldKey: _descriptionFieldKey),
                     TaskDateField(fieldKey: _dueDateFieldKey),
                     TaskLocationField(fieldKey: _locationFieldKey),
-                    // ItemDropdownField(fieldKey: _itemFieldKey, itemNames: itemNames),
+                    ItemDropdownField(fieldKey: _itemFieldKey, itemNames: itemNames),
                     // UsersDropdownField(fieldKey: _usersFieldKey, userNames: userNames)
                   ],
                 )
