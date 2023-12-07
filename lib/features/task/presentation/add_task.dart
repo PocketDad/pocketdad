@@ -52,35 +52,7 @@ class AddTask extends ConsumerWidget  {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final TaskDB taskDB = ref.watch(taskDBProvider);
-    // final ItemDB itemDB = ref.watch(itemDBProvider);
-    // final UserDB userDB = ref.watch(userDBProvider);
-    // final String currentUserID = ref.watch(currentUserIDProvider);
-    // List<String> itemNames = itemDB.getItemNames();
-    // List<String> userNames = userDB.getUserNames();
-    //
-    // void onSubmit() {
-    //   bool isValid = _formKey.currentState?.saveAndValidate() ?? false;
-    //   if (!isValid) return;
-    //   String name = _nameFieldKey.currentState?.value;
-    //   String description = _descriptionFieldKey.currentState?.value;
-    //   DateTime? dueDate = _dueDateFieldKey.currentState?.value;
-    //   String? location = _locationFieldKey.currentState?.value;
-    //   String? item = itemDB.getItemIDFromName(_itemFieldKey.currentState?.value);
-    //   List<String>? userIDs = userDB.getUserIDsFromString(_usersFieldKey.currentState?.value);
-    //   userIDs = userDB.validateUserNames(userIDs);
-    //   if(!userIDs.contains(currentUserID)) {
-    //     userIDs.add(currentUserID);
-    //   }
-    //
-    //   taskDB.addTask(
-    //     name: name,
-    //     description: description,
-    //     dueDate: dueDate,
-    //     location: location,
-    //     itemID: item,
-    //     userIDs: userIDs
-    //   );
+
     final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
     return asyncAllData.when(
         data: (allData) =>
@@ -132,8 +104,8 @@ class AddTask extends ConsumerWidget  {
       DateTime openDate = DateTime.now();
       DateTime dueDate = _dueDateFieldKey.currentState?.value;
       String location = _locationFieldKey.currentState?.value;
-      String itemName = _itemFieldKey.currentState?.value;
-      String itemID = itemNameToID[itemName] ?? '';
+      // String itemName = _itemFieldKey.currentState?.value;
+      // String itemID = itemNameToID[itemName] ?? '';
       int numTasks = taskCollection.size();
 
       String taskID = 'task-${(numTasks + 1).toString().padLeft(3, '0')}';
@@ -165,20 +137,20 @@ class AddTask extends ConsumerWidget  {
           GlobalSnackBar.show('TaskUser "$name" added.');
         },
       );
-      int numItemTasks = itemTaskCollection.size();
-      String itemTaskID = 'itemTask-${(numItemTasks + 1).toString().padLeft(3, '0')}';
-      ItemTask itemTask = ItemTask(
-          id: itemTaskID,
-          itemID: itemID,
-          taskID: taskID,
-      );
-      ref.read(editItemTaskControllerProvider.notifier).updateItemTask(
-        itemTask: itemTask,
-        onSuccess: () {
-          Navigator.pushReplacementNamed(context, HomeView.routeName);
-          GlobalSnackBar.show('TaskUser "$name" added.');
-        },
-      );
+      // int numItemTasks = itemTaskCollection.size();
+      // String itemTaskID = 'itemTask-${(numItemTasks + 1).toString().padLeft(3, '0')}';
+      // ItemTask itemTask = ItemTask(
+      //     id: itemTaskID,
+      //     itemID: itemID,
+      //     taskID: taskID,
+      // );
+      // ref.read(editItemTaskControllerProvider.notifier).updateItemTask(
+      //   itemTask: itemTask,
+      //   onSuccess: () {
+      //     Navigator.pushReplacementNamed(context, HomeView.routeName);
+      //     GlobalSnackBar.show('ItemTask "$name" added.');
+      //   },
+      // );
     }
 
     void onClear() {
@@ -204,7 +176,7 @@ class AddTask extends ConsumerWidget  {
                     TaskDescriptionField(fieldKey: _descriptionFieldKey),
                     TaskDateField(fieldKey: _dueDateFieldKey),
                     TaskLocationField(fieldKey: _locationFieldKey),
-                    ItemDropdownField(fieldKey: _itemFieldKey, itemNames: itemNames),
+                    // ItemDropdownField(fieldKey: _itemFieldKey, itemNames: itemNames),
                     // UsersDropdownField(fieldKey: _usersFieldKey, userNames: userNames)
                   ],
                 )
