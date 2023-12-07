@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pocketdad/features/task/presentation/single_task_card.dart';
 import '../../all_data_provider.dart';
 import '../../item/domain/item.dart';
 import '../../item/domain/item_collection.dart';
@@ -11,13 +12,11 @@ import '../../relations/itemUser/domain/itemUser.dart';
 import '../../relations/itemUser/domain/itemUser_collection.dart';
 import '../../relations/taskUser/domain/taskUser.dart';
 import '../../relations/taskUser/domain/taskUser_collection.dart';
+import '../../settings/settings_view.dart';
 import '../../user/domain/user.dart';
 import '../../user/domain/user_collection.dart';
 import '../domain/task.dart';
 import '../domain/task_collection.dart';
-import '../domain/task_db.dart';
-import '../../user/domain/user_db.dart';
-import 'list_task_item.dart';
 import 'add_task.dart';
 
 class ListTasks extends ConsumerWidget {
@@ -63,30 +62,22 @@ class ListTasks extends ConsumerWidget {
     TaskUserCollection taskUserCollection = TaskUserCollection(taskUsers);
 
     final List<Task> associatedTasks = userCollection.getAssociatedTasks(currentUserID, taskCollection, taskUserCollection);
-    return MaterialApp(
-      home: DefaultTabController(
-        length: 2,
-        child: Scaffold(
+    return Scaffold(
           appBar: AppBar(
-            bottom: const TabBar(
-              tabs: [
-                Tab(text: 'All'),
-                Tab(text: 'Filter by'),
-              ],
-            ),
             centerTitle: true,
             backgroundColor: Theme.of(context).colorScheme.primary,
-            title: const Text(
-                "Tasks",
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                )
-            )
+              titleTextStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
+            actions: const [
+              SettingsView(),
+            ],
+            title: const Text("All Tasks"),
           ),
           body: ListView(
-            padding: const EdgeInsets.symmetric(vertical: 8),
-            children: associatedTasks.map((task) => ListTaskItem(task: task)).toList()
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 60),
+            children: associatedTasks.map((task) => (
+                SingleTaskCard(task: task))).toList(),
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
@@ -95,8 +86,6 @@ class ListTasks extends ConsumerWidget {
             tooltip: 'Add Task',
             child: const Icon(Icons.add),
         )
-        ),
-      ),
-    );
+        );
   }
 }
