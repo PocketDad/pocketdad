@@ -20,8 +20,6 @@ import '../domain/task_collection.dart';
 
 class SingleTaskCard extends ConsumerWidget {
 
-  // TODO: add individual task page field as part of constructor
-
   const SingleTaskCard({Key? key, required this.task}) : super(key: key);
 
   final Task task;

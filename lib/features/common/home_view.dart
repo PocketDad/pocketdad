@@ -4,6 +4,7 @@ import 'package:pocketdad/features/chat/presentation/chat.dart';
 import 'package:pocketdad/features/task/presentation/check_in.dart';
 import 'package:pocketdad/features/user/presentation/choose_avatar.dart';
 import 'package:pocketdad/features/task/presentation/list_tasks.dart';
+import 'package:pocketdad/features/item/presentation/list_items.dart';
 
 /// Top-level Layout for all of the "Home" related
 class HomeView extends StatefulWidget {
