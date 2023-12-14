@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pocketdad/features/item/presentation/list_items.dart';
 import 'package:pocketdad/features/task/presentation/single_task_card.dart';
 import '../../all_data_provider.dart';
 import '../../item/domain/item.dart';
@@ -62,30 +63,44 @@ class ListTasks extends ConsumerWidget {
     TaskUserCollection taskUserCollection = TaskUserCollection(taskUsers);
 
     final List<Task> associatedTasks = userCollection.getAssociatedTasks(currentUserID, taskCollection, taskUserCollection);
-    return Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            backgroundColor: Theme.of(context).colorScheme.primary,
-              titleTextStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
-                color: Theme.of(context).colorScheme.onPrimary,
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+            appBar: AppBar(
+              centerTitle: true,
+              backgroundColor: Theme.of(context).colorScheme.primary,
+                titleTextStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
+              actions: const [
+                SettingsView(),
+              ],
+              bottom: TabBar(
+                tabs: const [
+                  Tab(text: 'My Tasks'),
+                  Tab(text: 'My Items'),
+                ],
               ),
-            actions: const [
-              SettingsView(),
-            ],
-            title: const Text("All Tasks"),
+              title: const Text("My Tasks and Items"),
+            ),
+            body: TabBarView(
+              children: [
+                ListView(
+                  padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 60),
+                  children: associatedTasks.map((task) => (
+                      SingleTaskCard(task: task))).toList(),
+                ),
+                ListItems(),
+              ]
+            ),
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                Navigator.restorablePushNamed(context, AddTask.routeName);
+              },
+              tooltip: 'Add Task',
+              child: const Icon(Icons.add),
+          )
           ),
-          body: ListView(
-            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 60),
-            children: associatedTasks.map((task) => (
-                SingleTaskCard(task: task))).toList(),
-          ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              Navigator.restorablePushNamed(context, AddTask.routeName);
-            },
-            tooltip: 'Add Task',
-            child: const Icon(Icons.add),
-        )
-        );
+    );
   }
 }

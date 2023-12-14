@@ -12,6 +12,7 @@ import '../../user/domain/user.dart';
 import '../../user/domain/user_collection.dart';
 import '../domain/item.dart';
 import '../domain/item_collection.dart';
+import '../presentation/list_tasks_for_item.dart';
 
 class ListItemItem extends ConsumerWidget {
   ListItemItem({Key? key, required this.item}) : super(key: key);
@@ -52,73 +53,64 @@ class ListItemItem extends ConsumerWidget {
     ItemCollection itemCollection = ItemCollection(items);
     UserCollection userCollection = UserCollection(users);ItemUserCollection itemUserCollection = ItemUserCollection(itemUsers);
     final List<User> associatedUsers = itemCollection.getAssociatedUsers(item.id, userCollection, itemUserCollection);
-    return Center(
+    return ButtonTheme(
+      minWidth: 150,
+      height: 100,
       child: Card(
-        child: SizedBox(
-            width: 300,
-            height: 200,
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Spacer(),
-                  Column(
-                      children: [
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                  textAlign: TextAlign.center,
-                                  item.name,
-                                  style:
-                                  const TextStyle(
-                                      fontSize: 24,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w400
-                                  )
-                              ),
-                            ]
-                        ),
-                        const SizedBox(height: 20),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            if (item.icon != "")
-                              SizedBox(height: 80, child: Image.asset(item.icon),),
-                          ],
-                        ),
-                        const SizedBox(height: 20),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                               const Text(
-                                 textAlign: TextAlign.center,
-                                 'Assigned users: ',
-                                 style:
-                                 TextStyle(
-                                     fontSize: 14,
-                                     color: Colors.black,
-                                     fontWeight: FontWeight.w400
-                                 )
-                               ),
-                              for (var i = 0; i < associatedUsers.length; i++)
-                                Text(
-                                    textAlign: TextAlign.center,
-                                    '${associatedUsers.map((user) => (user.name))} ',
-                                    style:
-                                    const TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w400
-                                    )
-                                ),
-                            ]
-                        ),
-                      ]
-                  ),
-                  const Spacer(),
-                ])
-                )
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+                Radius.circular(15)
+            )
         ),
-      );
+        color: Theme.of(context).colorScheme.surface,
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(15),
+                  topRight: Radius.circular(15),
+                ),
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    padding: const EdgeInsets.all(15),
+                    textStyle: Theme.of(context).textTheme.titleLarge,
+                    minimumSize: const Size.fromHeight(50),
+                  ),
+                  onPressed: () {
+                    ListTasksForItem(item: item,); // TODO: fix routing
+                  },
+                  child: Text(
+                    item.name,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: AspectRatio(
+                  aspectRatio: 1.5,
+                  child: Image.asset(
+                    'assets/images/car.png',
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(0, 0, 10, 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text("Assigned users: xx, xx"), // TODO: make real
+                  ],
+                ),
+              )
+            ]
+        ),
+      ),
+    );
   }
 }

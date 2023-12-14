@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pocketdad/features/user/domain/user_db.dart';
-import 'package:pocketdad/features/item/presentation/list_item_item.dart';
+import 'package:pocketdad/features/item/domain/item.dart';
+import 'package:pocketdad/features/task/presentation/single_task_card.dart';
 
 import '../../all_data_provider.dart';
 import '../../pocketDadError.dart';
@@ -16,12 +16,12 @@ import '../../task/domain/task.dart';
 import '../../task/domain/task_collection.dart';
 import '../../user/domain/user.dart';
 import '../../user/domain/user_collection.dart';
-import '../domain/item.dart';
 import '../domain/item_collection.dart';
-import '../../settings/settings_view.dart';
 
-class ListItems extends ConsumerWidget {
-  const ListItems({Key? key}) : super(key: key);
+class ListTasksForItem extends ConsumerWidget {
+  final Item item;
+
+  const ListTasksForItem({super.key, required this.item});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -51,8 +51,7 @@ class ListItems extends ConsumerWidget {
         required List<ItemTask> itemTasks,
         required List<ItemUser> itemUsers,
         required List<TaskUser> taskUsers,
-        required WidgetRef ref}) {
-
+        required WidgetRef ref}){
     ItemCollection itemCollection = ItemCollection(items);
     TaskCollection taskCollection = TaskCollection(tasks);
     UserCollection userCollection = UserCollection(users);
@@ -60,20 +59,57 @@ class ListItems extends ConsumerWidget {
     ItemUserCollection itemUserCollection = ItemUserCollection(itemUsers);
     TaskUserCollection taskUserCollection = TaskUserCollection(taskUsers);
 
-    final List<Item> associatedItems = itemCollection.getItemsFromUserID(currentUserID, itemUserCollection);
-    return Scaffold(
-        body: ListView(
-          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 60),
-          children: associatedItems.map((item) => (
-              ListItemItem(item: item))).toList(),
+    final taskIDs = itemTaskCollection.getTaskIDsWithItemID(item.id);
+    final tasksfromList = taskCollection.getTasks(taskIDs);
+
+    return ButtonTheme(
+      minWidth: 150,
+      height: 100,
+      child: Card(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+                Radius.circular(15)
+            )
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            // TODO: Link to add items page
-          },
-          tooltip: 'Add Item',
-          child: const Icon(Icons.add),
-        )
+        color: Theme.of(context).colorScheme.surface,
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(15),
+                  topRight: Radius.circular(15),
+                ),
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    padding: const EdgeInsets.all(15),
+                    textStyle: Theme.of(context).textTheme.titleLarge,
+                    minimumSize: const Size.fromHeight(50),
+                  ),
+                  onPressed: () {  },
+                  child: Text(
+                    "Tasks for ${item.name}",
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10,),
+              Text("Sample Task"),
+              Padding(
+                padding: EdgeInsets.fromLTRB(0, 0, 10, 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    // Text((task.dueDate != null) ? DateFormat.yMMMMd().format(task.dueDate ?? DateTime.now()) : "no due date"),
+                  ],
+                ),
+              )
+            ]
+        ),
+      ),
     );
   }
 }
