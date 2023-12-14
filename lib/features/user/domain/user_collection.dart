@@ -1,7 +1,10 @@
+import '../../chat/domain/conversation.dart';
+import '../../chat/domain/conversation_collection.dart';
 import '../../item/domain/item.dart';
 import '../../item/domain/item_collection.dart';
 import '../../relations/itemUser/domain/itemUser_collection.dart';
 import '../../relations/taskUser/domain/taskUser_collection.dart';
+import '../../relations/userConversation/domain/userConversationCollection.dart';
 import '../../task/domain/task.dart';
 import '../../task/domain/task_collection.dart';
 import 'user.dart';
@@ -51,5 +54,9 @@ class UserCollection {
 
   List<Task> getAssociatedTasks(String userID, TaskCollection taskCollection, TaskUserCollection taskUserCollection) {
     return taskCollection.getTasks(taskUserCollection.getTaskIDsWithUserID(userID));
+  }
+
+  List<Conversation> getAssociatedConversations(String userID, ConversationCollection conversationCollection, UserConversationCollection userConversationCollection) {
+    return conversationCollection.getConversations(userConversationCollection.getConversationIDsWithUserID(userID));
   }
 }

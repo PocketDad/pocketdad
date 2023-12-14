@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import '../domain/message.dart';
+
 
 class ChatBubble extends StatelessWidget{
 
-  const ChatBubble({super.key, required this.message, required this.isMe});
+  const ChatBubble({super.key, required this.message, required this.currentUserID});
 
-  final String message;
-  final bool isMe;
+  final Message message;
+  final String currentUserID;
 
   @override
   Widget build(BuildContext context) {
+
+
+    final isMe = (message.senderID == currentUserID);
     return Align(
       alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
@@ -19,7 +24,7 @@ class ChatBubble extends StatelessWidget{
           borderRadius: BorderRadius.circular(12.0),
         ),
         child: Text(
-          message,
+          message.text,
           style: TextStyle(
             color: Theme.of(context).colorScheme.onSecondary,
           ),
