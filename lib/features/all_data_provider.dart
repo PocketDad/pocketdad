@@ -1,5 +1,3 @@
-import 'package:pocketdad/features/relations/conversationMessages/data/conversationMessage_provider.dart';
-import 'package:pocketdad/features/relations/conversationMessages/domain/conversationMessage.dart';
 import 'package:pocketdad/features/relations/itemTask/data/itemTask_provider.dart';
 import 'package:pocketdad/features/relations/itemTask/domain/itemTask.dart';
 import 'package:pocketdad/features/relations/itemUser/data/itemUser_provider.dart';
@@ -36,7 +34,6 @@ class AllData {
       required this.itemUsers,
       required this.taskUsers,
       required this.userConversations,
-      required this.conversationMessages,
       required this.currentUserID});
 
   final List<Item> items;
@@ -48,7 +45,6 @@ class AllData {
   final List<ItemUser> itemUsers;
   final List<TaskUser> taskUsers;
   final List<UserConversation> userConversations;
-  final List<ConversationMessage> conversationMessages;
   final String currentUserID;
 }
 
@@ -63,7 +59,6 @@ Future<AllData> allData(AllDataRef ref) async {
   final itemUsers = ref.watch(itemUsersProvider.future);
   final taskUsers = ref.watch(taskUsersProvider.future);
   final userConversations = ref.watch(userConversationsProvider.future);
-  final conversationMessages = ref.watch(conversationMessagesProvider.future);
   final currentUserID = ref.watch(currentUserIDProvider);
   return AllData(
       items: await items,
@@ -75,6 +70,5 @@ Future<AllData> allData(AllDataRef ref) async {
       itemUsers: await itemUsers,
       taskUsers: await taskUsers,
       userConversations: await userConversations,
-      conversationMessages: await conversationMessages,
       currentUserID: currentUserID);
 }

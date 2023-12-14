@@ -7,25 +7,16 @@ import 'package:pocketdad/features/chat/presentation/chat_bubble.dart';
 import 'package:http/http.dart' as http;
 
 import '../../all_data_provider.dart';
-import '../../global_snackbar.dart';
 import '../../item/domain/item.dart';
-import '../../item/domain/item_collection.dart';
 import '../../pocketDadError.dart';
 import '../../pocketDadLoading.dart';
-import '../../relations/conversationMessages/domain/conversationMessage.dart';
-import '../../relations/conversationMessages/domain/conversationMessageCollection.dart';
-import '../../relations/conversationMessages/presentation/edit_conversationMessage_controller.dart';
 import '../../relations/itemTask/domain/itemTask.dart';
-import '../../relations/itemTask/domain/itemTask_collection.dart';
 import '../../relations/itemUser/domain/itemUser.dart';
-import '../../relations/itemUser/domain/itemUser_collection.dart';
 import '../../relations/taskUser/domain/taskUser.dart';
-import '../../relations/taskUser/domain/taskUser_collection.dart';
 import '../../relations/userConversation/domain/userConversation.dart';
 import '../../relations/userConversation/domain/userConversationCollection.dart';
 import '../../relations/userConversation/presentation/edit_userConversation_controller.dart';
 import '../../task/domain/task.dart';
-import '../../task/domain/task_collection.dart';
 import '../../user/domain/user.dart';
 import '../../user/domain/user_collection.dart';
 import '../domain/conversation.dart';
@@ -60,7 +51,7 @@ class Chat extends ConsumerWidget {
                 itemUsers: allData.itemUsers,
                 taskUsers: allData.taskUsers,
                 userConversations: allData.userConversations,
-                conversationMessages: allData.conversationMessages),
+                ),
         loading: () => const PocketDadLoading(),
         error: (error, st) => PocketDadError(error.toString(), st.toString()));
   }
@@ -77,21 +68,14 @@ class Chat extends ConsumerWidget {
         required List<ItemUser> itemUsers,
         required List<TaskUser> taskUsers,
         required List<UserConversation> userConversations,
-        required List<ConversationMessage> conversationMessages,
         required WidgetRef ref}) {
 
-    ItemCollection itemCollection = ItemCollection(items);
-    TaskCollection taskCollection = TaskCollection(tasks);
+
     UserCollection userCollection = UserCollection(users);
     ConversationCollection conversationCollection = ConversationCollection(conversations);
     MessageCollection messageCollection = MessageCollection(messages);
-    ItemTaskCollection itemTaskCollection = ItemTaskCollection(itemTasks);
-    ItemUserCollection itemUserCollection = ItemUserCollection(itemUsers);
-    TaskUserCollection taskUserCollection = TaskUserCollection(taskUsers);
     UserConversationCollection userConversationCollection = UserConversationCollection(userConversations);
-    ConversationMessageCollection conversationMessageCollection = ConversationMessageCollection(conversationMessages);
 
-    final List<Task> associatedTasks = userCollection.getAssociatedTasks(currentUserID, taskCollection, taskUserCollection);
     final List<Conversation> associatedConversations = userCollection.getAssociatedConversations(currentUserID, conversationCollection, userConversationCollection);
     final dadID = "${currentUserID}Dad";
 
@@ -131,15 +115,11 @@ class Chat extends ConsumerWidget {
 
     List<Message> associatedMessages = [];
     if(conversation != null){
-      associatedMessages = messageCollection.getMessagesFromConversationID(conversation.id, conversationMessageCollection);
+      associatedMessages = conversationCollection.getMessagesFromConversationID(conversation.id, messageCollection);
     }
 
     void onSubmit(String value, Conversation? conversation) {
-      if(conversation != null) {
-        print("implement conversation update");
-      } else {
-        conversation = initializeConversation();
-      }
+      conversation ??= initializeConversation();
       final numMessages = messageCollection.size();
       final messageID = 'message-${(numMessages + 1).toString().padLeft(3, '0')}';
       final responseID = 'message-${(numMessages + 2).toString().padLeft(3, '0')}';
@@ -180,32 +160,6 @@ class Chat extends ConsumerWidget {
           // do nothing
         },
       );
-
-      final numConversationMessages = conversationMessageCollection.size();
-      final conversationMessageID = 'conversationMessage-${(numConversationMessages + 1).toString().padLeft(3, '0')}';
-      ConversationMessage conversationMessage = ConversationMessage(
-          id: conversationMessageID,
-          conversationID: conversation.id,
-          messageID: messageID,
-      );
-      ref.read(editConversationMessageControllerProvider.notifier).updateConversationMessage(
-        conversationMessage: conversationMessage,
-        onSuccess: () {
-          // do nothing
-        },
-      );
-      final conversationMessageID2 = 'conversationMessage-${(numConversationMessages + 2).toString().padLeft(3, '0')}';
-      ConversationMessage conversationMessage2 = ConversationMessage(
-        id: conversationMessageID2,
-        conversationID: conversation.id,
-        messageID: responseID,
-      );
-      ref.read(editConversationMessageControllerProvider.notifier).updateConversationMessage(
-        conversationMessage: conversationMessage2,
-        onSuccess: () {
-          // do nothing
-        },
-      );
     }
 
       // ref.watch(chatProvider).add(ChatBubble(message: value, isMe: true));
@@ -227,7 +181,7 @@ class Chat extends ConsumerWidget {
                 builder: (context, watch, child) {
                   return ListView(
                     padding: EdgeInsets.fromLTRB(32, 16, 32, 16),
-                    children: associatedMessages.map((message) => ChatBubble(message: message)).toList(),
+                    children: associatedMessages.map((message) => ChatBubble(message: message, currentUserID: currentUserID)).toList(),
                   );
                 }
             ),

@@ -15,8 +15,6 @@ import '../item/domain/item.dart';
 import '../item/domain/item_collection.dart';
 import '../pocketDadError.dart';
 import '../pocketDadLoading.dart';
-import '../relations/conversationMessages/domain/conversationMessage.dart';
-import '../relations/conversationMessages/domain/conversationMessageCollection.dart';
 import '../relations/itemTask/domain/itemTask.dart';
 import '../relations/itemTask/domain/itemTask_collection.dart';
 import '../relations/itemUser/domain/itemUser.dart';
@@ -100,7 +98,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
                 itemUsers: allData.itemUsers,
                 taskUsers: allData.taskUsers,
                 userConversations: allData.userConversations,
-                conversationMessages: allData.conversationMessages),
+                ),
         loading: () => const PocketDadLoading(),
         error: (error, st) => PocketDadError(error.toString(), st.toString()));
   }
@@ -117,19 +115,8 @@ class _HomeViewState extends ConsumerState<HomeView> {
         required List<ItemUser> itemUsers,
         required List<TaskUser> taskUsers,
         required List<UserConversation> userConversations,
-        required List<ConversationMessage> conversationMessages,
         required WidgetRef ref}) {
 
-    ItemCollection itemCollection = ItemCollection(items);
-    TaskCollection taskCollection = TaskCollection(tasks);
-    UserCollection userCollection = UserCollection(users);
-    ConversationCollection conversationCollection = ConversationCollection(conversations);
-    MessageCollection messageCollection = MessageCollection(messages);
-    ItemTaskCollection itemTaskCollection = ItemTaskCollection(itemTasks);
-    ItemUserCollection itemUserCollection = ItemUserCollection(itemUsers);
-    TaskUserCollection taskUserCollection = TaskUserCollection(taskUsers);
-    UserConversationCollection userConversationCollection = UserConversationCollection(userConversations);
-    ConversationMessageCollection conversationMessageCollection = ConversationMessageCollection(conversationMessages);
     return Scaffold(
       body: SafeArea(
           child: widget.pages[_selectedIndex]['body']

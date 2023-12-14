@@ -1,33 +1,24 @@
-import '../../relations/conversationMessages/domain/conversationMessageCollection.dart';
-import '../../user/domain/user.dart';
-import '../../user/domain/user_collection.dart';
-import 'conversation.dart';
-import 'conversation_collection.dart';
 import 'message.dart';
 
 /// Encapsulates operations on the list of [Message] returned from Firestore.
 class MessageCollection {
-  MessageCollection(conversations) : _conversations = conversations;
+  MessageCollection(messages) : _messages = messages;
 
-  final List<Message> _conversations;
+  final List<Message> _messages;
 
-  Message getMessage(String conversationID) {
-    return _conversations.firstWhere((conversation) => conversation.id == conversationID);
+  Message getMessage(String messageID) {
+    return _messages.firstWhere((message) => message.id == messageID);
   }
 
-  List<Message> getMessages(List<String> conversationIDs) {
-    return _conversations.where((conversation) => conversationIDs.contains(conversation.id)).toList();
-  }
-
-  List<Message> getMessagesFromConversationID(String conversationID, ConversationMessageCollection conversationMessageCollection) {
-    return getMessages(conversationMessageCollection.getMessageIDsWithConversationID(conversationID));
+  List<Message> getMessages(List<String> messageIDs) {
+    return _messages.where((message) => messageIDs.contains(message.id)).toList();
   }
 
   int size() {
-    return _conversations.length;
+    return _messages.length;
   }
 
   List<String> getMessageIDs() {
-    return _conversations.map((data) => data.id).toList();
+    return _messages.map((data) => data.id).toList();
   }
 }

@@ -2,6 +2,8 @@ import '../../relations/userConversation/domain/userConversationCollection.dart'
 import '../../user/domain/user.dart';
 import '../../user/domain/user_collection.dart';
 import 'conversation.dart';
+import 'message.dart';
+import 'message_collection.dart';
 
 /// Encapsulates operations on the list of [Conversation] returned from Firestore.
 class ConversationCollection {
@@ -23,6 +25,10 @@ class ConversationCollection {
 
   List<Conversation> getConversationsFromUserID(String userID, UserConversationCollection userConversationCollection) {
     return getConversations(userConversationCollection.getConversationIDsWithUserID(userID));
+  }
+
+  List<Message> getMessagesFromConversationID(String conversationID, MessageCollection messageCollection) {
+    return getConversation(conversationID).messageIDs.map((messageID) => messageCollection.getMessage(messageID)).toList();
   }
 
   int size() {
